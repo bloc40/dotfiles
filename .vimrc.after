@@ -1,0 +1,88 @@
+" allow Vim to manage multiple buffers effectively
+set hidden
+
+" auto save files when changed somewhere else
+set autoread
+
+" ignore these files
+set wildignore=*.swp,*.bak,*.pyc,*.class
+
+" font size
+set guifont=Monaco:h12
+
+" add git branch to status line
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+
+" remove swap and backup files from working directory
+set nobackup
+set nowritebackup
+
+" clear white space in the end of lines
+autocmd BufWritePre * :%s/\s\+$//e
+
+" autosave when focus is lost
+:au focuslost * silent! :wa
+
+"------------------------------------------------------------------------
+"---------------- Custom Mapping ----------------------------------------
+"------------------------------------------------------------------------
+
+" map for resizing windows
+" http://vim.wikia.com/wiki/Fast_window_resizing_with_plus/minus_keys
+if bufwinnr(1)
+  map + <C-W>+
+  map - <C-W>-
+  map ( <C-W><
+  map ) <C-W>>
+end
+
+" jump between windows
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-h> <C-w>h
+map <C-l> <C-w>l
+
+" ZoomWin configuration
+map <C-z> <C-w>o
+
+" toggle NERDTree
+map <F2> :NERDTreeToggle<CR>
+" show file in NERDTree
+map <F1> :NERDTreeFind<CR>
+" collapse all files in NERDTree
+map <F3> :NERDTree<CR>
+
+" run test for specific line with spin push
+map <D-r> :wa<CR> \| :exe "!spin push %" <CR><CR>
+" run test for the whole file
+map <D-R> :wa<CR> \| :exe "!spin push %:" . line(".") <CR><CR>
+
+" run all tests
+:command! S !spin push spec
+
+" search for the word where the cursor is
+map <D-A> :Ack! <C-R><C-W><CR>
+" Open search files without opening the first found
+map <D-F> :Ack!
+
+" format the entire file
+map <D-L> gg=G<CR>''z.
+
+" open BufferGator bar with open files
+map <D-e> :BuffergatorToggle <CR>
+
+" folding settings
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1         "this is just what i use
+
+" convert Ruby 1.8 to 1.9 hash syntax
+map<D-H> :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
+
+"-------------------------------------------------------------------------
+"-------- Old Commands ---------------------------------------------------
+"-------------------------------------------------------------------------
+
+" run specs with command :S
+":command! S !bundle exec rspec %
