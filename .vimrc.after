@@ -81,6 +81,23 @@ set foldlevel=1         "this is just what i use
 map<D-H> :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
 
 "-------------------------------------------------------------------------
+"--------- Functions -----------------------------------------------------
+"-------------------------------------------------------------------------
+
+" global find and replace
+" e.g. (default are Ruby files):  :Replace foo bar
+" e.g. (for non ruby files):      :Replace foo bar js
+
+function! FindAndReplace(from, to, ...)
+  let extension = a:0 > 0 ? a:1 : 'rb'
+
+  exe 'args **/*.'. extension
+  exe 'argdo %s/'. a:from .'/'. a:to .'/gce | update'
+endfunction
+
+command! -nargs=+ Replace call FindAndReplace(<f-args>)
+
+"-------------------------------------------------------------------------
 "-------- Old Commands ---------------------------------------------------
 "-------------------------------------------------------------------------
 
