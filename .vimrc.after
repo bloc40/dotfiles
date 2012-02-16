@@ -78,7 +78,7 @@ set nofoldenable        "dont fold by default
 set foldlevel=1         "this is just what i use
 
 " convert Ruby 1.8 to 1.9 hash syntax
-map<D-H> :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
+map<D-H> :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
 
 "-------------------------------------------------------------------------
 "--------- Functions -----------------------------------------------------
