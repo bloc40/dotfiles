@@ -21,7 +21,7 @@ set nowritebackup
 autocmd BufWritePre * :%s/\s\+$//e
 
 " autosave when focus is lost
-:au focuslost * silent! :wa
+au focuslost * silent! :wa
 
 "------------------------------------------------------------------------
 "---------------- Custom Mapping ----------------------------------------
@@ -58,11 +58,11 @@ map <D-r> :wa<CR> \| :exe "!spin push %" <CR><CR>
 map <D-R> :wa<CR> \| :exe "!spin push %:" . line(".") <CR><CR>
 
 " run all tests
-:command! S !spin push spec
+command! S !spin push spec
 
 " search for the word where the cursor is
 map <D-A> :Ack! <C-R><C-W><CR>
-" Open search files without opening the first found
+" Open search files without opening the file with the first match
 map <D-F> :Ack!
 
 " format the entire file
@@ -90,16 +90,9 @@ map<D-H> :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
 
 function! FindAndReplace(from, to, ...)
   let extension = a:0 > 0 ? a:1 : 'rb'
-
   exe 'args **/*.'. extension
   exe 'argdo %s/'. a:from .'/'. a:to .'/gce | update'
 endfunction
 
 command! -nargs=+ Replace call FindAndReplace(<f-args>)
 
-"-------------------------------------------------------------------------
-"-------- Old Commands ---------------------------------------------------
-"-------------------------------------------------------------------------
-
-" run specs with command :S
-":command! S !bundle exec rspec %
