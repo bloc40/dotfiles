@@ -17,6 +17,12 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 set nobackup
 set nowritebackup
 
+" folding settings
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1         "this is just what i use
+
 " clear white space in the end of lines
 autocmd BufWritePre * :%s/\s\+$//e
 
@@ -74,12 +80,6 @@ map <D-L> gg=G<CR>''z.
 
 " open BufferGator bar with open files
 map <D-e> :BuffergatorToggle <CR>
-
-" folding settings
-set foldmethod=indent   "fold based on indent
-set foldnestmax=10      "deepest fold is 10 levels
-set nofoldenable        "dont fold by default
-set foldlevel=1         "this is just what i use
 
 " convert Ruby 1.8 to 1.9 hash syntax
 map<D-H> :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
