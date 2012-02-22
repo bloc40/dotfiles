@@ -1,0 +1,23 @@
+= Jamal El Milahi's Dot Files
+
+== Prerequisite
+
+You need to install MacVim and Janus.
+
+== Installation
+
+  git clone git://github.com/bloc40/dotfiles.git
+  cd ~/.dotfiles
+  rake install
+
+== Commands
+
+  <Shift-Cmd>h    # convert Ruby 1.8 to 1.9 hash syntax
+  <Shift-Cmd>l    # format the whole file
+  <Cmd>e          # Open Buffergator
+
+If you are running a test suite and using Spin:
+
+  <Cmd>r          # run all tests for the current file
+  <Shift-Cmd>r    # run a specific test whre the cursor is
+  :!S             # run the entire test suite
