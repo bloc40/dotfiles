@@ -29,6 +29,11 @@ autocmd BufWritePre * :%s/\s\+$//e
 " autosave when focus is lost
 au focuslost * silent! :wa
 
+" hide the toolbar
+if has('gui_running')
+  set guioptions=egmrt
+endif
+
 "------------------------------------------------------------------------
 "---------------- Custom Mapping ----------------------------------------
 "------------------------------------------------------------------------
