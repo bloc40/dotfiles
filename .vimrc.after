@@ -72,8 +72,8 @@ map <D-A> :Ack! <C-R><C-W><CR>
 map <D-F> :Ack!
 
 " map Ctrl-n and Ctrl-p to :cp and :cn when using searching with Ack
-map<C-n> :cn<CR>
-map<C-p> :cp<CR>
+map <C-n> :cn<CR>
+map <C-p> :cp<CR>
 
 " format the entire file
 map <D-L> gg=G<CR>''z.
@@ -82,7 +82,10 @@ map <D-L> gg=G<CR>''z.
 map <D-e> :BuffergatorToggle <CR>
 
 " convert Ruby 1.8 to 1.9 hash syntax
-map<D-H> :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
+map <D-H> :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
+
+" clear search highlights
+nmap <ESC> :noh<CR>
 
 "-------------------------------------------------------------------------
 "--------- Functions -----------------------------------------------------
