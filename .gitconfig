@@ -1,19 +1,48 @@
 [user]
-	name = Jamal El Milahi
+	name  = Jamal El Milahi
 	email = jamal@bloc40.com
+
 [color]
 	ui = true
+
 [commit]
 	template = /etc/git-commit-template
+
 [core]
-	whitespace = trailing-space,space-before-tab,indent-with-non-tab
-	excludesfile = $HOME/.gitignore_global
+  filemode         = true
+	logallrefupdates = true
+	whitespace       = trailing-space,space-before-tab,indent-with-non-tab
+	excludesfile     = $HOME/.gitignore_global
+
 [alias]
-	co = checkout
-  st = status
+  br  = !git branch --color -v | cut -c1-100
+  ci  = commit
+  co  = checkout
+  ll  = log --pretty=oneline --abbrev-commit --max-count=15 --graph --decorate
+  st  = status
+
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	cmd  = opendiff \"$LOCAL\" \"$REMOTE\"
 	path =
+
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+
+[color "diff"]
+  meta = blue bold
+	frag = magenta bold
+	old  = red bold
+	new  = green bold
+
+[color "branch"]
+	current = yellow reverse
+	local   = yellow bold
+	remote  = green bold
+	plain   = red bold
+
+[color "status"]
+	added     = green
+	changed   = red bold
+	untracked = magenta bold
+
