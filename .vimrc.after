@@ -71,10 +71,6 @@ map <D-A> :Ack! <C-R><C-W><CR>
 " Open search files without opening the file with the first match
 map <D-F> :Ack!
 
-" map Ctrl-n and Ctrl-p to :cp and :cn when using searching with Ack
-map <C-n> :cn<CR>
-map <C-p> :cp<CR>
-
 " format the entire file
 map <D-L> gg=G<CR>''z.
 
