@@ -3,7 +3,9 @@
 	email = jamal@bloc40.com
 
 [color]
-	ui = true
+	ui     = auto
+  diff   = auto
+  branch = auto
 
 [commit]
 	template = /etc/git-commit-template
@@ -20,7 +22,7 @@
   br  = !git branch --color -v | cut -c1-100
   ci  = commit
   co  = checkout
-  ll  = log --pretty=oneline --decorate --graph --abbrev-commit
+  ll  = log -20 --pretty=oneline --decorate --graph --abbrev-commit
   lll = log -20 --graph --pretty=format:'%Cgreen%h %Cred%d%Creset %s%Creset %C(black bold)(%cr)%Creset %Cblue<%an>%Creset'
   st  = status
 
@@ -31,18 +33,6 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
-
-[color "diff"]
-  meta = blue bold
-	frag = magenta bold
-	old  = red bold
-	new  = green bold
-
-[color "branch"]
-	current = yellow reverse
-	local   = yellow bold
-	remote  = green bold
-	plain   = red bold
 
 [color "status"]
 	added     = green
