@@ -9,6 +9,8 @@
 	template = /etc/git-commit-template
 
 [core]
+  pager            = cat
+  editor           = vim
   filemode         = true
 	logallrefupdates = true
 	whitespace       = trailing-space,space-before-tab,indent-with-non-tab
@@ -18,7 +20,8 @@
   br  = !git branch --color -v | cut -c1-100
   ci  = commit
   co  = checkout
-  ll  = log --pretty=oneline --abbrev-commit --max-count=15 --graph --decorate
+  ll  = log --pretty=oneline --decorate --graph --abbrev-commit
+  lll = log -20 --graph --pretty=format:'%Cgreen%h %Cred%d%Creset %s%Creset %C(black bold)(%cr)%Creset %Cblue<%an>%Creset'
   st  = status
 
 [difftool "sourcetree"]
