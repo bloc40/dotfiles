@@ -57,13 +57,12 @@ map <F2> :NERDTreeToggle<CR>
 map <F1> :NERDTreeFind<CR>
 " collapse all files in NERDTree
 map <F3> :NERDTree<CR>
-" show hidden files by default
-let NERDTreeShowHidden=1
 
 " run test for specific line with spin push
 map <D-r> :wa<CR> \| :exe "!spin push %" <CR><CR>
 " run test for the whole file
 map <D-R> :wa<CR> \| :exe "!spin push %:" . line(".") <CR><CR>
+
 " run all tests
 command! S !spin push spec
 
