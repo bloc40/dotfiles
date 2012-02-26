@@ -29,8 +29,7 @@ let g:colors_name = 'bloc40'
 hi Normal               guifg=#E6E1DC guibg=#2B2B2B
 hi Cursor               guibg=#FFFFFF
 hi CursorLine           guibg=#333435
-hi LineNr               guifg=#888888 guibg=#000000
-"hi LineNr               guifg=#880088
+hi LineNr               guifg=#888888 guibg=#1f1f1f
 hi Search               guibg=#5A647E
 hi Visual               guibg=#5A647E
 
