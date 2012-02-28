@@ -25,6 +25,7 @@
   ll  = log -20 --pretty=oneline --decorate --graph --abbrev-commit
   lll = log -20 --graph --pretty=format:'%Cgreen%h %Cred%d%Creset %s%Creset %C(black bold)(%cr)%Creset %Cblue<%an>%Creset'
   st  = status
+  cl  = clean -df
 
 [difftool "sourcetree"]
   cmd  = opendiff \"$LOCAL\" \"$REMOTE\"
