@@ -82,6 +82,8 @@ map <D-H> :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
 
 " clear search highlights
 nmap <ESC> :noh<CR>
+" show the list of methods (TagList plugin)
+map <D-Y> <leader>rt
 
 "-------------------------------------------------------------------------
 "--------- Functions -----------------------------------------------------
