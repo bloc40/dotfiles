@@ -1,6 +1,3 @@
-alias gift='cd $HOME/workspace/giftslate'
-alias amal='cd $HOME/workspace/amalchabach'
-alias sal='cd $HOME/workspace/salamhub'
 alias dot='cd $HOME/workspace/dotfiles'
 
 alias rs='rails s'
