@@ -19,7 +19,7 @@ PROMPT='%{$PATH_COLOR%}%~%{$GIT_PROMPT_INFO%} $(git_prompt_info)$(git_prompt_sta
 ZSH_THEME_GIT_PROMPT_PREFIX="("
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$GIT_PROMPT_INFO%})"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%} ✘"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$$fg[green]%} ✔"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%} ✔"
 
 # Format for git_prompt_status()
 ZSH_THEME_GIT_PROMPT_DELETED=" %{$fg[red]%}✖"
