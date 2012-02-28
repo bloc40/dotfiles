@@ -1,8 +1,8 @@
 = Jamal El Milahi's Dot Files
 
-== Prerequisite
+== Pre-requisites
 
-You need to install MacVim and Janus.
+You need to have Macvim[http://code.google.com/p/macvim/], Janus[https://github.com/carlhuda/janus], and Oh-My-Zsh[https://github.com/robbyrussell/oh-my-zsh] installed.
 
 == Installation
 
@@ -10,14 +10,4 @@ You need to install MacVim and Janus.
   cd ~/.dotfiles
   rake install
 
-== Commands
-
-  <Shift-Cmd>h    # convert Ruby 1.8 to 1.9 hash syntax
-  <Shift-Cmd>l    # format the whole file
-  <Cmd>e          # Open Buffergator
-
-If you are running a test suite and using Spin:
-
-  <Cmd>r          # run all tests for the current file
-  <Shift-Cmd>r    # run a specific test whre the cursor is
-  :!S             # run the entire test suite
+Enjoy!
