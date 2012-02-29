@@ -21,11 +21,14 @@
 [alias]
   br  = !git branch --color -v | cut -c1-100
   ci  = commit
+  cl  = clean -df
   co  = checkout
-  ll  = log -20 --pretty=oneline --decorate --graph --abbrev-commit
+  df  = diff
+  dc  = diff --cached
+  ll  = log -20 --oneline --decorate --graph
   lll = log -20 --graph --pretty=format:'%Cgreen%h %Cred%d%Creset %s%Creset %C(black bold)(%cr)%Creset %Cblue<%an>%Creset'
   st  = status
-  cl  = clean -df
+  sts = status -s
 
 [difftool "sourcetree"]
   cmd  = opendiff \"$LOCAL\" \"$REMOTE\"
