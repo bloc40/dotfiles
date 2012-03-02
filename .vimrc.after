@@ -86,19 +86,3 @@ map <D-H> :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
 " show the list of methods (TagList plugin)
 map <D-Y> <leader>rt
 
-"-------------------------------------------------------------------------
-"--------- Functions -----------------------------------------------------
-"-------------------------------------------------------------------------
-
-" global find and replace
-" e.g. (default are Ruby files):  :Replace foo bar
-" e.g. (for non ruby files):      :Replace foo bar js
-
-function! FindAndReplace(from, to, ...)
-  let extension = a:0 > 0 ? a:1 : 'rb'
-  exe 'args **/*.'. extension
-  exe 'argdo %s/'. a:from .'/'. a:to .'/gcIe | update'
-endfunction
-
-command! -nargs=+ Replace call FindAndReplace(<f-args>)
-

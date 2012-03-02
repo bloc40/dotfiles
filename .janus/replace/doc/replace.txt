@@ -1,0 +1,3 @@
+replace.txt     Plugin for doing global find and replace
+
+Author          Jamal El Milahi <http://bloc40.com/>
