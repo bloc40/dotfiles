@@ -24,8 +24,8 @@
   cl  = clean -df
   co  = checkout
   df  = diff
-  dc  = diff --cached
-  ll  = log -20 --oneline --decorate --graph
+  dfc = diff --cached
+  lg  = log -20 --oneline --decorate --graph
   lll = log -20 --graph --pretty=format:'%Cgreen%h %Cred%d%Creset %s%Creset %C(black bold)(%cr)%Creset %Cblue<%an>%Creset'
   st  = status
   sts = status -s
