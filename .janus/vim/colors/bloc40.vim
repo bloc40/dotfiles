@@ -32,6 +32,7 @@ hi CursorLine           guibg=#333435
 hi LineNr               guifg=#888888 guibg=#1f1f1f
 hi Search               guibg=#5A647E
 hi Visual               guibg=#5A647E
+hi StatusLine           guifg=Black guibg=Orange gui=bold
 
 " Folds
 " -----
