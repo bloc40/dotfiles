@@ -14,6 +14,7 @@ function! Rctags()
   if gems == gemfile_not_found
     echo gemfile_not_found
   else
+    echo 'Generating ctags... and tagging gems from your rvm gemset'
     let gems = substitute(gems, 'Gems included by the bundle:', '', 'g')
     let gems = substitute(gems, "\n", ';', 'g')
     let gems = substitute(gems, '* ', '', 'g')
@@ -30,8 +31,10 @@ function! Rctags()
     for gem in gems_array
       let library_load_string .= ' -R '. path .'/gems/'. gem
     endfor
-    let generate_ctags = system('/usr/local/bin/ctags -f tagsxx --exclude="*.log" --langmap="ruby:+.rake.builder.rjs" -R . '. library_load_string)
+    let tags_file = 'tags'
+    let generate_ctags = system('/usr/local/bin/ctags -f '. tags_file .' --exclude="*.log" --langmap="ruby:+.rake.builder.rjs" -R . '. library_load_string)
     let generate_ctags = system('sort tags')
+    echo 'Done. Find your ctags at '. tags_file
   endif
 endfunction
 
