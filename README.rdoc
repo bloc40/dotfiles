@@ -9,5 +9,3 @@ You need to have Macvim[http://code.google.com/p/macvim/], Janus[https://github.
   $ git clone git://github.com/bloc40/dotfiles.git
   $ cd dotfiles
   $ rake install
-
-Enjoy!
