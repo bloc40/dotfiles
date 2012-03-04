@@ -1,21 +1,25 @@
 " Vim color scheme
 "
-" Name:        bloc40.vim
-" Maintainer:  Jamal El Milahi <jamal@bloc40.com>
+" Name:        railscast.vim
+" Maintainer:  Josh O'Rourke <jorourke23@gmail.com>
 " License:     public domain
 "
 " A GUI Only port of the RailsCasts TextMate theme [1] to Vim.
-" Some parts of this theme were borrowed from RailsCasts theme [1] and the well-documented Lucius theme [2].
+" Some parts of this theme were borrowed from the well-documented Lucius theme [2].
 "
 " [1] http://railscasts.com/about
 " [2] http://www.vim.org/scripts/script.php?script_id=2536
+"
+"-----------------------------------------------------------------
+" Note: This is an improved version of the railscasts theme
+"-----------------------------------------------------------------
 
 set background=dark
 hi clear
 if exists('syntax_on')
   syntax reset
 endif
-let g:colors_name = 'bloc40'
+let g:colors_name = 'railscasts3'
 
 " Colors
 " Brown        #BC9458
@@ -32,7 +36,7 @@ hi CursorLine           guibg=#333435
 hi LineNr               guifg=#888888 guibg=#1f1f1f
 hi Search               guibg=#5A647E
 hi Visual               guibg=#5A647E
-hi StatusLine           guifg=Black guibg=Orange gui=bold
+hi StatusLine           guifg=#FFFFFF guibg=#555555 gui=NONE
 
 " Folds
 " -----
