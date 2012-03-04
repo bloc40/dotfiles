@@ -1,0 +1,3 @@
+[submodule ".janus/rctags"]
+	path = .janus/rctags
+	url = https://bloc40@github.com/bloc40/rctags.git
