@@ -2,7 +2,7 @@ require 'rake'
 
 desc 'Install the dot files into the home directory'
 task :install do
-  EXCLUDED_FILES = %w[ . .. .git Rakefile README.rdoc ]
+  EXCLUDED_FILES = %w[ . .. .git .gitmodules Rakefile README.rdoc ]
 
   home_directory_files = []
   Dir.foreach(ENV['HOME']) { |f| home_directory_files << f }
