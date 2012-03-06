@@ -21,6 +21,7 @@
 [alias]
   br  = !git branch --color -v | cut -c1-100
   ci  = commit
+  cia = commit --amend
   cl  = clean -df
   co  = checkout
   df  = diff
