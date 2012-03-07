@@ -1,7 +1,7 @@
 " allow Vim to manage multiple buffers effectively
 set hidden
 
-" auto save files when changed somewhere else
+" auto save files when changed by another editor
 set autoread
 
 " ignore these files
@@ -53,6 +53,9 @@ map <C-l> <C-w>l
 
 " ZoomWin configuration
 map <C-z> <C-w>o
+
+" swap buffers around
+map <C-x> <C-w>x
 
 " toggle NERDTree
 map <F2> :NERDTreeToggle<CR>
