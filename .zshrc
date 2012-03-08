@@ -39,4 +39,9 @@ if [[ -L "zsh" ]]; then
 fi
 #---------------------------------------------------------
 
+# Print content of folder as a tree
+function tree {
+  find ${1:-.} -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'
+}
+
 if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
