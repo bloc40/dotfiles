@@ -24,7 +24,7 @@ set nofoldenable        "dont fold by default
 set foldlevel=1         "this is just what i use
 
 " clear white space in the end of lines
-autocmd BufWritePre * :%s/\s\+$//e
+au BufWritePre * :%s/\s\+$//e
 
 " autosave when focus is lost
 au focuslost * silent! :wa
@@ -91,4 +91,11 @@ map <D-H> :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
 
 " show the list of methods (TagList plugin)
 map <D-Y> <leader>rt
+
+" keep selection in visual mode when (in|re)denting it
+vmap > >gv
+vmap < <gv
+
+" update .vimrc.after file
+command! V so ~/.vimrc.after
 
