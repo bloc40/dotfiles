@@ -1,9 +1,11 @@
 colorscheme railscasts3
-set guifont=Monaco:h12
+set guifont=Monaco:h13
 
 " hide scroll bars
 set guioptions-=r
 set guioptions-=L
 " hide the toolbar
 set guioptions-=T
+
+let g:insert_mode_background_color = "#18434E"
 
