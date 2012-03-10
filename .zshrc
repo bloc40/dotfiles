@@ -34,7 +34,7 @@ export PATH=/Users/jamal/.rvm/gems/ruby-1.9.2-p290/bin:/Users/jamal/.rvm/gems/ru
 #---------------------------------------------------------
 # Load custom plugin and theme if the zsh symlink exist
 if [[ -L "zsh" ]]; then
-  source "$HOME/zsh/plugins/aliases.plugin.zsh"
+  source "$HOME/zsh/plugins/bloc40.plugin.zsh"
   source "$HOME/zsh/themes/bloc40.zsh-theme"
 fi
 #---------------------------------------------------------
@@ -44,4 +44,7 @@ function tree {
   find ${1:-.} -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'
 }
 
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
 if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
+
