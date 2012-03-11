@@ -1,0 +1,23 @@
+#!/bin/sh
+
+EXCLUDED_FILES=( README.rdoc .git .gitmodules 'install' )
+
+for file in $(ls -A $pwd ); do
+  target=`echo ${EXCLUDED_FILES[*]} | grep $file`
+
+  if [ "${target}" == "" ]; then
+    if [[ -e ~/$file  ]]; then
+      if [ ! -L ~/$file ]; then
+        echo "$file exists but not a symlink"
+        echo "Moving $file to $file.bak"
+        mv $HOME/$file "$HOME/$file.bak"
+        echo "Symlinking $file ..."
+        ln -s $PWD/$file $HOME/$file
+      fi
+    else
+      echo "Symlinking $file ..."
+      ln -s $PWD/$file $HOME/$file
+    fi
+  fi
+done
+
