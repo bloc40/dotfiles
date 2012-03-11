@@ -3,6 +3,7 @@ alias dot='cd $HOME/workspace/dotfiles'
 # rails
 alias rdm0='rake db:migrate VERSION=0'
 alias rdtp='rake db:test:prepare'
+alias tt='touch tmp/restart.txt'
 
 # macvim
 alias m='mvim'
@@ -11,7 +12,7 @@ alias m='mvim'
 alias h='history'
 alias tarc='tar -czvf'
 alias tarx='tar -xzvf'
-alias la='ls -lah'
+alias la='ls -lAh'
 #alias xx="history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head"
 
 function most {
