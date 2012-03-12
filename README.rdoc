@@ -4,8 +4,15 @@
 
 You need to have Macvim[http://code.google.com/p/macvim/], Janus[https://github.com/carlhuda/janus], and Oh-My-Zsh[https://github.com/robbyrussell/oh-my-zsh] installed.
 
-== Installation
+== To Install
 
   $ git clone git://github.com/bloc40/dotfiles.git
   $ cd dotfiles
+  $ git submodule update --init
   $ ./install
+
+== To Update
+
+  $ cd dotfiles
+  $ git pull --rebase
+  $ git submodule update
