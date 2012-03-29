@@ -32,6 +32,9 @@ au focuslost * silent! :wa
 " show the listing order of the matched files for ControlP (ex-CommandT) from top to bottom
 let g:ctrlp_match_window_reversed = 0
 
+" additional Ruby syntax highliting
+au BufRead,BufNewFile {Capfile,Gemfile,Gemfile.lock,Rakefile,Thorfile,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
+
 "------------------------------------------------------------------------
 "---------------- Custom Mapping ----------------------------------------
 "------------------------------------------------------------------------
@@ -99,3 +102,9 @@ vmap < <gv
 " update .vimrc.after file
 command! V so ~/.vimrc.after
 
+" Get of my lawn!!!
+" Takend from: https://github.com/thoughtbot/dotfiles/blob/master/vimrc#L77-L82
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>

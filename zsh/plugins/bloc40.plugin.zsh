@@ -5,8 +5,16 @@ alias rdm0='rake db:migrate VERSION=0'
 alias rdtp='rake db:test:prepare'
 alias tt='touch tmp/restart.txt'
 
+# spin
+alias ss='spin serve'
+
 # macvim
 alias m='mvim'
+
+# heroku
+alias hlt='heroku logs -t'
+alias hpsm='heroku push staging master'
+alias hppm='heroku push production master'
 
 # shell
 alias h='history'
