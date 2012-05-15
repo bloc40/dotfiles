@@ -8,6 +8,9 @@ alias tt='touch tmp/restart.txt'
 # spin
 alias ss='spin serve'
 
+# foreman
+alias fs='foreman start'
+
 # macvim
 alias m='mvim'
 
