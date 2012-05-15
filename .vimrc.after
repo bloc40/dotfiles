@@ -11,7 +11,7 @@ set wildignore=*.swp,*.bak,*.pyc,*.class
 set guifont=Monaco:h12
 
 " add git branch to status line
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+set statusline=[%n]\ %*%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 " remove swap and backup files from working directory
 set nobackup
@@ -23,14 +23,13 @@ set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
 set foldlevel=1         "this is just what i use
 
+set splitbelow
+
 " clear white space in the end of lines
 au BufWritePre * :%s/\s\+$//e
 
 " autosave when focus is lost
 au focuslost * silent! :wa
-
-" show the listing order of the matched files for ControlP (ex-CommandT) from top to bottom
-let g:ctrlp_match_window_reversed = 0
 
 " additional Ruby syntax highliting
 au BufRead,BufNewFile {Capfile,Gemfile,Gemfile.lock,Rakefile,Thorfile,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
@@ -69,9 +68,10 @@ map <F3> :NERDTree<CR>
 
 " run test for specific line with spin push
 map <D-r> :wa<CR> \| :exe "!spin push %" <CR><CR>
+" use Rubymine way of running a spec
+map <S-D-F8> :wa<CR> \| :exe "!spin push %" <CR><CR>
 " run test for the whole file
 map <D-R> :wa<CR> \| :exe "!spin push %:" . line(".") <CR><CR>
-
 " run all tests
 command! S !spin push spec
 
@@ -83,14 +83,14 @@ map <D-F> :Ack!
 " format the entire file
 map <D-L> gg=G<CR>''z.
 
-" open BufferGator bar with open files
-map <D-e> :BuffergatorToggle <CR>
+" show open buffers
+map <D-e> :CtrlPBuffer<CR>
 
 " convert Ruby 1.8 to 1.9 hash syntax
 map <D-H> :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
 
-" clear search highlights
-"nmap <ESC> :noh<CR>
+" use Rubymine way of opening a file
+map <D-N> :CtrlP <CR>
 
 " show the list of methods (TagList plugin)
 map <D-Y> <leader>rt
@@ -102,7 +102,7 @@ vmap < <gv
 " update .vimrc.after file
 command! V so ~/.vimrc.after
 
-" Get of my lawn!!!
+" Get off my lawn!!!
 " Takend from: https://github.com/thoughtbot/dotfiles/blob/master/vimrc#L77-L82
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
