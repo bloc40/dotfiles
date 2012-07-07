@@ -13,11 +13,11 @@ snippet desit
 	end
 snippet des
 	describe '${1}' do
-		${0}
+		${2}
 	end
 snippet con
 	context '${1}' do
-		${0}
+		${2}
 	end
 snippet vp
 	validates :${1:attribute}, presence: true
@@ -25,15 +25,18 @@ snippet vp
 snippet ithc
 	it { should have_db_column(:${1:column_name}).of_type(:${2:type}) }
 snippet ithi
-	it { should have_db_index(:${1:column_name})
+	it { should have_db_index(:${1:column_name}) }
 snippet itbt
 	it { should belong_to :${1:class} }
 snippet ithm
 	it { should have_many :${1:collection} }
+snippet itho
+	it { should have_one :${1:collection} }
 snippet itvp
 	it { should validate_presence_of :${1:attribute} }
 snippet itr
 	it { should route(:${1:method}, '${2:route}').to(${3:controller:} :${4:controller_name}, action: :${5:action_name}${0}) }
-
-
-
+snippet itam
+	it { should allow_mass_assignment_of :${1:attribute}  }
+snippet save
+	save_and_open_page
