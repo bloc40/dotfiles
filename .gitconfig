@@ -24,6 +24,7 @@
   cia  = commit --amend
   cl   = clean -df
   co   = checkout
+  cp   = cherry-pick
   df   = diff
   dfs  = diff --staged
   ll   = log -20 --oneline --decorate --graph --all
