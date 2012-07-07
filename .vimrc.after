@@ -23,7 +23,11 @@ set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
 set foldlevel=1         "this is just what i use
 
+" put the cursor in the split below window
 set splitbelow
+
+" make all operations work with the OS clipboard.
+set clipboard=unnamed
 
 " clear white space in the end of lines
 au BufWritePre * :%s/\s\+$//e
@@ -96,11 +100,15 @@ map <D-N> :CtrlP <CR>
 map <D-Y> <leader>rt
 
 " keep selection in visual mode when (in|re)denting it
-vmap > >gv
-vmap < <gv
+"vmap > >gv
+"vmap < <gv
 
+" open .vimrc.after
+command! V tabe ~/.vimrc.after
 " update .vimrc.after file
-command! V so ~/.vimrc.after
+command! Vs so ~/.vimrc.after
+
+map <leader>ct :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs /usr/local/bin/ctags -R<CR>
 
 " Get off my lawn!!!
 " Takend from: https://github.com/thoughtbot/dotfiles/blob/master/vimrc#L77-L82
