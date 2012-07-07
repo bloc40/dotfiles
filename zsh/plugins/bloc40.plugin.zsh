@@ -3,16 +3,21 @@ alias dot='cd $HOME/workspace/dotfiles'
 # rails
 alias rdm0='rake db:migrate VERSION=0'
 alias rdtp='rake db:test:prepare'
+alias rds='rake db:seed'
 alias tt='touch tmp/restart.txt'
+alias rake='noglob rake' # https://github.com/robbyrussell/oh-my-zsh/issues/433
+
+# bundle
+alias bo='EDITOR=mvim bundle open'
 
 # spin
-alias ss='spin serve'
+alias ss='spin serve -t'
 
 # foreman
 alias fs='foreman start'
 
-# macvim
-alias m='mvim'
+# meteor
+alias m='meteor'
 
 # heroku
 alias hlt='heroku logs -t'
