@@ -18,10 +18,8 @@ git_position() {
 
   if [[ behind -gt 0 ]]; then
     echo "%{$fg_bold[grey]%}[%{$fg_bold[blue]%}-${behind}%{$fg_bold[grey]%}]"
-    #echo "%{$fg_bold[blue]%}[-${behind}]"
   elif [[ ahead -gt 0 ]]; then
     echo "%{$fg_bold[grey]%}[%{$fg_bold[blue]%}+${ahead}%{$fg_bold[grey]%}]"
-    #echo "%{$fg_bold[blue]%}[+${ahead}]"
   fi
 }
 
@@ -38,7 +36,6 @@ git_branch_color() {
 git_dirty() {
   local result=''
   # modified
-  #if [[ "$repo_path" != '.' && `git ls-files -m` != '' ]]; then
   if [[ `git ls-files -m` != '' ]]; then
     result="${result} %{$fg_bold[red]%}✗%{$reset_color%}"
   fi
@@ -70,8 +67,7 @@ git_prompt() {
   local cb=$(current_branch)
 
   if [ -n "$cb" ]; then
-    #echo " %{$fg_bold[$(git_branch_color)]%}$cb %{$fg[white]%}%{$fg_bold[black]%}$(git_commit_id)%{$reset_color%}$(git_dirty) $(git_position)%{$reset_color%}"
-    echo " %{$fg_bold[$(git_branch_color)]%}$cb $(git_position)%{$reset_color%}%{$reset_color%}$(git_dirty)"
+    echo "%{$fg_bold[$(git_branch_color)]%} $cb $(git_position)%{$reset_color%}$(git_dirty)"
   fi
 }
 
