@@ -7,60 +7,55 @@ git_repo_path() {
   git rev-parse --git-dir 2>/dev/null
 }
 
-git_commit_id() {
-  git rev-parse --short HEAD 2>/dev/null
-}
-
 git_position() {
   set -- `git rev-list --left-right --count origin/master..HEAD`
   local behind="$1"
   local ahead="$2"
 
   if [[ behind -gt 0 ]]; then
-    echo "%{$fg_bold[grey]%}[%{$fg_bold[blue]%}-${behind}%{$fg_bold[grey]%}]"
+    echo "%{$fg_bold[grey]%}(%{$fg_bold[blue]%}-${behind}%{$fg_bold[grey]%})"
   elif [[ ahead -gt 0 ]]; then
-    echo "%{$fg_bold[grey]%}[%{$fg_bold[blue]%}+${ahead}%{$fg_bold[grey]%}]"
+    echo "%{$fg_bold[grey]%}(%{$fg_bold[blue]%}+${ahead}%{$fg_bold[grey]%})"
   fi
 }
 
-git_branch_color() {
-  if [[ $(git_repo_path) != '' ]]; then
-    if [[ `git ls-files -m` != '' || `git ls-files -o --exclude-standard` != '' || `git diff --staged --name-only` != '' ]]; then
-      echo 'red'
-    else
-      echo 'green'
-    fi
-  fi
+git_modified() {
+  [[ `git ls-files -m` != '' ]]
+}
+
+git_untracked() {
+  [[ `git ls-files -o --exclude-standard` != '' ]]
+}
+
+git_staged() {
+  [[ `git diff --staged --name-only` != '' ]]
+}
+
+git_unmerged() {
+  [[ `git ls-files -u` != '' ]]
+}
+
+git_deleted() {
+  [[ `git ls-files -d` != '' ]]
 }
 
 git_dirty() {
   local result=''
-  # modified
-  if [[ `git ls-files -m` != '' ]]; then
-    result="${result} %{$fg_bold[red]%}✗%{$reset_color%}"
-  fi
 
-  # untracked
-  if [[ `git ls-files -o --exclude-standard` != '' ]]; then
-    result="${result} %{$FG[133]%}✭%{$reset_color%}"
-  fi
-
-  # staged
-  if [[ `git diff --staged --name-only` != '' ]]; then
-    result="${result} %{$FG[077]%}∆%{$reset_color%}"
-  fi
-
-  # unmerged
-  if [[ `git ls-files -u` != '' ]]; then
-    result="${result} %{$fg_bold[red]%}⚡%{$reset_color%}"
-  fi
-
-  # deleted
-  if [[ `git ls-files -d` != '' ]]; then
-    result="${result} %{$fg_bold[red]%}✖%{$reset_color%}"
-  fi
-
+  git_modified && result="${result} %{$fg_bold[red]%}✗%{$reset_color%}"
+  git_untracked && result="${result} %{$FG[133]%}✭%{$reset_color%}"
+  git_staged && result="${result} %{$FG[077]%}∆%{$reset_color%}"
+  git_unmerged && result="${result} %{$fg_bold[red]%}⚡%{$reset_color%}"
+  git_deleted && result="${result} %{$fg_bold[red]%}✖%{$reset_color%}"
   echo ${result}
+}
+
+git_branch_color() {
+  if git_modified || git_untracked || git_staged; then
+    echo 'red'
+  else
+    echo 'green'
+  fi
 }
 
 git_prompt() {
@@ -76,5 +71,4 @@ local smiley="%(?,%{$fg[green]%}☺%{$reset_color%},%{$fg[red]%}☹%{$reset_colo
 PROMPT='
 %{$fg[yellow]%}%~
 ${smiley}  %{$reset_color%}'
-
 RPROMPT='%{$fg_bold[grey]%} $(~/.rvm/bin/rvm-prompt)$(git_prompt)%{$reset_color%}'
