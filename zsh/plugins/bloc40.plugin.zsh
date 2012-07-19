@@ -29,7 +29,7 @@ alias h='history'
 alias tarc='tar -czvf'
 alias tarx='tar -xzvf'
 alias la='ls -lAh'
-#alias xx="history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head"
+alias cl='clear'
 
 function most {
  #history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head
