@@ -1,6 +1,6 @@
 " Vim color scheme
 "
-" Name:        railscast.vim
+" Name:        railscast3.vim
 " Maintainer:  Josh O'Rourke <jorourke23@gmail.com>
 " License:     public domain
 "
