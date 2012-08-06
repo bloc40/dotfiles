@@ -8,7 +8,7 @@ git_repo_path() {
 }
 
 git_position() {
-  set -- `git rev-list --left-right --count origin/master..HEAD`
+  set -- `git rev-list --left-right --count origin/master..HEAD 2>/dev/null`
   local behind="$1"
   local ahead="$2"
 
