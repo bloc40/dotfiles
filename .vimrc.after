@@ -83,12 +83,13 @@ map <D-R> :wa<CR> \| :exe "!spin push %:" . line(".") <CR><CR>
 command! S !spin push spec
 
 " search for the word where the cursor is
-map <D-A> :Ack! <C-R><C-W><CR>
+map <D-A> :Ack! <C-R><C-W>
 " Open search files without opening the file with the first match
 map <D-F> :Ack!
 
-" format the entire file
+" auto-indent the entire file
 map <D-L> gg=G<CR>''z.
+map <leader>= gg=G``
 
 " show open buffers
 map <D-e> :CtrlPBuffer<CR>
@@ -97,7 +98,9 @@ map <D-e> :CtrlPBuffer<CR>
 map <D-H> :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
 
 " use Rubymine way of opening a file
-map <D-N> :CtrlP <CR>
+map <D-N> :CtrlPClearCache<CR>:CtrlP<CR>
+" override Ctrl-T to flush the file list
+map <D-t> :CtrlPClearCache<CR>:CtrlP<CR>
 
 " show the list of methods (TagList plugin)
 map <D-Y> <leader>rt
@@ -111,8 +114,6 @@ command! V tabe ~/.vimrc.after
 " update .vimrc.after file
 command! Vs so ~/.vimrc.after
 
-map <leader>ct :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs /usr/local/bin/ctags -R<CR>
-
 " Get off my lawn!!!
 " Takend from: https://github.com/thoughtbot/dotfiles/blob/master/vimrc#L77-L82
 nnoremap <Left> :echoe "Use h"<CR>
@@ -123,3 +124,14 @@ nnoremap <Down> :echoe "Use j"<CR>
 " scroll the viewport faster
 nnoremap <C-e> 5<C-e>
 nnoremap <C-y> 5<C-y>
+
+" ctags with rails load path
+map <leader>rt :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs /usr/local/bin/ctags -R public/javascripts<CR>
+map <leader>T  :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs rdoc -f tags<CR>
+
+" format JSON using Python's json.tool module
+map <leader>j :%!python -m json.tool<CR>
+
+" search
+nmap <leader>s  :%s/
+vmap <leader>s  :s/
