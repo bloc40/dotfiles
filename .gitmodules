@@ -1,6 +1,0 @@
-[submodule ".janus/rctags"]
-	path = .janus/rctags
-	url = https://bloc40@github.com/bloc40/rctags.git
-[submodule ".janus/replace"]
-	path = .janus/replace
-	url = https://bloc40@github.com/bloc40/vim-replace.git
