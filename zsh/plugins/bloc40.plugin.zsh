@@ -1,11 +1,15 @@
-alias dot='cd $HOME/workspace/dotfiles'
+alias dot='cd $HOME/Development/vim/dotfiles'
 
 # rails
 alias rdm0='rake db:migrate VERSION=0'
+alias dm='db:migrate'
 alias rdtp='rake db:test:prepare'
+alias dtp='db:test:prepare'
 alias rds='rake db:seed'
+alias ds='db:seed'
 alias tt='touch tmp/restart.txt'
 alias rake='noglob rake' # https://github.com/robbyrussell/oh-my-zsh/issues/433
+alias dr='db:rollback'
 
 # bundle
 alias bo='EDITOR=mvim bundle open'
