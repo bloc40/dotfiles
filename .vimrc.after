@@ -46,7 +46,6 @@ au BufRead,BufNewFile {Capfile,Gemfile,Gemfile.lock,Rakefile,Thorfile,config.ru,
 "------------------------------------------------------------------------
 
 " map for resizing windows
-" http://vim.wikia.com/wiki/Fast_window_resizing_with_plus/minus_keys
 if bufwinnr(1)
   map + <C-W>+
   map - <C-W>-
@@ -60,50 +59,17 @@ map <C-k> <C-w>k
 map <C-h> <C-w>h
 map <C-l> <C-w>l
 
-" ZoomWin configuration
-map <C-z> <C-w>o
-
-" swap buffers around
-map <C-x> <C-w>x
-
-" toggle NERDTree
-map <F2> :NERDTreeToggle<CR>
-" show file in NERDTree
-map <F1> :NERDTreeFind<CR>
-" collapse all files in NERDTree
-map <F3> :NERDTree<CR>
-
-" run test for specific line with spin push
-map <D-r> :wa<CR> \| :exe "!spin push %" <CR><CR>
-" use Rubymine way of running a spec
-map <S-D-F8> :wa<CR> \| :exe "!spin push %" <CR><CR>
-" run test for the whole file
-map <D-R> :wa<CR> \| :exe "!spin push %:" . line(".") <CR><CR>
-" run all tests
-command! S !spin push spec
-
-" search for the word where the cursor is
-map <D-A> :Ack! <C-R><C-W>
-" Open search files without opening the file with the first match
-map <D-F> :Ack!
-
 " auto-indent the entire file
-map <D-L> gg=G<CR>''z.
+"map <D-L> gg=G<CR>''z.
+map <D-L> gg=G``
 map <leader>= gg=G``
-
-" show open buffers
-map <D-e> :CtrlPBuffer<CR>
 
 " convert Ruby 1.8 to 1.9 hash syntax
 map <D-H> :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
-
-" use Rubymine way of opening a file
-map <D-N> :CtrlPClearCache<CR>:CtrlP<CR>
-" override Ctrl-T to flush the file list
-map <D-t> :CtrlPClearCache<CR>:CtrlP<CR>
-
-" show the list of methods (TagList plugin)
-map <D-Y> <leader>rt
+"" convert string into a symbol
+"map <leader>ssym :%s/'\([^ ]*\)'/:\1/gc<CR>
+"" convert symbol into a string
+"map <leader>syms :%s/:{1}\([^ ]*\)\(\s*\)/'\1'/gc<CR>
 
 " keep selection in visual mode when (in|re)denting it
 "vmap > >gv
@@ -115,23 +81,25 @@ command! V tabe ~/.vimrc.after
 command! Vs so ~/.vimrc.after
 
 " Get off my lawn!!!
-" Takend from: https://github.com/thoughtbot/dotfiles/blob/master/vimrc#L77-L82
-nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Left>  :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
+nnoremap <Up>    :echoe "Use k"<CR>
+nnoremap <Down>  :echoe "Use j"<CR>
 
 " scroll the viewport faster
 nnoremap <C-e> 5<C-e>
 nnoremap <C-y> 5<C-y>
 
 " ctags with rails load path
-map <leader>rt :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs /usr/local/bin/ctags -R public/javascripts<CR>
-map <leader>T  :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs rdoc -f tags<CR>
+map <leader>t :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs /usr/local/bin/ctags -R public/javascripts<CR>
+map <leader>T :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs rdoc -f tags<CR>
 
 " format JSON using Python's json.tool module
 map <leader>j :%!python -m json.tool<CR>
 
 " search
-nmap <leader>s  :%s/
-vmap <leader>s  :s/
+nmap <leader>s :%s/
+vmap <leader>s :s/
+
+" In command-line mode, <C-A> should go to the front of the line, as in bash.
+cmap <C-A> <C-B>
