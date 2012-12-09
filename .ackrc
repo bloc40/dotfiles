@@ -1,9 +1,11 @@
 # add these types to Ack
---type-add=css=.sass
---type-add=js=.json,.coffee
---type-add=ruby=.haml,.rake
+--type-add=css=.sass,.scss
+--type-add=js=.coffee,.json
+--type-add=ruby=.gemspec,.haml,.rake,.ru,.thor
+
+--type-set=md=.md
+--type-add=md=.md
 
 # ignore files while searching
 --ignore-dir=log
 --ignore-dir=tmp
-
