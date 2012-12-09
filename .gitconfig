@@ -1,6 +1,6 @@
 [user]
   name  = Jamal El Milahi
-  email = jamal@bloc40.com
+  email = jamal@elmilahi.com
 
 [color]
   ui     = auto
@@ -16,7 +16,7 @@
   filemode         = true
   logallrefupdates = true
   whitespace       = trailing-space,space-before-tab,indent-with-non-tab
-  excludesfile     = $HOME/.gitignore_global
+  excludesfile     = /Users/jamal/.gitignore_global
 
 [alias]
   br   = !git branch --color -v | cut -c1-100
@@ -34,14 +34,6 @@
   sts  = status -s
   web  = instaweb --httpd=webrick
   webs = instaweb --stop
-
-[difftool "sourcetree"]
-  cmd  = opendiff \"$LOCAL\" \"$REMOTE\"
-  path =
-
-[mergetool "sourcetree"]
-  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-  trustExitCode = true
 
 [color "status"]
   added     = green
