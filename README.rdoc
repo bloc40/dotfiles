@@ -10,6 +10,11 @@ You need to have Macvim[http://code.google.com/p/macvim/], Janus[https://github.
   $ cd dotfiles
   $ ./install
 
+== To remove the symlinks
+
+  $ cd dotfiles
+  $ ./remove_symlinks
+
 == To Update
 
   $ cd dotfiles
