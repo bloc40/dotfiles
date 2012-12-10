@@ -66,14 +66,12 @@ map <leader>= gg=G``
 
 " convert Ruby 1.8 to 1.9 hash syntax
 map <D-H> :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc<CR>
-"" convert string into a symbol
-"map <leader>ssym :%s/'\([^ ]*\)'/:\1/gc<CR>
-"" convert symbol into a string
-"map <leader>syms :%s/:{1}\([^ ]*\)\(\s*\)/'\1'/gc<CR>
 
-" keep selection in visual mode when (in|re)denting it
-"vmap > >gv
-"vmap < <gv
+" convert string into a symbol
+command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc
+
+" convert symbol into a string
+command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc
 
 " open .vimrc.after
 command! V tabe ~/.vimrc.after
