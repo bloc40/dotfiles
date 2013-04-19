@@ -32,6 +32,9 @@ set clipboard=unnamed
 " start the scrolling 3 lines before the border
 set scrolloff=3
 
+" no error bell please
+set noeb vb t_vb=
+
 " clear white space in the end of lines
 au BufWritePre * :%s/\s\+$//e
 
