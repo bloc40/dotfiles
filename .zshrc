@@ -29,7 +29,8 @@ plugins=(bloc40 brew bundler gem git pow rails3 ruby rvm)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/Users/jamal/.rvm/gems/ruby-1.9.2-p290/bin:/Users/jamal/.rvm/gems/ruby-1.9.2-p290@global/bin:/Users/jamal/.rvm/rubies/ruby-1.9.2-p290/bin:/Users/jamal/.rvm/bin:/Library/Ruby/Gems/1.8/gems:/usr/local/bin:/usr/local/sbin:/Users/jamal/android-sdk-mac_x86/tools:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
+export PATH=/Users/jamal/.rvm/gems/ruby-1.9.2-p290/bin:/Users/jamal/.rvm/gems/ruby-1.9.2-p290@global/bin:/Users/jamal/.rvm/rubies/ruby-1.9.2-p290/bin:/Users/jamal/.rvm/bin:/Library/Ruby/Gems/1.8/gems:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
+export NODE_ENV=development
 
 #---------------------------------------------------------
 # Load custom plugin and theme if the zsh symlink exist
