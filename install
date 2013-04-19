@@ -1,6 +1,6 @@
 #!/bin/sh
 
-EXCLUDED_FILES=( README.rdoc .git 'install' )
+EXCLUDED_FILES=( README.rdoc .git 'install' 'remove_symlinks' )
 
 for file in $(ls -A $pwd ); do
   target=`echo ${EXCLUDED_FILES[*]} | grep $file`
