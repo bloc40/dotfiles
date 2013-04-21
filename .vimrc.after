@@ -5,7 +5,7 @@ set hidden
 set autoread
 
 " ignore these files
-set wildignore=*.swp,*.bak,*.pyc,*.class
+set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class
 
 " font size
 set guifont=Monaco:h12
