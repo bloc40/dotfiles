@@ -36,7 +36,7 @@ export NODE_ENV=development
 # Load custom plugin and theme if the zsh symlink exist
 if [[ -L "zsh" ]]; then
   source "$HOME/zsh/plugins/bloc40.plugin.zsh"
-  source "$HOME/zsh/themes/peepcode3.zsh-theme"
+  source "$HOME/zsh/themes/peepcode2.zsh-theme"
 fi
 #---------------------------------------------------------
 
