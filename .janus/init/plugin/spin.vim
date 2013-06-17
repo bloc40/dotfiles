@@ -8,4 +8,4 @@ map <S-D-F8> :wa<CR> \| :exe "!spin push %" <CR><CR>
 map <D-R> :wa<CR> \| :exe "!spin push %:" . line(".") <CR><CR>
 
 " run all tests
-command! S !spin push spec
+command! Spin !spin push spec
