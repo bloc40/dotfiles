@@ -7,9 +7,6 @@ set autoread
 " ignore these files
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class
 
-" font size
-set guifont=Monaco:h12
-
 " add git branch to status line
 set statusline=[%n]\ %*%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
