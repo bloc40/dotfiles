@@ -24,7 +24,7 @@ ZSH_THEME='robbyrussell'
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(bloc40 brew bundler gem git pow rails3 ruby rvm)
+plugins=(bloc40 brew bundler gem git rails3 ruby rvm)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -36,7 +36,8 @@ export NODE_ENV=development
 # Load custom plugin and theme if the zsh symlink exist
 if [[ -L "zsh" ]]; then
   source "$HOME/zsh/plugins/bloc40.plugin.zsh"
-  source "$HOME/zsh/themes/peepcode2.zsh-theme"
+  #source "$HOME/zsh/themes/peepcode2.zsh-theme"
+  source "$HOME/zsh/themes/bloc40.zsh-theme"
 fi
 #---------------------------------------------------------
 

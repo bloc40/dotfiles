@@ -17,6 +17,7 @@ GIT_PROMPT_INFO=$CYAN
 PATH_COLOR=$fg[yellow]
 
 PROMPT='%{$PATH_COLOR%}%~%{$GIT_PROMPT_INFO%} $(git_prompt_info)$(git_prompt_status) %{$reset_color%}$ '
+RPROMPT='%{$fg_bold[grey]%}$(~/.rvm/bin/rvm-prompt)%{$reset_color%}'
 
 # Format for git_prompt_info()
 ZSH_THEME_GIT_PROMPT_PREFIX="("
