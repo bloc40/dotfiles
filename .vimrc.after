@@ -88,9 +88,6 @@ nnoremap <Down>  :echoe "Use j"<CR>
 nnoremap <C-e> 5<C-e>
 nnoremap <C-y> 5<C-y>
 
-" toggle the folding of the current block
-nnoremap <Space> za
-
 " ctags with rails load path
 map <leader>t :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs /usr/local/bin/ctags -R public/javascripts<CR>
 map <leader>T :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs rdoc -f tags<CR>
