@@ -1,4 +1,4 @@
-alias dot='cd $HOME/Development/vim/dotfiles'
+alias dot='cd $HOME/Code/vim/dotfiles'
 
 # rails
 alias rdm0='rake db:migrate VERSION=0'
