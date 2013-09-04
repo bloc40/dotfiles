@@ -27,8 +27,8 @@
   cp   = cherry-pick
   df   = diff
   dfs  = diff --staged
-  ll   = log -20 --oneline --decorate --graph --all
-  lll  = log -20 --graph --all --pretty=format:'%Cgreen%h %Cred%d%Creset %s%Creset %C(black bold)(%cr)%Creset %Cblue<%an>%Creset'
+  ll   = log -50 --oneline --decorate --graph --all
+  lll  = log -50 --graph --all --pretty=format:'%Cgreen%h %Cred%d%Creset %s%Creset %C(black bold)(%cr)%Creset %Cblue<%an>%Creset'
   lp   = log -p
   st   = status
   sts  = status -s
