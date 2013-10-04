@@ -11,6 +11,9 @@ alias ds='db:seed'
 alias tt='touch tmp/restart.txt'
 alias rake='noglob rake' # https://github.com/robbyrussell/oh-my-zsh/issues/433
 alias dr='db:rollback'
+alias rdmpp='time rake db:migrate parallel:prepare'
+alias rpa='time rake parallel:all'
+alias rdmpppa='time rake db:migrate parallel:prepare parallel:all'
 
 # bundle
 alias bo='EDITOR=mvim bundle open'
