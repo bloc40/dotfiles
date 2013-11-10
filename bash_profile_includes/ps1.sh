@@ -48,4 +48,4 @@ function git_branch {
 }
 
 export CLICOLOR=1
-export PS1="\[\033[36m\]\w \[\033[\$(git_branch_color)m\]\$(git_branch)\[\033[00m\]$\[\033[00m\] "
+export PS1="\[\033[33m\]\w \[\033[\$(git_branch_color)m\]\$(git_branch)\[\033[00m\]$\[\033[00m\] "
