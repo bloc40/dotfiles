@@ -1,18 +1,7 @@
-#-------------------------------------------
-# http://stackoverflow.com/questions/4133904/ps1-line-with-git-current-branch-and-colors/6086978#6086978#answer-6086978
-#function color_my_prompt {
-#  local __user_and_host="\[\033[01;32m\]\u@\h"
-#  local __cur_location="\[\033[01;34m\]\w"
-#  local __git_branch_color="\[\033[31m\]"
-#  #local __git_branch="\`ruby -e \"print (%x{git branch 2> /dev/null}.grep(/^\*/).first || '').gsub(/^\* (.+)$/, '(\1) ')\"\`"
-#  local __git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`'
-#  local __prompt_tail="\[\033[35m\]$"
-#  local __last_color="\[\033[00m\]"
-#  export PS1="$__user_and_host $__cur_location $__git_branch_color$__git_branch$__prompt_tail$__last_color "
-#}
-#color_my_prompt
+RED=31
+GREEN=32
+YELLOW=33
 
-#----------------------------------------------
 function git_repo {
   [[ `git rev-parse --is-inside-work-tree 2>/dev/null` == true ]]
 }
@@ -36,9 +25,9 @@ function git_dirty {
 function git_branch_color {
   if git_repo; then
     if git_dirty; then
-      echo '31'
+      echo $RED
     else
-      echo '32'
+      echo $GREEN
     fi
   fi
 }
@@ -48,4 +37,4 @@ function git_branch {
 }
 
 export CLICOLOR=1
-export PS1="\[\033[33m\]\w \[\033[\$(git_branch_color)m\]\$(git_branch)\[\033[00m\]$\[\033[00m\] "
+export PS1="\[\033[\$(echo $YELLOW)m\]\w \[\033[\$(git_branch_color)m\]\$(git_branch)\[\033[00m\]$\[\033[00m\] "
