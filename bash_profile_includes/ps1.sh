@@ -68,4 +68,4 @@ PROMPT_COMMAND=print_pre_prompt
 
 export CLICOLOR=1
 #export PS1="\[\033[\$(echo $YELLOW)m\]\w \[\033[\$(git_branch_color)m\]\$(git_branch) \$(symbol) \[\033[00m\]$\[\033[00m\] "
-export PS1="\[\033[\$(echo $YELLOW)m\]\w \[\033[\$(git_branch_color)m\]\$(git_branch) \[\033[00m\]$\[\033[00m\] "
+export PS1="\[\033[\$(echo $YELLOW)m\]\w \[\033[\$(git_branch_color)m\]\$(git_branch)\[\033[00m\] ۞ \[\033[00m\] "
