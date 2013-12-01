@@ -2,7 +2,7 @@
 
 == Pre-requisites
 
-You need to have Macvim[http://code.google.com/p/macvim/], Janus[https://github.com/carlhuda/janus], and Oh-My-Zsh[https://github.com/robbyrussell/oh-my-zsh] installed.
+You need to have Macvim[http://code.google.com/p/macvim/] and Janus[https://github.com/carlhuda/janus] installed.
 
 == To Install
 
