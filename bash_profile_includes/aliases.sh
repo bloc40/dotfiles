@@ -1,3 +1,14 @@
+# unix
+alias mkdir='mkdir -p'
+alias cl='clear'
+alias h='history'
+alias la='ls -lah'
+alias ll='ls -lh'
+alias ls='ls -F'
+alias so='source ~/.bash_profile'
+alias tarc='tar -czvf'
+alias tarx='tar -xzvf'
+
 # git
 alias g=git
 
@@ -24,15 +35,6 @@ alias ss='spin serve -t'
 
 # foreman
 alias fs='foreman start'
-
-# shell
-alias cl='clear'
-alias h='history'
-alias la='ls -lah'
-alias ll='ls -lh'
-alias so='source ~/.bash_profile'
-alias tarc='tar -czvf'
-alias tarx='tar -xzvf'
 
 # apps
 alias dot='cd $HOME/Code/dotfiles'
