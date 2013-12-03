@@ -1,0 +1,5 @@
+# make tab autocomplete regardless of filename case
+set completion-ignore-case on
+
+# set warning bell to visible
+set bell-style visible
