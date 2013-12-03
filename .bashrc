@@ -1,4 +1,4 @@
-source ~/.bash_profile_includes/paths.sh
+source ~/.bash/paths.sh
 #PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 ### Added by the Heroku Toolbelt
