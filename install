@@ -1,6 +1,11 @@
 #!/bin/sh
 
-EXCLUDED_FILES=( README.rdoc .git 'install' 'remove_symlinks' 'bash' )
+RED="\033[31m"
+GREEN="\033[32m"
+YELLOW="\033[33m"
+RESET="\033[0m"
+
+EXCLUDED_FILES=( README.rdoc .git install remove_symlinks bash )
 
 for file in $(ls -A $pwd ); do
   target=`echo ${EXCLUDED_FILES[*]} | grep $file`
@@ -8,14 +13,18 @@ for file in $(ls -A $pwd ); do
   if [ "${target}" == "" ]; then
     if [[ -e ~/$file  ]]; then
       if [ ! -L ~/$file ]; then
-        echo "$file exists but not a symlink"
-        echo "Moving $file to $file.bak"
+        echo " ----------------------------------------"
+        echo "$RED $file exists but not a symlink $RESET"
+        echo "$YELLOW Moving $file to $file.bak $RESET"
         mv $HOME/$file "$HOME/$file.bak"
-        echo "Symlinking $file ..."
+        echo "$YELLOW Symlinking $file ...$RESET"
+        echo ' ----------------------------------------'
         ln -s $PWD/$file $HOME/$file
+      else
+        echo "$RED $file file exists $RESET"
       fi
     else
-      echo "Symlinking $file ..."
+      echo "$GREEN Symlinking $file ...$RESET"
       ln -s $PWD/$file $HOME/$file
     fi
   fi
