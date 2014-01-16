@@ -13,10 +13,12 @@ alias g=git
 
 # rails
 alias rdm='rake db:migrate'
+alias rdr='rake db:rollback'
 alias rpp='time rake parallel:prepare'
 alias rdm0='rake db:migrate VERSION=0'
 alias rdtp='rake db:test:prepare'
 alias rdmtp='rake db:migrate db:test:prepare'
+alias rdmtps='rake db:migrate db:test:prepare db:seed'
 alias rds='time rake db:seed'
 alias rdmpp='time rake db:migrate parallel:prepare'
 alias rdmppds='time rake db:migrate parallel:prepare db:seed'
