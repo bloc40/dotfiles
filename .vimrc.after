@@ -88,10 +88,6 @@ nnoremap <Down>  :echoe "Use j"<CR>
 nnoremap <C-e> 5<C-e>
 nnoremap <C-y> 5<C-y>
 
-" ctags with rails load path
-map <leader>t :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs /usr/local/bin/ctags -R public/javascripts<CR>
-map <leader>T :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs rdoc -f tags<CR>
-
 " format JSON using Python's json.tool module
 map <leader>j :%!python -m json.tool<CR>
 
@@ -101,5 +97,3 @@ vmap <leader>s :s/
 
 " In command-line mode, <C-A> should go to the front of the line, as in bash.
 cmap <C-A> <C-B>
-
-map <D-F> :Ack!
