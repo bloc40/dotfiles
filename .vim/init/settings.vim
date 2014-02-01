@@ -55,3 +55,6 @@ set guioptions-=r
 set guioptions-=L
 " hide the toolbar
 set guioptions-=T
+
+" nwswapfile
+set noswapfile
