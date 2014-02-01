@@ -1,9 +1,5 @@
 = Jamal El Milahi's Dot Files
 
-== Pre-requisites
-
-You need to have Macvim[http://code.google.com/p/macvim/] and Janus[https://github.com/carlhuda/janus] installed.
-
 == To Install
 
   $ git clone git://github.com/bloc40/dotfiles.git
