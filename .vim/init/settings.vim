@@ -58,3 +58,8 @@ set guioptions-=T
 
 " nwswapfile
 set noswapfile
+
+" indent without hard tab
+set expandtab
+set shiftwidth=2
+set softtabstop=2

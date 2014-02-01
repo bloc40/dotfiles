@@ -27,9 +27,9 @@ command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc
 command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc
 
 " open .vimrc.after
-command! V tabe ~/.vimrc.after
+command! V tabe ~/.vimrc
 " update .vimrc.after file
-command! Vs so ~/.vimrc.after
+command! Vs so ~/.vimrc
 
 " Get off my lawn!!!
 nnoremap <Left>  :echoe "Use h"<CR>
