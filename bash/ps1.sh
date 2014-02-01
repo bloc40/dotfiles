@@ -36,6 +36,10 @@ git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
+git_branch_name() {
+  git rev-parse --abbrev-ref HEAD
+}
+
 ruby_version() {
   echo `~/.rvm/bin/rvm-prompt`
 }

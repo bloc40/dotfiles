@@ -2,6 +2,7 @@
 alias mkdir='mkdir -p'
 alias cl='clear'
 alias h='history'
+alias ls='ls --color=auto'
 alias la='ls -lah'
 alias ll='ls -lh'
 alias so='source ~/.bash_profile'
