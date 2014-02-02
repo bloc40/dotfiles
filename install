@@ -5,28 +5,51 @@ GREEN="\033[32m"
 YELLOW="\033[33m"
 RESET="\033[0m"
 
-EXCLUDED_FILES=( README.rdoc .git install remove_symlinks bash )
+EXCLUDED_FILES=( README.rdoc .git install remove_symlinks bash battery .gitmodules )
 
 for file in $(ls -A $pwd ); do
   target=`echo ${EXCLUDED_FILES[*]} | grep $file`
 
   if [ "${target}" == "" ]; then
-    if [[ -e ~/$file  ]]; then
-      if [ ! -L ~/$file ]; then
+    if [[ -e ~/.$file ]]; then
+      if [ ! -L ~/.$file ]; then
         echo " ----------------------------------------"
         echo "$RED $file exists but not a symlink $RESET"
-        echo "$YELLOW Moving $file to $file.bak $RESET"
-        mv $HOME/$file "$HOME/$file.bak"
+        echo "$YELLOW Moving .$file to $file.bak $RESET"
+        mv $HOME/.$file "$HOME/.$file.bak"
         echo "$YELLOW Symlinking $file ...$RESET"
         echo ' ----------------------------------------'
-        ln -s $PWD/$file $HOME/$file
+        ln -s $PWD/$file $HOME/.$file
       else
         echo "$RED $file file exists $RESET"
       fi
     else
       echo "$GREEN Symlinking $file ...$RESET"
-      ln -s $PWD/$file $HOME/$file
+      ln -s $PWD/$file $HOME/.$file
     fi
   fi
 done
+
+#for file in $(ls -A $pwd ); do
+  #target=`echo ${EXCLUDED_FILES[*]} | grep $file`
+
+  #if [ "${target}" == "" ]; then
+    #if [[ -e ~/$file  ]]; then
+      #if [ ! -L ~/$file ]; then
+        #echo " ----------------------------------------"
+        #echo "$RED $file exists but not a symlink $RESET"
+        #echo "$YELLOW Moving $file to $file.bak $RESET"
+        #mv $HOME/$file "$HOME/$file.bak"
+        #echo "$YELLOW Symlinking $file ...$RESET"
+        #echo ' ----------------------------------------'
+        #ln -s $PWD/$file $HOME/$file
+      #else
+        #echo "$RED $file file exists $RESET"
+      #fi
+    #else
+      #echo "$GREEN Symlinking $file ...$RESET"
+      #ln -s $PWD/$file $HOME/$file
+    #fi
+  #fi
+#done
 

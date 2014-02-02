@@ -2,7 +2,7 @@ set nocompatible    " don't maintain compatibility with vi
 syntax on           " highlight known syntaxes
 
 " Vundle. This must happen first
-set rtp+=~/.vim/bundle/vundle/
+set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
