@@ -50,6 +50,8 @@ au focuslost * silent! :wa
 " additional Ruby syntax highliting
 au BufRead,BufNewFile {Capfile,Gemfile,Gemfile.lock,Rakefile,Thorfile,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
+au VimLeave * if filereadable(".vim/.netrwhist")|call delete(".vim/.netrwhist")|endif
+
 " hide scroll bars
 set guioptions-=r
 set guioptions-=L
