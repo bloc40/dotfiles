@@ -1,67 +1,51 @@
 colorscheme railscasts
 set guifont=Inconsolata:h15
 
-" allow Vim to manage multiple buffers effectively
-set hidden
-
-" no text wrapping
-set nowrap
-
-" show line numbers
-set nu
-
-" auto save files when changed by another editor
-set autoread
+set hidden      " allow Vim to manage multiple buffers effectively
+set hlsearch    " highlight search
+set nowrap      " no text wrapping
+set nu          " show line numbers
+set autoread    " auto save files when changed by another editor
 
 " ignore these files
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class
+set wildignore+=.git " ignore these folders
 
 " add git branch to status line
 set statusline=[%n]\ %*%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
-" remove swap and backup files from working directory
-set nobackup
+set nobackup      " remove swap and backup files from working directory
 set nowritebackup
 
 " folding settings
-set foldmethod=indent   "fold based on indent
-set foldnestmax=10      "deepest fold is 10 levels
-set nofoldenable        "dont fold by default
-set foldlevel=1         "this is just what i use
+set foldmethod=indent           "fold based on indent
+set foldnestmax=10              "deepest fold is 10 levels
+set nofoldenable                "dont fold by default
+set foldlevel=1                 "this is just what i use
 
-" put the cursor in the split below window
-set splitbelow
+set splitbelow                  " put the cursor in the split below window
+set clipboard=unnamed           " make all operations work with the OS clipboard.
+set scrolloff=3                 " start the scrolling 3 lines before the border
+set noeb vb t_vb=               " no error bell please
 
-" make all operations work with the OS clipboard.
-set clipboard=unnamed
+au BufWritePre * :%s/\s\+$//e   " clear white space in the end of lines
 
-" start the scrolling 3 lines before the border
-set scrolloff=3
-
-" no error bell please
-set noeb vb t_vb=
-
-" clear white space in the end of lines
-au BufWritePre * :%s/\s\+$//e
-
-" autosave when focus is lost
-au focuslost * silent! :wa
+au focuslost * silent! :wa      " autosave when focus is lost
 
 " additional Ruby syntax highliting
 au BufRead,BufNewFile {Capfile,Gemfile,Gemfile.lock,Rakefile,Thorfile,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
 au VimLeave * if filereadable(".vim/.netrwhist")|call delete(".vim/.netrwhist")|endif
 
-" hide scroll bars
-set guioptions-=r
+set guioptions-=r     " hide scroll bars
 set guioptions-=L
-" hide the toolbar
-set guioptions-=T
+set guioptions-=T     " hide the toolbar
 
-" nwswapfile
-set noswapfile
+set noswapfile        " nwswapfile
 
-" indent without hard tab
-set expandtab
+set expandtab         " indent without hard tab
 set shiftwidth=2
 set softtabstop=2
+
+" check for typos
+"set spell
