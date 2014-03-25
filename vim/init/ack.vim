@@ -3,4 +3,4 @@
 nnoremap <D-A> :Ack! <C-R><C-W>
 
 " open search files without opening the file with the first match
-map <leader>f :Ack!<SPACE>
+map <leader>f :Ack!<space>

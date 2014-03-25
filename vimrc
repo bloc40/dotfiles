@@ -32,7 +32,7 @@ syntax on
 
 filetype plugin indent on
 
-let mapleader = ","
+let mapleader = "\<Space>"
 
 
 " Source initialization files

@@ -7,10 +7,10 @@ if bufwinnr(1)
 end
 
 " jump between windows
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-h> <C-w>h
-map <C-l> <C-w>l
+map <leader>j <C-w>j
+map <leader>k <C-w>k
+map <leader>h <C-w>h
+map <leader>l <C-w>l
 
 " auto-indent the entire file
 "map <D-L> gg=G<CR>''z.
@@ -42,7 +42,7 @@ nnoremap <C-e> 5<C-e>
 nnoremap <C-y> 5<C-y>
 
 " format JSON using Python's json.tool module
-map <leader>j :%!python -m json.tool<CR>
+command! FormatJson %!python -m json.tool
 
 " search
 nmap <leader>s :%s/
