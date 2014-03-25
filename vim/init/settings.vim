@@ -26,7 +26,7 @@ set foldlevel=1                 "this is just what i use
 set splitbelow                  " put the cursor in the split below window
 set clipboard=unnamed           " make all operations work with the OS clipboard.
 set scrolloff=3                 " start the scrolling 3 lines before the border
-set noeb vb t_vb=               " no error bell please
+set noeb vb t_vb=               " no error or visual bells please
 
 au BufWritePre * :%s/\s\+$//e   " clear white space in the end of lines
 
@@ -47,5 +47,8 @@ set expandtab         " indent without hard tab
 set shiftwidth=2
 set softtabstop=2
 
-" check for typos
-"set spell
+"set spell            " check for typos
+
+set laststatus=2      " show a status line even when only one window is shown. (set ls=2)
+set shortmess=at      " shortens about every message to a minimum and thus avoids scrolling within the output of messages and the 'press a key' prompt that goes with these. (set shm=at)
+set wildmenu          " show possible completions of command line commands, file names, and more
