@@ -14,6 +14,7 @@ alias g=git
 
 # rails
 alias rake='time rake'
+alias migrate='rake db:migrate db:rollback && rake db:migrate'
 alias rdm='bin/rake db:migrate'
 alias rdr='bin/rake db:rollback'
 alias rpp='rake parallel:prepare'
