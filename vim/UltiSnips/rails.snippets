@@ -1,0 +1,78 @@
+snippet bt
+belongs_to :${1:class}
+endsnippet
+
+snippet hm
+has_many :${1:classes}
+endsnippet
+
+snippet def
+def ${1:function_name}
+  $0
+end
+endsnippet
+
+snippet defs
+def self.${1:function_name}
+  $0
+end
+endsnippet
+
+snippet C
+class ${1:ControllerName}Controller < ApplicationController
+  $0
+end
+endsnippet
+
+#---------------------------------------------
+#------------ RSpec --------------------------
+#---------------------------------------------
+
+snippet ex
+expect($1).to ${2:eq} $0
+endsnippet
+
+snippet des
+describe '$1' do
+  it '$2' do
+    $0
+  end
+end
+endsnippet
+
+snippet con
+context '$1' do
+  it '$2' do
+    $0
+  end
+end
+endsnippet
+
+snippet it
+it '$1' do
+  $0
+end
+endsnippet
+
+snippet bef
+before do
+  $0
+end
+endsnippet
+
+snippet save
+save_and_open_page
+endsnippet
+
+#------------ Shoulda ------------------------
+snippet ivp
+it { should validate_presence_of :${1:attribute } }
+endsnippet
+
+snippet ibt
+it { should belong_to :${1:attribute } }
+endsnippet
+
+snippet ir
+it { should route(:${1:get}, '${2:url}').to(action: :${3:action}${4}) }
+endsnippet

@@ -1,5 +1,6 @@
 colorscheme railscasts
 set guifont=Monaco:h13
+"set guifont=CamingoCode:h14
 
 set hidden      " allow Vim to manage multiple buffers effectively
 set hlsearch    " highlight search
