@@ -16,6 +16,7 @@ alias g=git
 alias rake='time rake'
 alias migrate='rake db:migrate db:rollback && rake db:migrate'
 alias rdm='bin/rake db:migrate'
+alias rdtp='bin/rake db:test:prepare'
 alias rdr='bin/rake db:rollback'
 alias rpp='rake parallel:prepare'
 alias rpa='rake parallel:all'
