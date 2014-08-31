@@ -6,25 +6,25 @@ set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 " bundles
-Plugin 'ap/vim-css-color.git'
-Plugin 'ervandew/supertab.git'
-Plugin 'itspriddle/ZoomWin.git'
-Plugin 'kchmck/vim-coffee-script.git'
-Plugin 'kien/ctrlp.vim.git'
-Plugin 'mileszs/ack.vim.git'
-Plugin 'scrooloose/nerdtree.git'
-Plugin 'scrooloose/nerdcommenter.git'
-Plugin 'scrooloose/syntastic.git'
-Plugin 'tpope/vim-abolish.git'
-Plugin 'tpope/vim-endwise.git'
-Plugin 'tpope/vim-fugitive.git'
-Plugin 'tpope/vim-rails.git'
-Plugin 'tpope/vim-repeat.git'
-Plugin 'tpope/vim-surround.git'
-Plugin 'tpope/vim-unimpaired.git'
+Plugin 'ap/vim-css-color'
+Plugin 'ervandew/supertab'
+Plugin 'itspriddle/ZoomWin'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'kien/ctrlp.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
 
 call vundle#end()
 filetype plugin indent on
