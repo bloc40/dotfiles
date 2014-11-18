@@ -7,6 +7,10 @@ set hlsearch    " highlight search
 set nowrap      " no text wrapping
 set nu          " show line numbers
 
+" mouse scrolling
+set mouse=a
+set ttymouse=xterm
+
 " ignore these files
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class
 set wildignore+=.git " ignore these folders
@@ -54,3 +58,5 @@ set softtabstop=2
 set laststatus=2      " show a status line even when only one window is shown. (set ls=2)
 set shortmess=at      " shortens about every message to a minimum and thus avoids scrolling within the output of messages and the 'press a key' prompt that goes with these. (set shm=at)
 set wildmenu          " show possible completions of command line commands, file names, and more
+
+set textwidth=80      " (tw=80) limit the number of characters to 80 per line

@@ -31,11 +31,11 @@ command! V tabe ~/.vimrc
 " update .vimrc.after file
 command! Vs so ~/.vimrc
 
-" Get off my lawn!!!
-nnoremap <Left>  :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up>    :echoe "Use k"<CR>
-nnoremap <Down>  :echoe "Use j"<CR>
+" Disable the arrow keys
+"nnoremap <Left>  :echoe "Use h"<CR>
+"nnoremap <Right> :echoe "Use l"<CR>
+"nnoremap <Up>    :echoe "Use k"<CR>
+"nnoremap <Down>  :echoe "Use j"<CR>
 
 " scroll the viewport faster
 nnoremap <C-e> 5<C-e>
