@@ -22,13 +22,18 @@ set nobackup      " remove swap and backup files from working directory
 set nowritebackup
 
 " folding settings
-set foldmethod=indent         "fold based on indent
-set foldnestmax=10            "deepest fold is 10 levels
-set nofoldenable              "dont fold by default
-set foldlevel=1               "this is just what i use
+set foldmethod=indent         " fold based on indent
+set foldnestmax=10            " deepest fold is 10 levels
+set nofoldenable              " dont fold by default
+set foldlevel=1               " this is just what i use
 
 set splitbelow                " put the cursor in the split below window
-set clipboard=unnamed         " make all operations work with the OS clipboard.
+
+"set clipboard=unnamed         " make all operations work with the OS clipboard.
+if has('unnamedplus')
+  set clipboard=unnamed,unnamedplus
+endif
+
 set scrolloff=3               " start the scrolling 3 lines before the border
 set noeb vb t_vb=             " no error or visual bells please
 set autoread                  " auto save files when changed by another editor
