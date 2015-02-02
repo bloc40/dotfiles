@@ -50,3 +50,6 @@ vmap <leader>s :s/
 
 " In command-line mode, <C-A> should go to the front of the line, as in bash.
 cmap <C-A> <C-B>
+
+" associate the .es6 file extension with JavaScript
+autocmd BufRead,BufNewFile *.es6 setfiletype javascript
