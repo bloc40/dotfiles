@@ -33,7 +33,7 @@ git_branch_color() {
 }
 
 git_branch() {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'
 }
 
 git_branch_name() {
@@ -45,14 +45,15 @@ ruby_version() {
 }
 
 print_pre_prompt() {
-  printf "\e[0;34m%$(($COLUMNS))s" $(ruby_version)
+  printf "\e[1;30m%$(($COLUMNS))s" $(ruby_version)
 }
 
 command_state() {
-  echo "\$(if [[ \$? == 0 ]]; then echo \"\[\033[0;32m\]☺ \"; else echo \"\[\033[0;31m\]☹ \"; fi)\[\033[00m\]"
+  echo "\$(if [[ \$? == 0 ]]; then echo \"\[\033[0;32m\]☺\"; else echo \"\[\033[0;31m\]☹\"; fi)\[\033[00m\]"
 }
 
 PROMPT_COMMAND=print_pre_prompt
 export CLICOLOR=1
-export PS1="$(command_state) \[\033[\$(echo $YELLOW)m\]\w \[\033[\$(git_branch_color)m\]\$(git_branch) \[\033[00m\]"
-#PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+export PS1="$(command_state) \[\033[\$(echo $YELLOW)m\]\w \[\033[\$(git_branch_color)m\]\$(git_branch)\[\033[00m\]"
+#export PS1="$(command_state) \[\033[0;36m\]\u\[\033[00m\]:\[\033[\$(echo $YELLOW)m\]\w \[\033[\$(git_branch_color)m\]\$(git_branch)\[\033[1;33m\]$\[\033[00m\] "
+#export PS1='[\u@\h \w$(__git_ps1 " (%s)")]\$ '
