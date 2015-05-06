@@ -16,7 +16,8 @@ set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class
 set wildignore+=.git " ignore these folders
 
 " add git branch to status line
-set statusline=[%n]\ %*%<%f\ %h%m%r%{fugitive#statusline()}%=%-16.(%y\ %l/%L,%c%V%)\ %P
+"set statusline=[%n]\ %*%<%f\ %h%m%r%{fugitive#statusline()}%=%-16.(%y\ %l/%L,%c%V%)\ %P
+set statusline=\ %*%<%f\ %h%m%r%{fugitive#statusline()}%=%-5.(%y%)\ %P\ " "
 
 set nobackup      " remove swap and backup files from working directory
 set nowritebackup
