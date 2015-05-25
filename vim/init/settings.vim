@@ -1,6 +1,6 @@
 colorscheme railscasts
 set guifont=Monaco:h13
-"set guifont=CamingoCode:h14
+" set guifont=CamingoCode:h14
 
 set hidden      " allow Vim to manage multiple buffers effectively
 set hlsearch    " highlight search
@@ -17,7 +17,7 @@ set wildignore+=.git " ignore these folders
 
 " add git branch to status line
 "set statusline=[%n]\ %*%<%f\ %h%m%r%{fugitive#statusline()}%=%-16.(%y\ %l/%L,%c%V%)\ %P
-set statusline=\ %*%<%f\ %h%m%r%{fugitive#statusline()}%=%-5.(%y%)\ %P\ " "
+set statusline=\ %*%<%f\ %{fugitive#statusline()}%h%m%r%=%-5.(%y\ %l,%c%V%)\ %P\ " "
 
 set nobackup      " remove swap and backup files from working directory
 set nowritebackup
