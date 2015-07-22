@@ -1,4 +1,4 @@
-# unix
+# --- unix
 alias mkdir='mkdir -p'
 alias cl='clear'
 alias h='history'
@@ -8,11 +8,12 @@ alias ll='ls -lh'
 alias so='source ~/.bash_profile'
 alias tarc='tar -czvf'
 alias tarx='tar -xzvf'
+alias py=python3.4
 
-# git
+# --- git
 alias g=git
 
-# rails
+# --- rails
 alias rake='time rake'
 alias migrate='rake db:migrate db:rollback && rake db:migrate'
 alias rdm='bin/rake db:migrate'
@@ -26,15 +27,10 @@ alias rds='bin/rake db:seed'
 alias rc='bin/rails c'
 alias rdb='bin/rails db'
 alias rs='bin/rails s'
-
-# bundler
-alias bo='EDITOR=mvim bundle open'
-
-# spin
-alias ss='spin serve -t'
-
-# foreman
 alias fs='foreman start'
 
-# apps
-alias dot='cd $HOME/Code/dotfiles'
+# --- bundler
+alias bo='EDITOR=mvim bundle open'
+
+# --- spin
+alias ss='spin serve -t'
