@@ -1,15 +1,14 @@
 set nocompatible    " don't maintain compatibility with vi
 filetype off
 
-" Vundle. This must happen first
+" --- Vundle. This must happen first
 set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" let Vundle manage Vundle
+" --- let Vundle manage Vundle
 Plugin 'gmarik/Vundle.vim'
 
-" bundles
-Plugin 'NLKNguyen/papercolor-theme'
+" --- bundles
 Plugin 'ervandew/supertab'
 Plugin 'kien/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
@@ -28,16 +27,15 @@ Plugin 'tpope/vim-unimpaired'
 call vundle#end()
 filetype plugin indent on
 
-" highlight known syntaxes
+" --- highlight known syntaxes
 syntax on
 
 let mapleader = "\<Space>"
 
 
-" Source initialization files
+" --- Source initialization files
 runtime! init/**.vim
 
-
-" Machine-local vim settings - keep this at the end
+" --- Machine-local vim settings - keep this at the end
 " --------------------------
 silent! source ~/.vimrc.local
