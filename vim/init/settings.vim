@@ -1,6 +1,7 @@
-colorscheme railscasts
-set guifont=Monaco:h13
-" set guifont=CamingoCode:h14
+set guifont=Inconsolata:h16
+set background=dark
+let g:solarized_termtrans=1
+colorscheme solarized
 
 set hidden      " allow Vim to manage multiple buffers effectively
 set hlsearch    " highlight search
