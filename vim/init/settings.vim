@@ -8,30 +8,30 @@ set hlsearch    " highlight search
 set nowrap      " no text wrapping
 set nu          " show line numbers
 
-" --- mouse scrolling
+" mouse scrolling
 set mouse=a
 set ttymouse=xterm
 
-" --- ignore these files
+" ignore these files
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class
 set wildignore+=.git " ignore these folders
 
-" --- add git branch to status line
+" add git branch to status line
 "set statusline=[%n]\ %*%<%f\ %h%m%r%{fugitive#statusline()}%=%-16.(%y\ %l/%L,%c%V%)\ %P
 set statusline=\ %*%<%f\ %{fugitive#statusline()}%h%m%r%=%-5.(%y\ %l,%c%V%)\ %P\ " "
 
 set nobackup      " remove swap and backup files from working directory
 set nowritebackup
 
-" --- folding settings
-set foldmethod=indent         " fold based on indent
-set foldnestmax=10            " deepest fold is 10 levels
-set nofoldenable              " dont fold by default
-set foldlevel=1               " this is just what i use
+" folding settings
+set foldmethod=indent   " fold based on indent
+set foldnestmax=10      " deepest fold is 10 levels
+set nofoldenable        " dont fold by default
+set foldlevel=1         " this is just what i use
 
-set splitbelow                " put the cursor in the split below window
+set splitbelow          " put the cursor in the split below window
 
-" set clipboard=unnamed         " make all operations work with the OS clipboard.
+" set clipboard=unnamed    " make all operations work with the OS clipboard.
 if has('unnamedplus')
   set clipboard=unnamed,unnamedplus
 endif

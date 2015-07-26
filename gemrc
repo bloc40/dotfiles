@@ -1,3 +1,2 @@
-# prevent rdoc and ri installation when installing a gem
 install: --no-ri --no-rdoc
 update: --no-ri --no-rdoc

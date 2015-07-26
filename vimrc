@@ -1,4 +1,5 @@
-set nocompatible    " don't maintain compatibility with vi
+" --- don't maintain compatibility with vi
+set nocompatible
 filetype off
 
 " --- Vundle. This must happen first
@@ -37,5 +38,4 @@ let mapleader = "\<Space>"
 runtime! init/**.vim
 
 " --- Machine-local vim settings - keep this at the end
-" --------------------------
 silent! source ~/.vimrc.local

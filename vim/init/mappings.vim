@@ -13,7 +13,6 @@ map <leader>h <C-w>h
 map <leader>l <C-w>l
 
 " auto-indent the entire file
-"map <D-L> gg=G<CR>''z.
 map <D-L> gg=G``
 map <leader>= gg=G``
 
@@ -26,16 +25,16 @@ command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc
 " convert symbol into a string
 command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc
 
-" open .vimrc.after
+" open .vimrc
 command! V tabe ~/.vimrc
-" update .vimrc.after file
+" source .vimrc
 command! Vs so ~/.vimrc
 
-" Disable the arrow keys
-"nnoremap <Left>  :echoe "Use h"<CR>
-"nnoremap <Right> :echoe "Use l"<CR>
-"nnoremap <Up>    :echoe "Use k"<CR>
-"nnoremap <Down>  :echoe "Use j"<CR>
+" disable the arrow keys
+" nnoremap <Left>  :echoe "Use h"<CR>
+" nnoremap <Right> :echoe "Use l"<CR>
+" nnoremap <Up>    :echoe "Use k"<CR>
+" nnoremap <Down>  :echoe "Use j"<CR>
 
 " scroll the viewport faster
 nnoremap <C-e> 5<C-e>
@@ -48,7 +47,7 @@ command! FormatJson %!python -m json.tool
 nmap <leader>s :%s/
 vmap <leader>s :s/
 
-" In command-line mode, <C-A> should go to the front of the line, as in bash.
+" In command-line mode, <C-A> goes to the front of the line, as in bash.
 cmap <C-A> <C-B>
 
 " associate the .es6 file extension with JavaScript

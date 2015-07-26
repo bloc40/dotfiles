@@ -43,9 +43,7 @@
   untracked = magenta bold
 
 [push]
-	default = simple
+  default = simple
 
-;[gc]
-	;auto = 1
 [grep]
-	fullname = true
+  fullname = true

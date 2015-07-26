@@ -29,27 +29,3 @@ for file in $(ls -A $pwd ); do
     fi
   fi
 done
-
-#for file in $(ls -A $pwd ); do
-  #target=`echo ${EXCLUDED_FILES[*]} | grep $file`
-
-  #if [ "${target}" == "" ]; then
-    #if [[ -e ~/$file  ]]; then
-      #if [ ! -L ~/$file ]; then
-        #echo " ----------------------------------------"
-        #echo "$RED $file exists but not a symlink $RESET"
-        #echo "$YELLOW Moving $file to $file.bak $RESET"
-        #mv $HOME/$file "$HOME/$file.bak"
-        #echo "$YELLOW Symlinking $file ...$RESET"
-        #echo ' ----------------------------------------'
-        #ln -s $PWD/$file $HOME/$file
-      #else
-        #echo "$RED $file file exists $RESET"
-      #fi
-    #else
-      #echo "$GREEN Symlinking $file ...$RESET"
-      #ln -s $PWD/$file $HOME/$file
-    #fi
-  #fi
-#done
-
