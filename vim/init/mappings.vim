@@ -52,3 +52,6 @@ cmap <C-A> <C-B>
 
 " associate the .es6 file extension with JavaScript
 autocmd BufRead,BufNewFile *.es6 setfiletype javascript
+
+" open file in current directory
+cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
