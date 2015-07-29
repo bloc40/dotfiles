@@ -56,7 +56,7 @@ set shortmess=at      " shortens about every message to a minimum and thus avoid
 set wildmenu          " show possible completions of command line commands, file names, and more
 
 set textwidth=80      " (tw=80) limit the number of characters to 80 per line
-set colorcolumn=80
+set colorcolumn=81
 hi ColorColumn ctermbg=8
 
 set incsearch         " move the cursor to the matched string while typing the search pattern
