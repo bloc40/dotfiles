@@ -1,6 +1,3 @@
-" track the engine.
-Plugin 'SirVer/ultisnips'
-
 " snippets are separated from the engine. Add this if you want them:
 "Plugin 'honza/vim-snippets'
 
