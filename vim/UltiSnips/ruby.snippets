@@ -1,9 +1,13 @@
-snippet bt
-belongs_to :${1:class}
+snippet cl
+class ${1:ClassName}
+  ${0}
+end
 endsnippet
 
-snippet hm
-has_many :${1:classes}
+snippet ini
+def initialize(${1:args})
+  ${0}
+end
 endsnippet
 
 snippet def
@@ -22,6 +26,14 @@ snippet C
 class ${1:ControllerName}Controller < ApplicationController
   $0
 end
+endsnippet
+
+snippet bt
+belongs_to :${1:class}
+endsnippet
+
+snippet hm
+has_many :${1:classes}
 endsnippet
 
 #---------------------------------------------
@@ -78,7 +90,10 @@ snippet debugger
 byebug
 endsnippet
 
+#---------------------------------------------
 #------------ Shoulda ------------------------
+#---------------------------------------------
+
 snippet ivp
 it { should validate_presence_of :${1:attribute } }
 endsnippet
