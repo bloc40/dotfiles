@@ -1,15 +1,15 @@
-" --- don't maintain compatibility with vi
+" don't maintain compatibility with vi
 set nocompatible
 filetype off
 
-" --- Vundle. This must happen first
+" Vundle. This must happen first
 set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" --- let Vundle manage Vundle
+" let Vundle manage Vundle
 Plugin 'gmarik/Vundle.vim'
 
-" --- bundles
+" bundles
 Plugin 'SirVer/ultisnips'
 Plugin 'ervandew/supertab'
 Plugin 'kien/ctrlp.vim'
@@ -30,30 +30,48 @@ Plugin 'vim-scripts/ZoomWin'
 call vundle#end()
 filetype plugin indent on
 
-" --- highlight known syntaxes
-syntax on
-
-let mapleader = "\<Space>"
-
 
 " ------------------------------------------
 " -- Settings ------------------------------
 " ------------------------------------------
+
+syntax on     " highlight known syntaxes
+
+let mapleader = "\<Space>"
 
 set guifont=Inconsolata:h16
 set background=dark
 let g:solarized_termtrans=1
 colorscheme solarized
 
-set hidden      " allow Vim to manage multiple buffers effectively
-set hlsearch    " highlight search
-set incsearch   " move the cursor to the matched string while typing the search pattern
-set nowrap      " no text wrapping
-set number      " show line numbers
-
-" mouse scrolling
-set mouse=a
+set hidden            " allow Vim to manage multiple buffers effectively
+set hlsearch          " highlight search
+set incsearch         " move the cursor to the matched string while searching
+set nowrap            " no text wrapping
+set nobackup          " remove swap and backup files from working directory
+set nowritebackup
+set noswapfile        " no swapfile
+set history=50
+set number            " show line numbers
+set autoread          " auto save files when changed by another editor
+set autowrite         " auto save when switching buffers
+set mouse=a           " mouse scrolling
 set ttymouse=xterm
+set splitbelow        " put the cursor in the split below window
+set scrolloff=3       " start the scrolling 3 lines before the border
+set noeb vb t_vb=     " no error or visual bells please
+set laststatus=2      " always diplay the status line. (set ls=2)
+set shortmess=at      " shortens about every message to a minimum and thus avoids scrolling within the output of messages and the 'press a key' prompt that goes with these. (set shm=at)
+set wildmenu          " show possible completions of command line commands, file names, and more
+set expandtab         " indent without hard tab
+set shiftwidth=2
+set softtabstop=2
+set diffopt+=vertical " always use vertical diffs
+set textwidth=80      " (tw=80) limit the number of characters to 80 per line
+set colorcolumn=+1
+hi colorcolumn ctermbg=8
+
+set list listchars=tab:»·,trail:·,nbsp:·  " display extra whitespace
 
 " ignore these files
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
@@ -62,40 +80,16 @@ set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
 " set statusline=[%n]\ %*%<%f\ %h%m%r%{fugitive#statusline()}%=%-16.(%y\ %l/%L,%c%V%)\ %P
 set statusline=\ %*%<%f\ %{fugitive#statusline()}%h%m%r%=%-5.(%y\ %l,%c%V%)\ %P\ " "
 
-set nobackup      " remove swap and backup files from working directory
-set nowritebackup
-
 " folding settings
 set foldmethod=indent   " fold based on indent
 set foldnestmax=10      " deepest fold is 10 levels
 set nofoldenable        " dont fold by default
-set foldlevel=1         " this is just what i use
-
-set splitbelow          " put the cursor in the split below window
+set foldlevel=1
 
 " set clipboard=unnamed    " make all operations work with the OS clipboard.
 if has('unnamedplus')
   set clipboard=unnamed,unnamedplus
 endif
-
-set scrolloff=3       " start the scrolling 3 lines before the border
-set noeb vb t_vb=     " no error or visual bells please
-set autoread          " auto save files when changed by another editor
-set autowrite         " auto save when switching buffers
-set noswapfile        " nwswapfile
-
-set expandtab         " indent without hard tab
-set shiftwidth=2
-set softtabstop=2
-
-set laststatus=2      " show a status line even when only one window is shown. (set ls=2)
-set shortmess=at      " shortens about every message to a minimum and thus avoids scrolling within the output of messages and the 'press a key' prompt that goes with these. (set shm=at)
-set wildmenu          " show possible completions of command line commands, file names, and more
-
-set textwidth=80      " (tw=80) limit the number of characters to 80 per line
-set colorcolumn=81
-hi ColorColumn ctermbg=8
-
 
 
 " ------------------------------------------
@@ -131,14 +125,18 @@ cmap <C-A> <C-B>
 " open file in current directory
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
 
+" open .vimrc
+nmap <leader>v :tabe $MYVIMRC<CR>
+" source .vimrc
+nmap <leader>vs :so $MYVIMRC<CR>
+
 
 " ------------------------------------------
 " -- Commands ------------------------------
 " ------------------------------------------
 command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc " convert string into a symbol
 command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc  " convert symbol into a string
-command! V tabe ~/.vimrc                      " open .vimrc
-command! Vs so ~/.vimrc                       " source .vimrc
+
 " format JSON
 command! FormatJson %!python -m json.tool
 
@@ -148,16 +146,28 @@ command! RubyHash :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc
 " associate the .es6 file extension with JavaScript
 autocmd BufRead,BufNewFile *.es6 setfiletype javascript
 
-au BufWritePre * :%s/\s\+$//e " clear white space in the end of lines
+" clear white space in the end of lines
+autocmd BufWritePre * :%s/\s\+$//e
 
 " additional Ruby syntax highliting
-au BufRead,BufNewFile {Capfile,Gemfile,Gemfile.lock,Rakefile,Thorfile,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
+autocmd BufRead,BufNewFile {Capfile,Gemfile,Gemfile.lock,Rakefile,Thorfile,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
-" au VimLeave * if filereadable(".vim/.netrwhist")|call delete(".vim/.netrwhist")|endif
+" autosave when focus is lost
+autocmd FocusLost * silent! :wa
+
+" allow stylesheets to autocomplete hyphenated words
+autocmd FileType css,scss,sass setlocal iskeyword+=-
+
+" delete .netrwhist files
+autocmd VimLeave * if filereadable(".vim/.netrwhist")|call delete(".vim/.netrwhist")|endif
+
+" autocmd FileType gitcommit setlocal textwidth=72
+" autocmd FileType gitcommit setlocal spell
 
 
-" --- Source initialization files
-runtime! init/**.vim
+runtime! init/**.vim    " source initialization files
 
-" --- Machine-local vim settings - keep this at the end
-silent! source ~/.vimrc.local
+" local vimrc - keep this at the end
+if filereadable($HOME . "/.vimrc.local")
+  source ~/.vimrc.local
+endif
