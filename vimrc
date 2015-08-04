@@ -11,6 +11,7 @@ Plugin 'gmarik/Vundle.vim'
 
 " bundles
 Plugin 'SirVer/ultisnips'
+Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'ervandew/supertab'
 Plugin 'kien/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
@@ -134,6 +135,7 @@ nmap <leader>vs :so $MYVIMRC<CR>
 " ------------------------------------------
 " -- Commands ------------------------------
 " ------------------------------------------
+
 command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc " convert string into a symbol
 command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc  " convert symbol into a string
 
