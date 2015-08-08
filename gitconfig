@@ -47,3 +47,6 @@
 
 [grep]
   fullname = true
+
+[help]
+  autocorrect = 10
