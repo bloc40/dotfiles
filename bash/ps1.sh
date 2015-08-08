@@ -1,3 +1,5 @@
+#!/bin/sh
+
 RED=31
 GREEN=32
 YELLOW=33
@@ -36,10 +38,6 @@ git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'
 }
 
-git_branch_name() {
-  git rev-parse --abbrev-ref HEAD
-}
-
 ruby_version() {
   echo `~/.rvm/bin/rvm-prompt`
 }
@@ -55,4 +53,3 @@ command_state() {
 PROMPT_COMMAND=print_pre_prompt
 export CLICOLOR=1
 export PS1="$(command_state) \[\033[44m\]\w\[\033[00m\] \[\033[\$(git_branch_color)m\]\$(git_branch)\[\033[00m\]"
-#export PS1='[\u@\h \w$(__git_ps1 " (%s)")]\$ '
