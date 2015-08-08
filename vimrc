@@ -53,7 +53,7 @@ set nowrap            " no text wrapping
 set nobackup          " remove swap and backup files from working directory
 set nowritebackup
 set noswapfile        " no swapfile
-set history=50
+set history=100
 set number            " show line numbers
 set autoread          " auto save files when changed by another editor
 set autowrite         " auto save when switching buffers
@@ -82,13 +82,14 @@ set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
 " set statusline=[%n]\ %*%<%f\ %h%m%r%{fugitive#statusline()}%=%-16.(%y\ %l/%L,%c%V%)\ %P
 set statusline=\ %*%<%f\ %{fugitive#statusline()}%h%m%r%=%-5.(%y\ %l,%c%V%)\ %P\ " "
 
+
 " folding settings
 set foldmethod=indent   " fold based on indent
 set foldnestmax=10      " deepest fold is 10 levels
 set nofoldenable        " dont fold by default
 set foldlevel=1
 
-" set clipboard=unnamed    " make all operations work with the OS clipboard.
+set clipboard=unnamed   " make all operations work with the OS clipboard.
 if has('unnamedplus')
   set clipboard=unnamed,unnamedplus
 endif
