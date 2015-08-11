@@ -171,7 +171,7 @@ autocmd VimLeave * if filereadable(".vim/.netrwhist")|call delete(".vim/.netrwhi
 
 " change status line color in insert mode
 if version >= 700
-  au InsertEnter * hi StatusLine term=reverse ctermbg=1* guisp=Red
+  au InsertEnter * hi StatusLine term=reverse ctermbg=4* guisp=Blue
   au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=3*
 endif
 
