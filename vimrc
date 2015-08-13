@@ -12,7 +12,6 @@ Plugin 'gmarik/Vundle.vim'
 " bundles
 Plugin 'SirVer/ultisnips'
 Plugin 'dhruvasagar/vim-table-mode'
-Plugin 'easymotion/vim-easymotion'
 Plugin 'ervandew/supertab'
 Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
