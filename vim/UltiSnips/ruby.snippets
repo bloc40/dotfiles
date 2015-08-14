@@ -27,6 +27,12 @@ def self.${1:function_name}
 end
 endsnippet
 
+snippet defi
+def initialize${1:(${2:args})}
+  ${0}
+end
+endsnippet
+
 snippet C
 class ${1:ControllerName}Controller < ApplicationController
   $0
@@ -53,6 +59,42 @@ snippet aa
 attr_accessor :${1:attr}
 endsnippet
 
+snippet case
+case ${1:object}
+when ${2:condition}
+  ${0}
+end
+endsnippet
+
+snippet if
+if ${1:condition}
+  ${0}
+end
+endsnippet
+
+snippet ife
+if ${1:condition}
+  ${0}
+else
+
+end
+endsnippet
+
+snippet unless
+unless ${1:condition}
+  ${0}
+else
+endsnippet
+
+snippet while
+while ${1:condition}
+  ${0}
+end
+endsnippet
+
+snippet puts
+puts "${1:1}"*80
+endsnippet
 #---------------------------------------------
 #------------ RSpec --------------------------
 #---------------------------------------------
@@ -107,16 +149,36 @@ snippet debugger
 byebug
 endsnippet
 
+snippet feat
+feature '${1}' do
+  scenario '${2}' do
+    ${0}
+  end
+end
+endsnippet
+
+snippet it{
+it { ${0} }
+endsnippet
+
 #---------------------------------------------
 #------------ Shoulda ------------------------
 #---------------------------------------------
 
 snippet ivp
-it { should validate_presence_of :${1:attribute } }
+it { should validate_presence_of :${1:attribute} }
+endsnippet
+
+snippet ivu
+it { should validate_uniqueness_of :${1:attribute} }
 endsnippet
 
 snippet ibt
-it { should belong_to :${1:attribute } }
+it { should belong_to :${1:attribute} }
+endsnippet
+
+snippet ihm
+it { should have_many :${1:attribute} }
 endsnippet
 
 snippet ir
