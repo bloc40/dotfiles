@@ -1,6 +1,6 @@
-# unix
-alias mkdir='mkdir -p'
-alias cl='clear'
+# bash
+alias mkdir='mkdir -pv'
+alias c='clear'
 alias h='history'
 alias ls='ls --color=auto'
 alias la='ls -lah'
@@ -8,10 +8,7 @@ alias ll='ls -lh'
 alias so='source ~/.bash_profile'
 alias tarc='tar -czvf'
 alias tarx='tar -xzvf'
-alias py=python3.4
-
-# git
-alias g=git
+alias now='date +"%T"'
 
 # rails
 alias rake='time rake'
@@ -34,3 +31,6 @@ alias bo='EDITOR=mvim bundle open'
 
 # spin
 alias ss='spin serve -t'
+
+# ctags
+alias tags='ctags -R --exclude=.git --exclude=log --exclude=tmp *'
