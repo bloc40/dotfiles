@@ -37,11 +37,9 @@ Plug 'vim-scripts/ZoomWin'
 " augroup END
 call plug#end()
 
-
 " ------------------------------------------
 " -- Settings ------------------------------
 " ------------------------------------------
-
 set background=dark
 let g:solarized_termtrans=1
 colorscheme solarized
@@ -92,6 +90,7 @@ set foldmethod=indent " fold based on indent
 set foldnestmax=10    " deepest fold is 10 levels
 set nofoldenable      " dont fold by default
 set foldlevel=1
+
 
 " ------------------------------------------
 " -- Mappings ------------------------------
