@@ -1,4 +1,5 @@
 # bash
+alias v='vim'
 alias mkdir='mkdir -pv'
 alias c='clear'
 alias h='history'

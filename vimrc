@@ -39,8 +39,6 @@ filetype plugin indent on
 
 syntax on     " highlight known syntaxes
 
-let mapleader = "\<Space>"
-
 set guifont=Inconsolata:h16
 set background=dark
 let g:solarized_termtrans=1
@@ -70,34 +68,28 @@ set shiftwidth=2
 set softtabstop=2
 set diffopt+=vertical " always use vertical diffs
 set textwidth=80      " (tw=80) limit the number of characters to 80 per line
-set colorcolumn=+1
-hi colorcolumn ctermbg=8
+" set colorcolumn=+1
+" hi colorcolumn ctermbg=8
 
 set list listchars=tab:»·,trail:·,nbsp:·  " display extra whitespace
-
-" ignore these files
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
-
-" add git branch to status line
-" set statusline=[%n]\ %*%<%f\ %h%m%r%{fugitive#statusline()}%=%-16.(%y\ %l/%L,%c%V%)\ %P
 set statusline=\ %*%<%f\ %{fugitive#statusline()}%h%m%r%=%-5.(%y\ %l,%c%V%)\ %P\ " "
 
-
 " folding settings
-set foldmethod=indent   " fold based on indent
-set foldnestmax=10      " deepest fold is 10 levels
-set nofoldenable        " dont fold by default
+set foldmethod=indent " fold based on indent
+set foldnestmax=10    " deepest fold is 10 levels
+set nofoldenable      " dont fold by default
 set foldlevel=1
 
-set clipboard=unnamed   " make all operations work with the OS clipboard.
-if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus
-endif
+set clipboard=unnamed " make all operations work with the OS clipboard.
 
 
 " ------------------------------------------
 " -- Mappings ------------------------------
 " ------------------------------------------
+" ---- Free leader single letters: [d o p q x y]
+
+let mapleader = "\<Space>"
 
 " jump between windows
 map <leader>j <C-w>j
@@ -105,7 +97,72 @@ map <leader>k <C-w>k
 map <leader>h <C-w>h
 map <leader>l <C-w>l
 
-if bufwinnr(1)    " resizing windows
+map <leader>i mzgg=G`z
+map <leader>w :w<CR>
+map <leader>nh :noh<CR>
+nmap <leader>v :tabe $MYVIMRC<CR>
+nmap <leader>s :so $MYVIMRC<CR>:echo 'Vimrc sourced :)'<CR>
+
+" wrap text
+map <Leader>wr mmgqap`m:w<CR>
+
+" open file in current directory
+cnoremap <expr> %%  getcmdtype() == ':' ? fnameescape(expand('%:h')).'/' : '%%'
+map <leader>e :e %%
+map <leader>es :sp %%
+map <leader>ev :vs %%
+map <leader>et :tabe %%
+
+map <leader>sc :sp db/schema.rb<CR>
+
+map <leader>rf :call RenameFile()<CR>
+
+" [Vundle]
+nmap <leader>bi :so $MYVIMRC<CR>:PluginInstall<CR>
+nmap <leader>bc :so $MYVIMRC<CR>:PluginClean<CR>
+nmap <leader>bu :so $MYVIMRC<CR>:PluginUpdate<CR>
+
+" [UltiSnips]
+map <leader>u :UltiSnipsEdit<space>
+
+" [vim-rails.vim]
+map <leader>vu :Vunittest<CR>
+
+" [ZoomWin] zoom in/out the current window
+map <silent><leader>z :ZoomWin<CR>
+
+" [vim-fugitive]
+map <leader>g :Gstatus<CR>
+
+" [vim-commentary] comment/uncomment lines
+map <silent><leader>/ :Commentary<CR>j
+
+" [vim-dispatch]
+map <leader>r :w<CR>:call RunCurrentLineInTest()<CR>
+map <leader>rr :w<CR>:call RunTestFile()<CR>
+map <leader>ra :w<CR>:Dispatch! rake<CR>
+map <leader>c :Copen<CR>
+
+" [CtrlP]
+" map <leader>t :CtrlPClearCache<CR>:CtrlP<CR>
+map <leader>t :CtrlP<CR>
+map <leader>b :CtrlPBuffer<CR>
+
+" [Ag]
+map <leader>f :Ag!<space>
+nnoremap <leader>a :Ag! <C-R><C-W>
+
+" WIP - mapping of the macros
+" map <leader>xx "Ilet(:<ESC>ea)<ESC>f-f=s<ESC>urR<ESC>ur{A }<ESC>"
+" map <leader>zz "Ilet(:^[ea(<80>kb)^[f=r{A }^["
+" map <leader>zz "Ilet(:"<CR>
+
+" ctags with rails load path
+" map <leader>t :!rails runner 'puts $LOAD_PATH.join(" ")' \| ctags -R --exclude=.svn --exclude=.git --exclude=log --exclude=tmp *<CR>
+" map <leader>T :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs rdoc -f tags<CR>
+
+" resizing windows
+if bufwinnr(1)
   map + <C-W>+
   map - <C-W>-
   map ( <C-W><
@@ -125,13 +182,9 @@ nnoremap <C-y> 5<C-y>
 " In command-line mode, <C-A> goes to the front of the line, as in bash.
 cmap <C-A> <C-B>
 
-" open file in current directory
-cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
-
-" open .vimrc
-nmap <leader>v :tabe $MYVIMRC<CR>
-" source .vimrc
-nmap <leader>vs :so $MYVIMRC<CR>
+" Emacs-like beginning and end of line.
+imap <C-e> <C-o>$
+imap <C-a> <C-o>^
 
 
 " ------------------------------------------
@@ -140,38 +193,46 @@ nmap <leader>vs :so $MYVIMRC<CR>
 
 command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc " convert string into a symbol
 command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc  " convert symbol into a string
+command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc " convert Ruby => to : ' '
 
+command! FormatJson !python -m json.tool
 " format JSON
-command! FormatJson %!python -m json.tool
 
-" convert Ruby 1.8 to 1.9 hash syntax
-command! RubyHash :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc
+command! Noh noh " bind Noh to noh
+command! Q q     " bind :Q to :q
 
-" associate the .es6 file extension with JavaScript
-autocmd BufRead,BufNewFile *.es6 setfiletype javascript
+" Qfdo
+command! -nargs=1 -complete=command -bang Qfdo exe 'args ' . QuickfixFilenames() | argdo<bang> <args>
 
 " clear white space in the end of lines
 autocmd BufWritePre * :%s/\s\+$//e
 
+" associate the .es6 file extension with JavaScript
+autocmd BufRead,BufNewFile *.es6 setfiletype javascript
+
 " additional Ruby syntax highliting
 autocmd BufRead,BufNewFile {Capfile,Gemfile,Gemfile.lock,Rakefile,Thorfile,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
-" autosave when focus is lost
+" autosave when focus is lost - GUI only :(
 autocmd FocusLost * silent! :wa
+
+" make ?s part of words
+autocmd FileType ruby,eruby,yaml setlocal iskeyword+=?
 
 " allow stylesheets to autocomplete hyphenated words
 autocmd FileType css,scss,sass setlocal iskeyword+=-
 
+" wrap the quickfix window
+autocmd FileType qf setlocal wrap linebreak
+
 " delete .netrwhist files
 autocmd VimLeave * if filereadable(".vim/.netrwhist")|call delete(".vim/.netrwhist")|endif
 
-" autocmd FileType gitcommit setlocal textwidth=72
-" autocmd FileType gitcommit setlocal spell
-
-" change status line color in insert mode
-if version >= 700
-  au InsertEnter * hi StatusLine term=reverse ctermbg=4* guisp=Blue
-  au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=3*
+hi StatusLine ctermfg=black ctermbg=yellow
+hi StatusLineNC ctermfg=black ctermbg=darkgray
+if version >= 700   " change status line color in insert mode
+  au InsertEnter * hi StatusLine term=reverse ctermfg=black ctermbg=darkblue guisp=Blue
+  au InsertLeave * hi StatusLine term=reverse ctermfg=black ctermbg=yellow
 endif
 
 

@@ -7,3 +7,4 @@ Abolish lastest latest
 Abolish grey    gray
 Abolish pravite private
 Abolish alais   alias
+Abolish vidoe   video

@@ -33,7 +33,7 @@
   dfs  = diff --staged
   dfsw = diff --staged --color-words
   ll   = log --oneline --decorate --graph --all
-  lll  = log --graph --all --pretty=format:'%Cgreen%h %Cred%d%Creset %s%Creset %C(black bold)(%cr)%Creset %Cblue<%an>%Creset'
+  ; lll  = log --graph --all --pretty=format:'%Cgreen%h %Cred%d%Creset %s%Creset %C(green bold)(%cr)%Creset %Cblue<%an>%Creset'
   lp   = log -p
   st   = status
   sts  = status -s
@@ -48,4 +48,7 @@
   fullname = true
 
 [help]
-  autocorrect = 10
+  autocorrect = 1
+
+[github]
+  user = bloc40
