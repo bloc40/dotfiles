@@ -1,5 +1,3 @@
-set nocompatible " don't maintain compatibility with vi
-
 " ------------------------------------------
 " -- Load Plug-vim -------------------------
 " ------------------------------------------
@@ -45,20 +43,20 @@ let g:solarized_termtrans=1
 colorscheme solarized
 
 set autoread          " auto save files when changed by another editor
+set autoread          " auto save files when changed by another editor
+set autowrite         " auto save when switching buffers
 set autowrite         " auto save when switching buffers
 set backspace=indent,eol,start
 set clipboard=unnamed " make all operations work with the OS clipboard.
-" hi colorcolumn ctermbg=8
-" set colorcolumn=+1
 set dictionary="/usr/dict/words"
 set diffopt+=vertical " always use vertical diffs
 set expandtab         " indent without hard tab
 set hidden            " allow Vim to manage multiple buffers effectively
 set history=100
 set hlsearch          " highlight search
-" set ignorecase        " while searching
 set incsearch         " move the cursor to the matched string while searching
 set laststatus=2      " always diplay the status line. (set ls=2)
+set mouse=a           " mouse scrolling
 set mouse=a           " mouse scrolling
 set nobackup          " remove swap and backup files from working directory
 set noeb vb t_vb=     " no error or visual bells please
@@ -67,13 +65,12 @@ set nowrap            " no text wrapping
 set nowritebackup
 set number
 set scrolloff=3       " start the scrolling 3 lines before the border
-" set showcmd
 set shiftwidth=2
 set shortmess=at      " shortens about every message to a minimum and thus avoids scrolling within the output of messages and the 'press a key' prompt that goes with these. (set shm=at)
 set softtabstop=2
 set splitbelow        " put the cursor in the split below window
+set splitbelow        " put the cursor in the split below window
 set textwidth=80      " (tw=80) limit the number of characters to 80 per line
-set ttymouse=xterm
 set wildmenu          " show possible completions of command line commands, file names, and more
 
 set list listchars=tab:»·,trail:·,nbsp:·  " display extra whitespace
