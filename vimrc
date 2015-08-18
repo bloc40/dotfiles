@@ -14,6 +14,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'ervandew/supertab'
 Plugin 'kien/ctrlp.vim'
+Plugin 'nanotech/jellybeans.vim'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
@@ -27,8 +28,8 @@ Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'vim-scripts/Auto-Pairs'
 Plugin 'vim-scripts/ZoomWin'
-Plugin 'nanotech/jellybeans.vim'
 
 call vundle#end()
 filetype plugin indent on
