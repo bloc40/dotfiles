@@ -203,8 +203,7 @@ command! FormatJson !python -m json.tool
 command! Noh noh " bind Noh to noh
 command! Q q     " bind :Q to :q
 
-" Qfdo
-command! -nargs=1 -complete=command -bang Qfdo exe 'args ' . QuickfixFilenames() | argdo<bang> <args>
+command! -nargs=+ FindReplace :call FindReplace(<f-args>)
 
 " clear white space in the end of lines
 autocmd BufWritePre * :%s/\s\+$//e

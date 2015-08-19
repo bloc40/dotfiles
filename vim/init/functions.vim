@@ -11,6 +11,13 @@ function! QuickfixFilenames()
   return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
 endfunction
 
+command! -nargs=1 -complete=command -bang Qfdo exe 'args ' . QuickfixFilenames() | argdo<bang> <args>
+function! FindReplace(old, new)
+  exec ':Ag! ' . a:old
+  exec ':q'
+  exec ':Qfdo %s/' . a:old . '/' . a:new . '/gcIe | update'
+endfunction
+
 " --------------------------------------
 " Rename a file
 " --------------------------------------
