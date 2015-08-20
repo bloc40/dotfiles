@@ -49,3 +49,11 @@ endfunction
 function! RunTestFile()
   call _RunTest('%')
 endfunction
+
+" --------------------------------------
+" Search DuckDuckGo from the Ex command
+" --------------------------------------
+function! Duck(...)
+  exec ':silent !open http://duckduckgo.com?q=' . join(a:000, '+')
+  redraw!
+endfunction

@@ -200,6 +200,7 @@ command! FormatJson !python -m json.tool
 command! Noh noh " bind Noh to noh
 command! Q q     " bind :Q to :q
 command! -nargs=+ Replace :call FindReplace(<f-args>)
+command! -nargs=+ Duck :call Duck(<f-args>)
 
 " clear white space in the end of lines
 autocmd BufWritePre * :%s/\s\+$//e
