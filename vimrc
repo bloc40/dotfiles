@@ -115,7 +115,8 @@ map <leader>es :sp %%
 map <leader>ev :vs %%
 map <leader>et :tabe %%
 
-map <leader>sc :sp db/schema.rb<CR>
+map <leader>sc :e db/schema.rb<CR>
+map <leader>ro :e config/routes.rb<CR>
 
 map <leader>rf :call RenameFile()<CR>
 
@@ -123,6 +124,9 @@ map <leader>rf :call RenameFile()<CR>
 nmap <leader>bi :so $MYVIMRC<CR>:PluginInstall<CR>
 nmap <leader>bc :so $MYVIMRC<CR>:PluginClean<CR>
 nmap <leader>bu :so $MYVIMRC<CR>:PluginUpdate<CR>
+
+" [ctags] for Rails projects
+map <leader>rt :!ctags -R --exclude=.git --exclude=log --exclude=tmp * `bundle show --paths`/../*<CR>
 
 " [UltiSnips]
 map <leader>u :UltiSnipsEdit<space>
@@ -159,10 +163,6 @@ nnoremap <leader>a :Ag! <C-R><C-W>
 " map <leader>zz "Ilet(:^[ea(<80>kb)^[f=r{A }^["
 " map <leader>zz "Ilet(:"<CR>
 
-" ctags with rails load path
-" map <leader>t :!rails runner 'puts $LOAD_PATH.join(" ")' \| ctags -R --exclude=.svn --exclude=.git --exclude=log --exclude=tmp *<CR>
-" map <leader>T :!rails runner 'puts $LOAD_PATH.join(" ")' \| xargs rdoc -f tags<CR>
-
 " resizing windows
 if bufwinnr(1)
   map + <C-W>+
@@ -196,14 +196,10 @@ imap <C-a> <C-o>^
 command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc " convert string into a symbol
 command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc  " convert symbol into a string
 command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc " convert Ruby => to : ' '
-
 command! FormatJson !python -m json.tool
-" format JSON
-
 command! Noh noh " bind Noh to noh
 command! Q q     " bind :Q to :q
-
-command! -nargs=+ FindReplace :call FindReplace(<f-args>)
+command! -nargs=+ Replace :call FindReplace(<f-args>)
 
 " clear white space in the end of lines
 autocmd BufWritePre * :%s/\s\+$//e
