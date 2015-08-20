@@ -39,15 +39,3 @@ alias ss='spin serve -t'
 
 # ctags
 alias tags='ctags -R --exclude=.git --exclude=log --exclude=tmp * `bundle show --paths`/../*'
-
-# git
-alias gad='git add .'
-alias gbr='git branch --color -v | cut -c1-100'
-alias gca='git commit --amend'
-alias gco='git checkout'
-alias gcp='git cherry-pick'
-alias gd='git diff'
-alias gds='git diff --staged'
-alias gdw='git diff --color-words'
-alias gra='git rebase --abort'
-alias grc='git rebase --continue'
