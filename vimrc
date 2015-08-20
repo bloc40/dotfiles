@@ -1,45 +1,47 @@
-" don't maintain compatibility with vi
-set nocompatible
-filetype off
+set nocompatible " don't maintain compatibility with vi
 
-" Vundle. This must happen first
-set runtimepath+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" ------------------------------------------
+" -- Load Plug-vim -------------------------
+" ------------------------------------------
+" install vim-plug if it does not exist
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
 
-" let Vundle manage Vundle
-Plugin 'gmarik/Vundle.vim'
+call plug#begin('~/.vim/plugged')
+Plug 'SirVer/ultisnips', { 'on': [] }
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'ervandew/supertab'
+Plug 'kien/ctrlp.vim'
+Plug 'nanotech/jellybeans.vim'
+Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic', { 'for': ['javascript', 'css'] }
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails', { 'for': ['ruby'] }
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-scripts/Auto-Pairs'
+Plug 'vim-scripts/ZoomWin'
 
-" bundles
-Plugin 'SirVer/ultisnips'
-Plugin 'dhruvasagar/vim-table-mode'
-Plugin 'ervandew/supertab'
-Plugin 'kien/ctrlp.vim'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'rking/ag.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'vim-scripts/Auto-Pairs'
-Plugin 'vim-scripts/ZoomWin'
-
-call vundle#end()
-filetype plugin indent on
+augroup load_us_ycm
+  autocmd!
+  autocmd InsertEnter * call plug#load('ultisnips') | autocmd! load_us_ycm
+augroup END
+call plug#end()
 
 
 " ------------------------------------------
 " -- Settings ------------------------------
 " ------------------------------------------
-
-syntax on     " highlight known syntaxes
 
 set guifont=Inconsolata:h16
 set background=dark
@@ -121,9 +123,9 @@ map <leader>ro :e config/routes.rb<CR>
 map <leader>rf :call RenameFile()<CR>
 
 " [Vundle]
-nmap <leader>bi :so $MYVIMRC<CR>:PluginInstall<CR>
-nmap <leader>bc :so $MYVIMRC<CR>:PluginClean<CR>
-nmap <leader>bu :so $MYVIMRC<CR>:PluginUpdate<CR>
+nmap <leader>bi :so $MYVIMRC<CR>:PlugInstall<CR>
+nmap <leader>bc :so $MYVIMRC<CR>:PlugClean<CR>
+nmap <leader>bu :so $MYVIMRC<CR>:PlugUpdate<CR>
 
 " [ctags] for Rails projects
 map <leader>rt :!ctags -R --exclude=.git --exclude=log --exclude=tmp * `bundle show --paths`/../*<CR>
@@ -237,6 +239,6 @@ endif
 runtime! init/**.vim    " source initialization files
 
 " local vimrc - keep this at the end
-if filereadable($HOME . "/.vimrc.local")
-  source ~/.vimrc.local
+if filereadable(glob("$HOME/.vimrc.local"))
+  source $HOME/.vimrc.local
 endif

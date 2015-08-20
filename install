@@ -30,3 +30,11 @@ for file in $(ls -A $pwd ); do
     fi
   fi
 done
+
+# echo 'Install vim plugins'
+# vim -E -s <<-EOF
+#   :source ~/.vimrc
+#   :PlugInstall
+#   :PlugClean
+#   :qa
+# EOF
