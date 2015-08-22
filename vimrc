@@ -3,6 +3,7 @@ set nocompatible " don't maintain compatibility with vi
 " ------------------------------------------
 " -- Load Plug-vim -------------------------
 " ------------------------------------------
+
 " install vim-plug if it does not exist
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -105,13 +106,13 @@ map <leader>i mzgg=G`z
 map <leader>w :w<CR>
 map <leader>nh :noh<CR>
 nmap <leader>v :tabe $MYVIMRC<CR>
-nmap <leader>s :so $MYVIMRC<CR>:echo 'Vimrc sourced :)'<CR>
+nmap <leader>so :so $MYVIMRC<CR>:echo 'Vimrc sourced :)'<CR>
 
 " wrap text
 map <Leader>wr mmgqap`m:w<CR>
 
 " open file in current directory
-cnoremap <expr> %%  getcmdtype() == ':' ? fnameescape(expand('%:h')).'/' : '%%'
+cnoremap <expr> %% getcmdtype() == ':' ? fnameescape(expand('%:h')).'/' : '%%'
 map <leader>e :e %%
 map <leader>es :sp %%
 map <leader>ev :vs %%
@@ -122,10 +123,12 @@ map <leader>ro :e config/routes.rb<CR>
 
 map <leader>rf :call RenameFile()<CR>
 
-" [Vundle]
-nmap <leader>bi :so $MYVIMRC<CR>:PlugInstall<CR>
-nmap <leader>bc :so $MYVIMRC<CR>:PlugClean<CR>
-nmap <leader>bu :so $MYVIMRC<CR>:PlugUpdate<CR>
+" [vim-plug]
+nmap <leader>pi :so $MYVIMRC<CR>:PlugInstall<CR>
+nmap <leader>pc :so $MYVIMRC<CR>:PlugClean<CR>
+nmap <leader>pu :so $MYVIMRC<CR>:PlugUpdate<CR>
+nmap <leader>ps :so $MYVIMRC<CR>:PlugStatus<CR>
+nmap <leader>pd :so $MYVIMRC<CR>:PlugDiff<CR>
 
 " [ctags] for Rails projects
 map <leader>rt :!ctags -R --exclude=.git --exclude=log --exclude=tmp * `bundle show --paths`/../*<CR>
@@ -159,11 +162,6 @@ map <leader>b :CtrlPBuffer<CR>
 " [Ag]
 map <leader>f :Ag!<space>
 nnoremap <leader>a :Ag! <C-R><C-W>
-
-" WIP - mapping of the macros
-" map <leader>xx "Ilet(:<ESC>ea)<ESC>f-f=s<ESC>urR<ESC>ur{A }<ESC>"
-" map <leader>zz "Ilet(:^[ea(<80>kb)^[f=r{A }^["
-" map <leader>zz "Ilet(:"<CR>
 
 " resizing windows
 if bufwinnr(1)
