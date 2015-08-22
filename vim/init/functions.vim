@@ -34,12 +34,19 @@ endfunction
 " --------------------------------------
 " [Dispatch] run tests
 " --------------------------------------
+function! _TestType()
+  return system('ps ax | grep "spin serve" | grep -v grep') != '' ? 'spin push' : 'rspec'
+endfunction
+
+function! _IsNotTestFile()
+  return match(expand('%:t'), '_spec.rb$') == -1
+endfunction
+
 function! _RunTest(param)
-  if match(expand('%:t'), '_spec.rb$') != -1
-    exec ':Dispatch rspec ' . a:param
-  else
-    echo '!!! not a test file :('
+  if _IsNotTestFile()
+    echo '!!! not a test file :(' | return
   endif
+  exec ':Dispatch ' . _TestType() . ' ' . a:param
 endfunction
 
 function! RunCurrentLineInTest()
