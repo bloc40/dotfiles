@@ -57,7 +57,8 @@ set nobackup          " remove swap and backup files from working directory
 set nowritebackup
 set noswapfile        " no swapfile
 set history=100
-set number            " show line numbers
+set number
+set relativenumber
 set autoread          " auto save files when changed by another editor
 set autowrite         " auto save when switching buffers
 set mouse=a           " mouse scrolling
@@ -72,6 +73,7 @@ set expandtab         " indent without hard tab
 set shiftwidth=2
 set softtabstop=2
 set diffopt+=vertical " always use vertical diffs
+set clipboard=unnamed " make all operations work with the OS clipboard.
 set textwidth=80      " (tw=80) limit the number of characters to 80 per line
 " set colorcolumn=+1
 " hi colorcolumn ctermbg=8
@@ -86,13 +88,10 @@ set foldnestmax=10    " deepest fold is 10 levels
 set nofoldenable      " dont fold by default
 set foldlevel=1
 
-set clipboard=unnamed " make all operations work with the OS clipboard.
-
-
 " ------------------------------------------
 " -- Mappings ------------------------------
 " ------------------------------------------
-" ---- Free leader single letters: [d o p q x y]
+" ---- Free leader single letters: [d o q x y]
 
 let mapleader = "\<Space>"
 
@@ -107,6 +106,7 @@ map <leader>w :w<CR>
 map <leader>nh :noh<CR>
 nmap <leader>v :tabe $MYVIMRC<CR>
 nmap <leader>so :so $MYVIMRC<CR>:echo 'Vimrc sourced :)'<CR>
+map <Leader>p :set paste<CR>o<Esc>"*]p:set nopaste<CR>
 
 " wrap text
 map <Leader>wr mmgqap`m:w<CR>
@@ -136,9 +136,6 @@ map <leader>rt :!ctags -R --exclude=.git --exclude=log --exclude=tmp * `bundle s
 " [UltiSnips]
 map <leader>u :UltiSnipsEdit<space>
 
-" [vim-rails.vim]
-map <leader>vu :Vunittest<CR>
-
 " [ZoomWin] zoom in/out the current window
 map <silent><leader>z :ZoomWin<CR>
 
@@ -155,13 +152,18 @@ map <leader>ra :w<CR>:Dispatch! rake<CR>
 map <leader>c :Copen<CR>
 
 " [CtrlP]
-" map <leader>t :CtrlPClearCache<CR>:CtrlP<CR>
 map <leader>t :CtrlP<CR>
 map <leader>b :CtrlPBuffer<CR>
 
 " [Ag]
 map <leader>f :Ag!<space>
 nnoremap <leader>a :Ag! <C-R><C-W>
+
+" disable the arrow keys
+" nnoremap <Left>  :echoe "Use h"<CR>
+" nnoremap <Right> :echoe "Use l"<CR>
+" nnoremap <Up>    :echoe "Use k"<CR>
+" nnoremap <Down>  :echoe "Use j"<CR>
 
 " resizing windows
 if bufwinnr(1)
@@ -170,12 +172,6 @@ if bufwinnr(1)
   map ( <C-W><
   map ) <C-W>>
 end
-
-" disable the arrow keys
-" nnoremap <Left>  :echoe "Use h"<CR>
-" nnoremap <Right> :echoe "Use l"<CR>
-" nnoremap <Up>    :echoe "Use k"<CR>
-" nnoremap <Down>  :echoe "Use j"<CR>
 
 " scroll the viewport faster
 nnoremap <C-e> 5<C-e>
@@ -193,12 +189,11 @@ imap <C-a> <C-o>^
 " -- Commands ------------------------------
 " ------------------------------------------
 
-command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc " convert string into a symbol
-command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc  " convert symbol into a string
+command! Q q                                    " bind :Q to :q
+command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc   " convert string into a symbol
+command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc    " convert symbol into a string
 command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc " convert Ruby => to : ' '
 command! FormatJson !python -m json.tool
-command! Noh noh " bind Noh to noh
-command! Q q     " bind :Q to :q
 command! -nargs=+ Replace :call FindReplace(<f-args>)
 command! -nargs=+ Duck :call Duck(<f-args>)
 
@@ -228,10 +223,9 @@ autocmd VimLeave * if filereadable(".vim/.netrwhist")|call delete(".vim/.netrwhi
 
 hi StatusLine ctermfg=black ctermbg=yellow
 hi StatusLineNC ctermfg=black ctermbg=darkgray
-if version >= 700   " change status line color in insert mode
-  au InsertEnter * hi StatusLine term=reverse ctermfg=black ctermbg=darkblue guisp=Blue
-  au InsertLeave * hi StatusLine term=reverse ctermfg=black ctermbg=yellow
-endif
+" change status line color in insert mode
+autocmd insertEnter * hi StatusLine term=reverse ctermfg=black ctermbg=darkblue guisp=Blue | call ToggleRelativeOn()
+autocmd InsertLeave * hi StatusLine term=reverse ctermfg=black ctermbg=yellow | call ToggleRelativeOn()
 
 
 runtime! init/**.vim    " source initialization files

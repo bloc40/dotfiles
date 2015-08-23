@@ -64,3 +64,11 @@ function! Duck(...)
   exec ':silent !open http://duckduckgo.com?q=' . join(a:000, '+')
   redraw!
 endfunction
+
+" ------------------------------------------
+" Toggle between number and relative numbers
+" ------------------------------------------
+function! ToggleRelativeOn()
+  set relativenumber!
+  set number
+endfunction
