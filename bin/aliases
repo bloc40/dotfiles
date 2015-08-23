@@ -1,4 +1,4 @@
-# bash
+# unix
 alias v='vim'
 alias mkdir='mkdir -pv'
 alias c='clear'
