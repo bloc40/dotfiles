@@ -14,7 +14,6 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'SirVer/ultisnips'
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'ervandew/supertab'
 Plug 'kien/ctrlp.vim'
 Plug 'nanotech/jellybeans.vim'
 Plug 'rking/ag.vim'
@@ -74,6 +73,7 @@ set shiftwidth=2
 set softtabstop=2
 set diffopt+=vertical " always use vertical diffs
 set clipboard=unnamed " make all operations work with the OS clipboard.
+set dictionary="/usr/dict/words"
 set textwidth=80      " (tw=80) limit the number of characters to 80 per line
 " set colorcolumn=+1
 " hi colorcolumn ctermbg=8
@@ -157,6 +157,8 @@ map <leader>b :CtrlPBuffer<CR>
 " [Ag]
 map <leader>f :Ag!<space>
 nnoremap <leader>a :Ag! <C-R><C-W>
+
+inoremap <Tab> <C-R>=TabOrComplete()<CR>
 
 " disable the arrow keys
 " nnoremap <Left>  :echoe "Use h"<CR>
