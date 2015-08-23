@@ -152,7 +152,6 @@ map <leader>ra :w<CR>:Dispatch! rake<CR>
 map <leader>c :Copen<CR>
 
 " [CtrlP]
-map <leader>t :CtrlP<CR>
 map <leader>b :CtrlPBuffer<CR>
 
 " [Ag]
