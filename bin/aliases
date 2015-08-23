@@ -10,8 +10,7 @@ alias so='source ~/.bash_profile'
 alias tarc='tar -czvf'
 alias tarx='tar -xzvf'
 alias now='date +"%T"'
-alias dot='cd ~/code/dotfiles && v .'
-alias work='tmux new -s work'
+alias dot='cd ~/Code/dotfiles && v .'
 alias u='cd ..'
 
 # rails

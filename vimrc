@@ -189,13 +189,11 @@ imap <C-a> <C-o>^
 " -- Commands ------------------------------
 " ------------------------------------------
 
-command! Q q                                    " bind :Q to :q
-command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc   " convert string into a symbol
-command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc    " convert symbol into a string
-command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc " convert Ruby => to : ' '
-command! FormatJson !python -m json.tool
-command! -nargs=+ Replace :call FindReplace(<f-args>)
-command! -nargs=+ Duck :call Duck(<f-args>)
+hi StatusLine ctermfg=black ctermbg=yellow
+hi StatusLineNC ctermfg=black ctermbg=darkgray
+" change status line color in insert mode
+autocmd insertEnter * hi StatusLine term=reverse ctermfg=black ctermbg=darkblue guisp=Blue | call ToggleRelativeOn()
+autocmd InsertLeave * hi StatusLine term=reverse ctermfg=black ctermbg=yellow | call ToggleRelativeOn()
 
 " clear white space in the end of lines
 autocmd BufWritePre * :%s/\s\+$//e
@@ -221,11 +219,13 @@ autocmd FileType qf setlocal wrap linebreak
 " delete .netrwhist files
 autocmd VimLeave * if filereadable(".vim/.netrwhist")|call delete(".vim/.netrwhist")|endif
 
-hi StatusLine ctermfg=black ctermbg=yellow
-hi StatusLineNC ctermfg=black ctermbg=darkgray
-" change status line color in insert mode
-autocmd insertEnter * hi StatusLine term=reverse ctermfg=black ctermbg=darkblue guisp=Blue | call ToggleRelativeOn()
-autocmd InsertLeave * hi StatusLine term=reverse ctermfg=black ctermbg=yellow | call ToggleRelativeOn()
+command! Q q                                    " bind :Q to :q
+command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc   " convert string into a symbol
+command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc    " convert symbol into a string
+command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc " convert Ruby => to : ' '
+command! FormatJson !python -m json.tool
+command! -nargs=+ Replace :call FindReplace(<f-args>)
+command! -nargs=+ Duck :call Duck(<f-args>)
 
 
 runtime! init/**.vim    " source initialization files
