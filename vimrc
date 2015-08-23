@@ -12,31 +12,31 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'SirVer/ultisnips', { 'on': [] }
+Plug 'SirVer/ultisnips'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'ervandew/supertab'
 Plug 'kien/ctrlp.vim'
 Plug 'nanotech/jellybeans.vim'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic', { 'for': ['javascript', 'css'] }
+Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rails', { 'for': ['ruby'] }
+Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/Auto-Pairs'
 Plug 'vim-scripts/ZoomWin'
 
-augroup load_us_ycm
-  autocmd!
-  autocmd InsertEnter * call plug#load('ultisnips') | autocmd! load_us_ycm
-augroup END
+" augroup load_us_ycm
+"   autocmd!
+"   autocmd InsertEnter * call plug#load('supertab') | autocmd! load_us_ycm
+" augroup END
 call plug#end()
 
 
