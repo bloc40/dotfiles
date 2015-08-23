@@ -1,6 +1,6 @@
 #!/bin/sh
 
-for file in $(ls -A $pwd ); do
+for file in $(ls -A $pwd); do
   if [ -L ~/$file ]; then
     rm ~/$file
   fi

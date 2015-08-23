@@ -9,7 +9,3 @@ endif
 set guioptions-=r   " hide scroll bars
 set guioptions-=L
 set guioptions-=T   " hide the toolbar
-
-" auto-indent the entire file
-map <D-L> gg=G``
-map <leader>= gg=G``
