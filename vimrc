@@ -227,6 +227,7 @@ command! FormatJson !python -m json.tool
 command! -nargs=+ Replace :call FindReplace(<f-args>)
 command! -nargs=+ Duck :call Duck(<f-args>)
 
+runtime macros/matchit.vim
 
 runtime! init/**.vim    " source initialization files
 
