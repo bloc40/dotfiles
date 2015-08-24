@@ -1,5 +1,6 @@
 silent! source ~/.gvimrc.local
 
+set guifont=Inconsolata:h16
 colorscheme railscasts
 
 if has('gui_macvim')

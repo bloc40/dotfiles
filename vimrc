@@ -42,10 +42,9 @@ call plug#end()
 " -- Settings ------------------------------
 " ------------------------------------------
 
-set guifont=Inconsolata:h16
 set background=dark
-let g:solarized_termtrans=1
-colorscheme solarized
+" let g:solarized_termtrans=1
+colorscheme jellybeans
 
 set hidden            " allow Vim to manage multiple buffers effectively
 set hlsearch          " highlight search
