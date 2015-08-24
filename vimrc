@@ -101,7 +101,6 @@ map <leader>h <C-w>h
 map <leader>l <C-w>l
 
 map <leader>i mzgg=G`z
-map <leader>w :w<CR>
 map <leader>nh :noh<CR>
 nmap <leader>v :tabe $MYVIMRC<CR>
 nmap <leader>so :so $MYVIMRC<CR>:echo 'Vimrc sourced :)'<CR>
