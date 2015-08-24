@@ -183,6 +183,8 @@ cmap <C-A> <C-B>
 imap <C-e> <C-o>$
 imap <C-a> <C-o>^
 
+" sudo to write
+cnoremap w!! w !sudo tee % >/dev/null
 
 " ------------------------------------------
 " -- Commands ------------------------------
