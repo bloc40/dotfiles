@@ -43,12 +43,13 @@ call plug#end()
 " ------------------------------------------
 
 set background=dark
-" let g:solarized_termtrans=1
-colorscheme jellybeans
+let g:solarized_termtrans=1
+colorscheme solarized
 
 set hidden            " allow Vim to manage multiple buffers effectively
 set hlsearch          " highlight search
 set incsearch         " move the cursor to the matched string while searching
+set ignorecase        " while searching
 set nowrap            " no text wrapping
 set nobackup          " remove swap and backup files from working directory
 set nowritebackup
@@ -72,6 +73,8 @@ set softtabstop=2
 set diffopt+=vertical " always use vertical diffs
 set clipboard=unnamed " make all operations work with the OS clipboard.
 set dictionary="/usr/dict/words"
+set showcmd
+set backspace=indent,eol,start
 set textwidth=80      " (tw=80) limit the number of characters to 80 per line
 " set colorcolumn=+1
 " hi colorcolumn ctermbg=8
@@ -184,6 +187,11 @@ imap <C-a> <C-o>^
 
 " sudo to write
 cnoremap w!! w !sudo tee % >/dev/null
+
+"!!!!! Experimentals -------------------------
+" list lines with word under the cursor
+map <F5> [I:let nr = input("Which one: ") <Bar>exe "normal " . nr ."[\t"<CR>
+
 
 " ------------------------------------------
 " -- Commands ------------------------------
