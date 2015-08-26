@@ -94,7 +94,7 @@ set foldlevel=1
 " ------------------------------------------
 " -- Mappings ------------------------------
 " ------------------------------------------
-" ---- Free leader single letters: [d o q x y]
+" ---- Free leader single letters: [o q x y]
 
 let mapleader = "\<Space>"
 
@@ -148,6 +148,7 @@ map <leader>g :Gstatus<CR>
 map <silent><leader>/ :Commentary<CR>j
 
 " [vim-dispatch]
+map <leader>d :Dispatch<space>
 map <leader>r :w<CR>:call RunCurrentLineInTest()<CR>
 map <leader>rr :w<CR>:call RunTestFile()<CR>
 map <leader>ra :w<CR>:Dispatch! rake<CR>
