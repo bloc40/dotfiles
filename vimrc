@@ -14,6 +14,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'SirVer/ultisnips'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'ervandew/supertab'
 Plug 'kien/ctrlp.vim'
 Plug 'nanotech/jellybeans.vim'
 Plug 'rking/ag.vim'
@@ -158,8 +159,6 @@ map <leader>b :CtrlPBuffer<CR>
 " [Ag]
 map <leader>f :Ag!<space>
 nnoremap <leader>a :Ag! <C-R><C-W>
-
-inoremap <Tab> <C-R>=TabOrComplete()<CR>
 
 " disable the arrow keys
 " nnoremap <Left>  :echoe "Use h"<CR>

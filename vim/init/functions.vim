@@ -72,15 +72,3 @@ function! ToggleRelativeOn()
   set relativenumber!
   set number
 endfunction
-
-" ------------------------------------------
-" Tab for autocomplete
-" ------------------------------------------
-
-function! TabOrComplete()
-  if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
-    return "\<C-N>"
-  else
-    return "\<Tab>"
-  endif
-endfunction
