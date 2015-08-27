@@ -18,23 +18,13 @@ function! FindReplace(old, new)
   exec ':Qfdo %s/' . a:old . '/' . a:new . '/gcIe | update'
 endfunction
 
-" --------------------------------------
-" Rename a file
-" --------------------------------------
-function! RenameFile()
-  let old_name = expand('%')
-  let new_name = input('New file name: ', expand('%'), 'file')
-  if new_name != '' && new_name != old_name
-    exec ':saveas ' . new_name
-    exec ':silent !rm ' . old_name
-    redraw!
-  endif
+function! GenerateRailsTags()
+  exec ':!ctags -R --exclude=.git --exclude=log --exclude=tmp * `bundle show --paths`/../*'
 endfunction
-
 " --------------------------------------
 " [Dispatch] run tests
 " --------------------------------------
-function! _TestType()
+function! _SpinOrRspec()
   return system('ps ax | grep "spin serve" | grep -v grep') != '' ? 'spin push' : 'rspec'
 endfunction
 
@@ -46,7 +36,7 @@ function! _RunTest(param)
   if _IsNotTestFile()
     echo '!!! not a test file :(' | return
   endif
-  exec ':Dispatch ' . _TestType() . ' ' . a:param
+  exec ':Dispatch ' . _SpinOrRspec() . ' ' . a:param
 endfunction
 
 function! RunCurrentLineInTest()
@@ -60,7 +50,7 @@ endfunction
 " --------------------------------------
 " Search DuckDuckGo from the Ex command
 " --------------------------------------
-function! Duck(...)
+function! DuckDuckGo(...)
   exec ':silent !open http://duckduckgo.com?q=' . join(a:000, '+')
   redraw!
 endfunction

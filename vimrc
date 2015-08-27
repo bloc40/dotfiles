@@ -98,6 +98,9 @@ set foldlevel=1
 
 let mapleader = "\<Space>"
 
+" open file in current directory
+cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
+
 " jump between windows
 map <leader>j <C-w>j
 map <leader>k <C-w>k
@@ -105,44 +108,14 @@ map <leader>h <C-w>h
 map <leader>l <C-w>l
 
 map <leader>i mzgg=G`z
-map <leader>nh :noh<CR>
 nmap <leader>v :tabe $MYVIMRC<CR>
 nmap <leader>so :so $MYVIMRC<CR>:echo 'Vimrc sourced :)'<CR>
-map <Leader>p :set paste<CR>o<Esc>"*]p:set nopaste<CR>
 
 " wrap text
 map <Leader>wr mmgqap`m:w<CR>
 
-" open file in current directory
-cnoremap <expr> %% getcmdtype() == ':' ? fnameescape(expand('%:h')).'/' : '%%'
-map <leader>e :e %%
-map <leader>es :sp %%
-map <leader>ev :vs %%
-map <leader>et :tabe %%
-
-map <leader>sc :e db/schema.rb<CR>
-map <leader>ro :e config/routes.rb<CR>
-
-map <leader>rf :call RenameFile()<CR>
-
-" [vim-plug]
-nmap <leader>pi :so $MYVIMRC<CR>:PlugInstall<CR>
-nmap <leader>pc :so $MYVIMRC<CR>:PlugClean<CR>
-nmap <leader>pu :so $MYVIMRC<CR>:PlugUpdate<CR>
-nmap <leader>ps :so $MYVIMRC<CR>:PlugStatus<CR>
-nmap <leader>pd :so $MYVIMRC<CR>:PlugDiff<CR>
-
-" [ctags] for Rails projects
-map <leader>rt :!ctags -R --exclude=.git --exclude=log --exclude=tmp * `bundle show --paths`/../*<CR>
-
-" [UltiSnips]
-map <leader>u :UltiSnipsEdit<space>
-
 " [ZoomWin] zoom in/out the current window
 map <silent><leader>z :ZoomWin<CR>
-
-" [vim-fugitive]
-map <leader>g :Gstatus<CR>
 
 " [vim-commentary] comment/uncomment lines
 map <silent><leader>/ :Commentary<CR>j
@@ -234,8 +207,9 @@ command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc   " convert string into a symbol
 command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc    " convert symbol into a string
 command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc " convert Ruby => to : ' '
 command! FormatJson !python -m json.tool
-command! -nargs=+ Replace :call FindReplace(<f-args>)
-command! -nargs=+ Duck :call Duck(<f-args>)
+command! -nargs=+ Replace call FindReplace(<f-args>)
+command! -nargs=+ Duck call DuckDuckGo(<f-args>)
+command! Tags call GenerateRailsTags()
 
 runtime macros/matchit.vim
 
