@@ -62,3 +62,18 @@ function! ToggleRelativeOn()
   set relativenumber!
   set number
 endfunction
+
+" ------------------------------------------
+" Tab completion
+" ------------------------------------------
+" innsert <Tab> or complete identifier
+" if the cursor is after a keyword character
+function! MyTabOrComplete()
+  let col = col('.')-1
+  if !col || getline('.')[col-1] !~ '\k'
+    return "\<tab>"
+  else
+    return "\<C-N>"
+  endif
+endfunction
+inoremap <Tab> <C-R>=MyTabOrComplete()<CR>

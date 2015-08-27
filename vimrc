@@ -14,7 +14,6 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'SirVer/ultisnips'
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'ervandew/supertab'
 Plug 'kien/ctrlp.vim'
 Plug 'nanotech/jellybeans.vim'
 Plug 'rking/ag.vim'
@@ -166,6 +165,7 @@ cnoremap w!! w !sudo tee % >/dev/null
 "!!!!! Experimentals -------------------------
 " list lines with word under the cursor
 map <F5> [I:let nr = input("Which one: ") <Bar>exe "normal " . nr ."[\t"<CR>
+
 
 
 " ------------------------------------------
