@@ -10,7 +10,7 @@ alias tarc='tar -czvf'
 alias tarx='tar -xzvf'
 alias now='date +"%T"'
 alias dot='cd ~/Code/dotfiles && v .'
-alias u='cd ..'
+alias g='git'
 
 # rails
 alias rake='time rake'
