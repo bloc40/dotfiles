@@ -3,7 +3,6 @@ set nocompatible " don't maintain compatibility with vi
 " ------------------------------------------
 " -- Load Plug-vim -------------------------
 " ------------------------------------------
-
 " install vim-plug if it does not exist
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -107,8 +106,6 @@ map <leader>h <C-w>h
 map <leader>l <C-w>l
 
 map <leader>i mzgg=G`z
-nmap <leader>v :tabe $MYVIMRC<CR>
-nmap <leader>so :so $MYVIMRC<CR>:echo 'Vimrc sourced :)'<CR>
 
 " wrap text
 map <Leader>wr mmgqap`m:w<CR>
@@ -120,7 +117,6 @@ map <silent><leader>z :ZoomWin<CR>
 map <silent><leader>/ :Commentary<CR>j
 
 " [vim-dispatch]
-map <leader>d :Dispatch<space>
 map <leader>r :w<CR>:call RunCurrentLineInTest()<CR>
 map <leader>rr :w<CR>:call RunTestFile()<CR>
 map <leader>ra :w<CR>:Dispatch! rake<CR>
@@ -167,11 +163,9 @@ cnoremap w!! w !sudo tee % >/dev/null
 map <F5> [I:let nr = input("Which one: ") <Bar>exe "normal " . nr ."[\t"<CR>
 
 
-
 " ------------------------------------------
 " -- Commands ------------------------------
 " ------------------------------------------
-
 hi StatusLine ctermfg=black ctermbg=yellow
 hi StatusLineNC ctermfg=black ctermbg=darkgray
 " change status line color in insert mode
@@ -210,6 +204,9 @@ command! FormatJson !python -m json.tool
 command! -nargs=+ Replace call FindReplace(<f-args>)
 command! -nargs=+ Duck call DuckDuckGo(<f-args>)
 command! Tags call GenerateRailsTags()
+
+command! V tabe $MYVIMRC
+command! Vs so $MYVIMRC " <bar> :echo 'Vimrc sourced :)'
 
 runtime macros/matchit.vim
 
