@@ -11,6 +11,8 @@ alias tarx='tar -xzvf'
 alias now='date +"%T"'
 alias dot='cd ~/Code/dotfiles && v .'
 alias g='git'
+alias noh='set +o history'
+alias yesh='set -o history'
 
 # rails
 alias rake='time rake'
