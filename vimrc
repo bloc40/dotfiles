@@ -57,7 +57,6 @@ set nowritebackup
 set noswapfile        " no swapfile
 set history=100
 set number
-set relativenumber
 set autoread          " auto save files when changed by another editor
 set autowrite         " auto save when switching buffers
 set mouse=a           " mouse scrolling
@@ -170,8 +169,8 @@ map <F5> [I:let nr = input("Which one: ") <Bar>exe "normal " . nr ."[\t"<CR>
 hi StatusLine ctermfg=black ctermbg=yellow
 hi StatusLineNC ctermfg=black ctermbg=darkgray
 " change status line color in insert mode
-autocmd insertEnter * hi StatusLine term=reverse ctermfg=black ctermbg=darkblue guisp=Blue | call ToggleRelativeOn()
-autocmd InsertLeave * hi StatusLine term=reverse ctermfg=black ctermbg=yellow | call ToggleRelativeOn()
+autocmd insertEnter * hi StatusLine term=reverse ctermfg=black ctermbg=darkblue guisp=Blue
+autocmd InsertLeave * hi StatusLine term=reverse ctermfg=black ctermbg=yellow
 
 " clear white space in the end of lines
 autocmd BufWritePre * :%s/\s\+$//e
