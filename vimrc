@@ -13,6 +13,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'SirVer/ultisnips'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'ervandew/supertab'
 Plug 'kien/ctrlp.vim'
 Plug 'nanotech/jellybeans.vim'
 Plug 'rking/ag.vim'

@@ -36,6 +36,7 @@ function! _RunTest(param)
   if _IsNotTestFile()
     echo '!!! not a test file :(' | return
   endif
+  exec ':wa'
   exec ':Dispatch ' . _SpinOrRspec() . ' ' . a:param
 endfunction
 
@@ -54,26 +55,3 @@ function! DuckDuckGo(...)
   exec ':silent !open http://duckduckgo.com?q=' . join(a:000, '+')
   redraw!
 endfunction
-
-" ------------------------------------------
-" Toggle between number and relative numbers
-" ------------------------------------------
-function! ToggleRelativeOn()
-  set relativenumber!
-  set number
-endfunction
-
-" ------------------------------------------
-" Tab completion
-" ------------------------------------------
-" innsert <Tab> or complete identifier
-" if the cursor is after a keyword character
-function! MyTabOrComplete()
-  let col = col('.')-1
-  if !col || getline('.')[col-1] !~ '\k'
-    return "\<tab>"
-  else
-    return "\<C-N>"
-  endif
-endfunction
-inoremap <Tab> <C-R>=MyTabOrComplete()<CR>
