@@ -29,7 +29,6 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'vim-scripts/Auto-Pairs'
 Plug 'vim-scripts/ZoomWin'
 
 " augroup load_us_ycm
