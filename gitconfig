@@ -1,6 +1,6 @@
 [user]
   name  = Jamal El Milahi
-  email = jamal@elmilahi.com
+  email = jmilahi@yuzu.com
 
 [color]
   ui     = auto
@@ -19,7 +19,7 @@
   filemode         = true
   logallrefupdates = true
   whitespace       = trailing-space,space-before-tab,indent-with-non-tab
-  excludesfile     = ~/.gitignore_global
+  excludesfile     = /opt/boxen/config/git/gitignore
 
 [alias]
   br   = !git branch --color -v | cut -c1-100
@@ -71,5 +71,12 @@
 
 [github]
   user = bloc40
+
+[hub]
+  protocol = https
+
 [init]
   templatedir = ~/.git_template
+
+[credential]
+  helper = /opt/boxen/bin/boxen-git-credential

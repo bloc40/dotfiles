@@ -31,6 +31,9 @@ alias rdb='bin/rails db'
 alias rs='bin/rails s'
 alias fs='foreman start'
 
+# rspec
+alias rspec='be rspec'
+
 # bundler
 alias bo='EDITOR=vim bundle open'
 alias bu='bundle update'
