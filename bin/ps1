@@ -39,6 +39,14 @@ git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'
 }
 
+# ruby_version() {
+#   echo `~/.rvm/bin/rvm-prompt`
+# }
+
+# print_pre_prompt() {
+#   printf "\e[1;30m%$(($COLUMNS))s" $(ruby_version)
+# }
+
 command_state() {
   echo "\$(if [[ \$? == 0 ]]; then echo \"\[\e[$GREEN\]✔\"; else echo \"\[\e[$RED\]✘\"; fi)$CLEAR"
 }
