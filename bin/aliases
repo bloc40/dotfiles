@@ -35,6 +35,9 @@ alias rr='be rake routes'
 # rspec
 alias rspec='be rspec'
 
+# rspec
+alias rspec='be rspec'
+
 # bundler
 alias bo='EDITOR=vim bundle open'
 alias bu='bundle update'
