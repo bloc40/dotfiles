@@ -196,6 +196,7 @@ autocmd FileType qf setlocal wrap linebreak
 autocmd VimLeave * if filereadable(".vim/.netrwhist")|call delete(".vim/.netrwhist")|endif
 
 command! Q q                                    " bind :Q to :q
+command! Noh noh
 command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc   " convert string into a symbol
 command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc    " convert symbol into a string
 command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc " convert Ruby => to : ' '
