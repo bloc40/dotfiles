@@ -123,7 +123,7 @@ map <leader>c :Copen<CR>
 
 " [CtrlP]
 map <leader>y :CtrlP<CR>
-map <leader>b :CtrlPBuffer<CR>
+map <leader>e :CtrlPBuffer<CR>
 
 " [Ag]
 map <leader>f :Ag!<space>
