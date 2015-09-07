@@ -50,7 +50,7 @@ print_pre_prompt() {
 }
 
 command_state() {
-  echo "\$(if [[ \$? == 0 ]]; then echo \"\[\033[0;32m\]💚 \"; else echo \"\[\033[0;31m\]💔 \"; fi)\[\033[00m\]"
+  echo "\$(if [[ \$? == 0 ]]; then echo \"\[\033[0;32m\]☺\"; else echo \"\[\033[0;31m\]☹\"; fi)\[\033[00m\]"
 }
 
 show_jobs() {
