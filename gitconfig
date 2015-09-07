@@ -35,6 +35,13 @@
   dfsw = diff --staged --color-words
   dfw  = diff --color-words
   ll   = "!f() { \
+              if [[ $# > 0  ]]; then \
+                git log --oneline --decorate --graph -$@; \
+              else \
+                git log --oneline --decorate --graph --all; \
+              fi \
+            }; f"
+  lll  = "!f() { \
               args='%Cgreen%h %Cred%d%Creset %s%Creset %C(cyan bold)(%cr)%Creset %Cblue<%an>%Creset'; \
               if [[ $# > 0  ]]; then \
                 git log -$@ --graph --all --pretty=format:\"$args\"; \
@@ -42,7 +49,6 @@
                 git log --graph --all --pretty=format:\"$args\"; \
               fi \
             }; f"
-
   lp   = log -p
   ra   = rebase --abort
   rc   = rebase --continue
