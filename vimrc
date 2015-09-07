@@ -80,7 +80,12 @@ set wildmenu          " show possible completions of command line commands, file
 
 set list listchars=tab:»·,trail:·,nbsp:·  " display extra whitespace
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
-set statusline=\ %*%<%f\ %{fugitive#statusline()}%h%m%r%=%-5.(%y\ %l,%c%V%)\ %P\ " "
+" set statusline=\ %*%<%f\ %{fugitive#statusline()}%h%m%r%=%-5.(%y\ %l,%c%V%)\ %P\ " "
+
+set statusline=\ %*%<%f
+set statusline+=\ %{fugitive#statusline()}
+set statusline+=%2*%{&modified?'\[+]':''}%*
+set statusline+=%=%-5.(%y\ %l,%c%V%)\ %P\ " "
 
 " folding settings
 set foldmethod=indent " fold based on indent
@@ -118,7 +123,7 @@ map <silent><leader>/ :Commentary<CR>j
 " [vim-dispatch]
 map <leader>r :w<CR>:call RunCurrentLineInTest()<CR>
 map <leader>rr :w<CR>:call RunTestFile()<CR>
-map <leader>ra :w<CR>:Dispatch! rake<CR>
+map <leader>rk :w<CR>:Dispatch! rake<CR>
 map <leader>c :Copen<CR>
 
 " [CtrlP]
@@ -165,7 +170,8 @@ map <F5> [I:let nr = input("Which one: ") <Bar>exe "normal " . nr ."[\t"<CR>
 " ------------------------------------------
 " -- Commands ------------------------------
 " ------------------------------------------
-hi StatusLine ctermfg=black ctermbg=yellow
+hi User2        ctermbg=red   ctermfg=white   guibg=#aa0000 guifg=#89a1a1
+hi StatusLine   ctermfg=black ctermbg=yellow
 hi StatusLineNC ctermfg=black ctermbg=darkgray
 " change status line color in insert mode
 autocmd insertEnter * hi StatusLine term=reverse ctermfg=black ctermbg=darkblue guisp=Blue
