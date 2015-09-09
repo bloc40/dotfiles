@@ -20,7 +20,6 @@ Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
@@ -110,17 +109,15 @@ map <leader>i mzgg=G`z
 " wrap text
 map <Leader>wr mmgqap`m:w<CR>
 
+" run Ruby tests
+map <leader>r :w<CR>:call RunCurrentLineInTest()<CR>
+map <leader>rr :w<CR>:call RunTestFile()<CR>
+
 " [ZoomWin] zoom in/out the current window
 map <silent><leader>z :ZoomWin<CR>
 
 " [vim-commentary] comment/uncomment lines
 map <silent><leader>/ :Commentary<CR>j
-
-" [vim-dispatch]
-map <leader>r :w<CR>:call RunCurrentLineInTest()<CR>
-map <leader>rr :w<CR>:call RunTestFile()<CR>
-map <leader>rk :w<CR>:Dispatch! rake<CR>
-map <leader>c :Copen<CR>
 
 " [CtrlP]
 map <leader>y :CtrlP<CR>
