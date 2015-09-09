@@ -9,7 +9,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'ervandew/supertab'
 Plug 'kien/ctrlp.vim'
