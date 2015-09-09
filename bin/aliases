@@ -1,5 +1,5 @@
 # unix
-alias v='vim'
+alias v='nvim'
 alias mkdir='mkdir -pv'
 alias c='clear'
 alias h='history'
@@ -33,6 +33,7 @@ alias fs='foreman start'
 # bundler
 alias bo='EDITOR=mvim bundle open'
 alias bu='bundle update'
+alias be='bundle exec'
 
 # spin
 alias ss='spin serve -t'
