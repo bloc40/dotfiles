@@ -28,11 +28,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/ZoomWin'
 
-" augroup load_us_ycm
-"   autocmd!
-"   autocmd InsertEnter * call plug#load('supertab') | autocmd! load_us_ycm
-" augroup END
 call plug#end()
+
 
 " ------------------------------------------
 " -- Settings ------------------------------
@@ -41,9 +38,6 @@ set background=dark
 let g:solarized_termtrans=1
 colorscheme solarized
 
-set autoread          " auto save files when changed by another editor
-set autoread          " auto save files when changed by another editor
-set autowrite         " auto save when switching buffers
 set autowrite         " auto save when switching buffers
 set backspace=indent,eol,start
 set clipboard=unnamed " make all operations work with the OS clipboard.
@@ -55,27 +49,22 @@ set history=100
 set hlsearch          " highlight search
 set incsearch         " move the cursor to the matched string while searching
 set laststatus=2      " always diplay the status line. (set ls=2)
-set mouse=a           " mouse scrolling
-set mouse=a           " mouse scrolling
+set list listchars=tab:»·,trail:·,nbsp:·  " display extra whitespace
 set nobackup          " remove swap and backup files from working directory
-set noeb vb t_vb=     " no error or visual bells please
 set noswapfile        " no swapfile
 set nowrap            " no text wrapping
 set nowritebackup
 set number
-set scrolloff=3       " start the scrolling 3 lines before the border
+set scrolloff=1       " start the scrolling 3 lines before the border
 set shiftwidth=2
 set shortmess=at      " shortens about every message to a minimum and thus avoids scrolling within the output of messages and the 'press a key' prompt that goes with these. (set shm=at)
 set softtabstop=2
 set splitbelow        " put the cursor in the split below window
-set splitbelow        " put the cursor in the split below window
 set textwidth=80      " (tw=80) limit the number of characters to 80 per line
+set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
 set wildmenu          " show possible completions of command line commands, file names, and more
 
-set list listchars=tab:»·,trail:·,nbsp:·  " display extra whitespace
-set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
 " set statusline=\ %*%<%f\ %{fugitive#statusline()}%h%m%r%=%-5.(%y\ %l,%c%V%)\ %P\ " "
-
 set statusline=\ %*%<%f
 set statusline+=\ %{fugitive#statusline()}
 set statusline+=%2*%{&modified?'\[+]':''}%*
@@ -110,8 +99,8 @@ map <leader>i mzgg=G`z
 map <Leader>wr mmgqap`m:w<CR>
 
 " run Ruby tests
-map <leader>r :w<CR>:call RunCurrentLineInTest()<CR>
-map <leader>rr :w<CR>:call RunTestFile()<CR>
+map <leader>r :w<CR>:call RunCurrentLineInTest()<CR><CR>
+map <leader>rr :w<CR>:call RunTestFile()<CR><CR>
 
 " [ZoomWin] zoom in/out the current window
 map <silent><leader>z :ZoomWin<CR>
@@ -126,6 +115,9 @@ map <leader>e :CtrlPBuffer<CR>
 " [Ag]
 map <leader>f :Ag!<space>
 nnoremap <leader>a :Ag! <C-R><C-W>
+
+" neovim - exit Terminal mode
+tnoremap <Esc> <C-\><C-n>
 
 " disable the arrow keys
 " nnoremap <Left>  :echoe "Use h"<CR>
