@@ -22,7 +22,7 @@ function! GenerateRailsTags()
   exec ':!ctags -R --exclude=.git --exclude=log --exclude=tmp * `bundle show --paths`/../*'
 endfunction
 " --------------------------------------
-" [Dispatch] run tests
+" run Ruby tests
 " --------------------------------------
 function! _SpinOrRspec()
   return system('ps ax | grep "spin serve" | grep -v grep') != '' ? 'spin push' : 'rspec'
@@ -37,7 +37,7 @@ function! _RunTest(param)
     echo '!!! not a test file :(' | return
   endif
   exec ':wa'
-  exec ':Dispatch ' . _SpinOrRspec() . ' ' . a:param
+  exec ':! ' . _SpinOrRspec() . ' ' . a:param
 endfunction
 
 function! RunCurrentLineInTest()
