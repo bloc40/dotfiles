@@ -2,6 +2,10 @@
 
 RED=31m
 GREEN=32m
+CLEAR="\[\e[0m\]"
+YELLOW="\[\e[33m\]"
+MAGENTA="\[\e[35m\]"
+BLUE_BG="\[\e[44m\]"
 
 _git_repo() {
   [[ `git rev-parse --is-inside-work-tree 2>/dev/null` == true ]]
@@ -26,9 +30,9 @@ _git_dirty() {
 git_branch_color() {
   if _git_repo; then
     if _git_dirty; then
-      printf "\e[${RED}"
+      echo $RED
     else
-      printf "\e[${GREEN}"
+      echo $GREEN
     fi
   fi
 }
@@ -37,8 +41,22 @@ git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'
 }
 
-clear() {
-  printf "\e[00m"
+command_state() {
+  echo "\$(if [[ \$? == 0 ]]; then echo \"\[\e[$GREEN\]☺\"; else echo \"\[\e[$RED\]☹\"; fi)$CLEAR"
+}
+
+show_jobs() {
+  if [[ `jobs` != '' ]]; then
+    count=`jobs | wc -l | awk '{print($1)}'`
+    echo " [👻- $count]"
+  fi
+}
+
+tmux_sessions() {
+  if [[ `tmux ls 2> /dev/null` != '' ]]; then
+    count=`tmux ls | wc -l | awk '{print($1)}'`
+    echo " [tmux $count]"
+  fi
 }
 
 _ruby_version() {
@@ -49,24 +67,5 @@ print_pre_prompt() {
   printf "\e[1;30m%$(($COLUMNS))s" $(_ruby_version)
 }
 
-command_state() {
-  echo "\$(if [[ \$? == 0 ]]; then echo \"\[\033[0;32m\]☺\"; else echo \"\[\033[0;31m\]☹\"; fi)\[\033[00m\]"
-}
-
-show_jobs() {
-  if [[ `jobs` != '' ]]; then
-    count=`jobs | wc -l | awk '{print($1)}'`
-    printf "\e[33m [👻- $count]"
-  fi
-}
-
-tmux_sessions() {
-  if [[ `tmux ls 2> /dev/null` != '' ]]; then
-    count=`tmux ls | wc -l | awk '{print($1)}'`
-    printf "\e[35m [tmux $count]"
-  fi
-}
-
 PROMPT_COMMAND=print_pre_prompt
-export CLICOLOR=1
-export PS1="$(command_state)\$(clear) \[\033[44m\]\w\$(clear)\$(show_jobs)\$(tmux_sessions) \$(git_branch_color)\$(git_branch)\$(clear)"
+export PS1="$(command_state) $BLUE_BG\w$CLEAR$YELLOW\$(show_jobs)$MAGENTA\$(tmux_sessions) \[\e[\$(git_branch_color)\]\$(git_branch)$CLEAR"
