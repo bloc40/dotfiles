@@ -3,33 +3,29 @@
 RED=31m
 GREEN=32m
 
-git_repo() {
+_git_repo() {
   [[ `git rev-parse --is-inside-work-tree 2>/dev/null` == true ]]
 }
 
-git_modified() {
+_git_modified() {
   [[ `git ls-files -m` != '' ]]
 }
 
-git_untracked() {
+_git_untracked() {
   [[ `git ls-files -o --exclude-standard` != '' ]]
 }
 
-git_staged() {
+_git_staged() {
   [[ `git diff --staged --name-only` != '' ]]
 }
 
-git_dirty() {
-  git_modified || git_untracked || git_staged
-}
-
-clear() {
-  printf "\e[00m"
+_git_dirty() {
+  _git_modified || _git_untracked || _git_staged
 }
 
 git_branch_color() {
-  if git_repo; then
-    if git_dirty; then
+  if _git_repo; then
+    if _git_dirty; then
       printf "\e[${RED}"
     else
       printf "\e[${GREEN}"
@@ -41,12 +37,16 @@ git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'
 }
 
-ruby_version() {
+clear() {
+  printf "\e[00m"
+}
+
+_ruby_version() {
   echo `~/.rvm/bin/rvm-prompt`
 }
 
 print_pre_prompt() {
-  printf "\e[1;30m%$(($COLUMNS))s" $(ruby_version)
+  printf "\e[1;30m%$(($COLUMNS))s" $(_ruby_version)
 }
 
 command_state() {
