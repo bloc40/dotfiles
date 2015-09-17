@@ -30,6 +30,7 @@ alias rc='bin/rails c'
 alias rdb='bin/rails db'
 alias rs='bin/rails s'
 alias fs='foreman start'
+alias rr='be rake routes'
 
 # rspec
 alias rspec='be rspec'
