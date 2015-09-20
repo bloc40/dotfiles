@@ -31,7 +31,7 @@ alias rs='bin/rails s'
 alias fs='foreman start'
 
 # bundler
-alias bo='EDITOR=mvim bundle open'
+alias bo='EDITOR=vim bundle open'
 alias bu='bundle update'
 alias be='bundle exec'
 

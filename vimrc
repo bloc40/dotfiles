@@ -80,7 +80,6 @@ set foldlevel=1
 " ------------------------------------------
 " -- Mappings ------------------------------
 " ------------------------------------------
-" ---- Free leader single letters: [o q x y]
 
 let mapleader = "\<Space>"
 
@@ -94,13 +93,15 @@ map <leader>h <C-w>h
 map <leader>l <C-w>l
 
 map <leader>i mzgg=G`z
+map <leader><leader> :wa<CR>
+map <leader>d :tabe ~/Dropbox/notes/coding_notes.txt<CR>
 
 " wrap text
-map <Leader>wr mmgqap`m:w<CR>
+map <Leader>w mzgqap`z:w<CR>
 
 " run Ruby tests
-map <leader>r :w<CR>:call RunCurrentLineInTest()<CR><CR>
-map <leader>rr :w<CR>:call RunTestFile()<CR><CR>
+map <leader>r :call RunCurrentLineInTest()<CR><CR>
+map <leader>rr :call RunTestFile()<CR><CR>
 
 " [ZoomWin] zoom in/out the current window
 map <silent><leader>z :ZoomWin<CR>
@@ -109,7 +110,6 @@ map <silent><leader>z :ZoomWin<CR>
 map <silent><leader>/ :Commentary<CR>j
 
 " [CtrlP]
-map <leader>y :CtrlP<CR>
 map <leader>e :CtrlPBuffer<CR>
 
 " [Ag]
@@ -172,10 +172,10 @@ autocmd BufRead,BufNewFile *.es6 setfiletype javascript
 autocmd BufRead,BufNewFile {Capfile,Gemfile,Gemfile.lock,Rakefile,Thorfile,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
 " autosave when focus is lost - GUI only :(
-autocmd FocusLost * silent! :wa
+autocmd FocusLost * silent! wa
 
-" make ?s part of words
-autocmd FileType ruby,eruby,yaml setlocal iskeyword+=?
+" make ? part of words
+autocmd FileType ruby,eruby,yaml,haml setlocal iskeyword+=?
 
 " allow stylesheets to autocomplete hyphenated words
 autocmd FileType css,scss,sass setlocal iskeyword+=-
@@ -184,26 +184,25 @@ autocmd FileType css,scss,sass setlocal iskeyword+=-
 autocmd FileType qf setlocal wrap linebreak
 
 " delete .netrwhist files
-autocmd VimLeave * if filereadable(".vim/.netrwhist")|call delete(".vim/.netrwhist")|endif
+autocmd VimLeave * if filereadable('.vim/.netrwhist')|call delete('.vim/.netrwhist')|endif
 
 command! Q q                                    " bind :Q to :q
 command! Noh noh
 command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc   " convert string into a symbol
 command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc    " convert symbol into a string
-command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc " convert Ruby => to : ' '
+command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc " convert to Ruby 1.9 syntax
 command! FormatJson !python -m json.tool
 command! -nargs=+ Replace call FindReplace(<f-args>)
 command! -nargs=+ Duck call DuckDuckGo(<f-args>)
 command! Tags call GenerateRailsTags()
-
 command! V tabe $MYVIMRC
-command! Vs so $MYVIMRC " <bar> :echo 'Vimrc sourced :)'
+command! Vs so $MYVIMRC | echo 'Vimrc sourced :)'
 
 runtime macros/matchit.vim
 
 runtime! init/**.vim    " source initialization files
 
 " local vimrc - keep this at the end
-if filereadable(glob("$HOME/.vimrc.local"))
+if filereadable(glob('$HOME/.vimrc.local'))
   source $HOME/.vimrc.local
 endif
