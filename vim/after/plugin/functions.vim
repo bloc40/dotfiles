@@ -18,7 +18,7 @@ function! ZoomedIn()
 endfunction
 
 " --------------------------------------
-" Toggle miximizing a split window
+" Toggle maximizing a split window
 " --------------------------------------
 function! MaximizeToggle()
   if exists("s:maximize_session")
