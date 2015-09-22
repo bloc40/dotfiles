@@ -101,8 +101,8 @@ map <F2> :NERDTreeToggle<CR>
 map <F3> :NERDTree<CR>
 
 if bufwinnr(1)
-  map + <C-W>+
-  map - <C-W>-
+  map + 2<C-W>+
+  map - 2<C-W>-
   map ( 5<C-W><
   map ) 5<C-W>>
 end
