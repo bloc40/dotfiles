@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# create or attach Tmux session named the same as current directory.
-
 _session_name() {
   echo `basename $PWD`
 }

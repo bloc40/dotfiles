@@ -28,12 +28,10 @@ _git_dirty() {
 }
 
 git_branch_color() {
-  if _git_repo; then
-    if _git_dirty; then
-      echo $RED
-    else
-      echo $GREEN
-    fi
+  if _git_repo && _git_dirty; then
+    echo $RED
+  else
+    echo $GREEN
   fi
 }
 
@@ -42,25 +40,31 @@ git_branch() {
 }
 
 command_state() {
-  echo "\$(if [[ \$? == 0 ]]; then echo \"\[\e[$GREEN\]:)\"; else echo \"\[\e[$RED\]:(\"; fi)$CLEAR"
+  echo "\$(if [[ \$? == 0 ]]; then echo \"\[\e[$GREEN\]✔\"; else echo \"\[\e[$RED\]✖\"; fi)$CLEAR"
 }
 
 show_jobs() {
   if [[ `jobs` != '' ]]; then
-    count=`jobs | wc -l | awk '{print($1)}'`
+    count=`jobs | wc -l | awk '{print $1}'`
     echo " [👻- $count]"
   fi
 }
 
 tmux_sessions() {
   if [[ `tmux ls 2> /dev/null` != '' ]]; then
-    count=`tmux ls | wc -l | awk '{print($1)}'`
+    count=`tmux ls | wc -l | awk '{print $1}'`
     echo " [tmux $count]"
   fi
 }
 
 _ruby_version() {
-  echo `~/.rvm/bin/rvm-prompt`
+  if [[ `which rvm` != '' ]]; then
+    echo `~/.rvm/bin/rvm-prompt`
+  elif [[ `which rbenv` != '' ]]; then
+    echo `rbenv version | awk '{print $1}'`
+  else
+    echo `ruby version | awk '{print $2}'`
+  fi
 }
 
 print_pre_prompt() {

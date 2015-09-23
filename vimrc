@@ -26,7 +26,6 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'vim-scripts/ZoomWin'
 
 call plug#end()
 
@@ -80,7 +79,6 @@ set foldlevel=1
 " ------------------------------------------
 " -- Mappings ------------------------------
 " ------------------------------------------
-
 let mapleader = "\<Space>"
 
 " open file in current directory
@@ -95,6 +93,7 @@ map <leader>l <C-w>l
 map <leader>i mzgg=G`z
 map <leader><leader> :wa<CR>
 map <leader>d :tabe ~/Dropbox/notes/coding_notes.txt<CR>
+map <leader>z :call MaximizeToggle()<CR>
 
 " wrap text
 map <Leader>w mzgqap`z:w<CR>
@@ -102,9 +101,6 @@ map <Leader>w mzgqap`z:w<CR>
 " run Ruby tests
 map <leader>r :call RunCurrentLineInTest()<CR><CR>
 map <leader>rr :call RunTestFile()<CR><CR>
-
-" [ZoomWin] zoom in/out the current window
-map <silent><leader>z :ZoomWin<CR>
 
 " [vim-commentary] comment/uncomment lines
 map <silent><leader>/ :Commentary<CR>j
@@ -129,8 +125,8 @@ tnoremap <Esc> <C-\><C-n>
 if bufwinnr(1)
   map + <C-W>+
   map - <C-W>-
-  map ( <C-W><
-  map ) <C-W>>
+  map ( 5<C-W><
+  map ) 5<C-W>>
 end
 
 " scroll the viewport faster
@@ -169,7 +165,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 autocmd BufRead,BufNewFile *.es6 setfiletype javascript
 
 " additional Ruby syntax highliting
-autocmd BufRead,BufNewFile {Capfile,Gemfile,Gemfile.lock,Rakefile,Thorfile,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
+autocmd BufRead,BufNewFile Gemfile.lock setfiletype ruby
 
 " autosave when focus is lost - GUI only :(
 autocmd FocusLost * silent! wa

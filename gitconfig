@@ -15,7 +15,7 @@
 
 [core]
   pager            = less
-  editor           = vim
+  editor           = nvim
   filemode         = true
   logallrefupdates = true
   whitespace       = trailing-space,space-before-tab,indent-with-non-tab
@@ -50,8 +50,11 @@
               fi \
             }; f"
   lp   = log -p
+  poh  = push origin HEAD
+  pr   = pull --rebase
   ra   = rebase --abort
   rc   = rebase --continue
+  rs   = rebase --skip
   st   = status
   sts  = status -s
   web  = instaweb --httpd=webrick
