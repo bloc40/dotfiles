@@ -13,7 +13,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'ervandew/supertab'
 Plug 'kien/ctrlp.vim'
-Plug 'nanotech/jellybeans.vim'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
