@@ -1,7 +1,6 @@
-Plugin for doing global find and replace using either Ag, the Silver Searcher
-vim plugin, or Ack, the ack vim plugin.
+Vim plugin for doing global find and replace
 
-### How to use
+## How to use it?
 ```
-:Replace <old term> <new term>
+:Replace <old-term> <new-term>
 ```
