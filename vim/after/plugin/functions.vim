@@ -1,6 +1,3 @@
-function! GenerateRailsTags()
-  exec ':!ctags -R --exclude=.git --exclude=log --exclude=tmp * `bundle show --paths`/../*'
-endfunction
 " --------------------------------------
 " run Ruby tests
 " --------------------------------------

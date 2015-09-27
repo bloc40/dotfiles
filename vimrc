@@ -33,6 +33,8 @@ call plug#end()
 " ------------------------------------------
 " -- Settings ------------------------------
 " ------------------------------------------
+let loaded_matchit=1
+
 set background=dark
 let g:solarized_termtrans=1
 colorscheme solarized
@@ -81,9 +83,6 @@ set foldlevel=1
 " ------------------------------------------
 let mapleader = "\<Space>"
 
-" open file in current directory
-cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
-
 " jump between windows
 map <leader>j <C-w>j
 map <leader>k <C-w>k
@@ -94,9 +93,10 @@ map <leader>i mzgg=G`z
 map <leader><leader> :wa<CR>
 map <leader>d :tabe ~/Dropbox/notes/coding_notes.txt<CR>
 map <leader>z :call MaximizeToggle()<CR>
-
-" wrap text
 map <Leader>w mzgqap`z:w<CR>
+cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
+cnoremap w!! w !sudo tee % >/dev/null
+tnoremap <Esc> <C-\><C-n>
 
 " run Ruby tests
 map <leader>r :call RunCurrentLineInTest()<CR><CR>
@@ -111,9 +111,6 @@ map <leader>e :CtrlPBuffer<CR>
 " [Ag]
 map <leader>f :Ag!<space>
 nnoremap <leader>a :Ag! <C-R><C-W>
-
-" neovim - exit Terminal mode
-tnoremap <Esc> <C-\><C-n>
 
 " disable the arrow keys
 " nnoremap <Left>  :echoe "Use h"<CR>
@@ -139,9 +136,6 @@ cmap <C-A> <C-B>
 " Emacs-like beginning and end of line.
 imap <C-e> <C-o>$
 imap <C-a> <C-o>^
-
-" sudo to write
-cnoremap w!! w !sudo tee % >/dev/null
 
 "!!!!! Experimentals -------------------------
 " list lines with word under the cursor
@@ -190,11 +184,10 @@ command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc " convert to Ruby 1.9 syntax
 command! FormatJson !python -m json.tool
 command! -nargs=+ Replace call FindReplace(<f-args>)
 command! -nargs=+ Duck call DuckDuckGo(<f-args>)
-command! Tags call GenerateRailsTags()
+command! Tags !ctags -R --exclude=.git --exclude=log --exclude=tmp * `bundle show --paths`/../*
+
 command! V tabe $MYVIMRC
 command! Vs so $MYVIMRC | echo 'Vimrc sourced :)'
-
-runtime macros/matchit.vim
 
 runtime! init/**.vim    " source initialization files
 
