@@ -189,8 +189,6 @@ command! Tags !ctags -R --exclude=.git --exclude=log --exclude=tmp * `bundle sho
 command! V tabe $MYVIMRC
 command! Vs so $MYVIMRC | echo 'Vimrc sourced :)'
 
-runtime! init/**.vim    " source initialization files
-
 " local vimrc - keep this at the end
 if filereadable(glob('$HOME/.vimrc.local'))
   source $HOME/.vimrc.local

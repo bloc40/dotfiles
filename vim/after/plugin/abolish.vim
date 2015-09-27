@@ -2,9 +2,10 @@ if !exists(':Abolish')
   finish
 endif
 
-Abolish teh     the
-Abolish lastest latest
-Abolish grey    gray
-Abolish pravite private
 Abolish alais   alias
+Abolish fo      of
+Abolish grey    gray
+Abolish lastest latest
+Abolish pravite private
+Abolish teh     the
 Abolish vidoe   video
