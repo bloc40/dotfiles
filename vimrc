@@ -101,6 +101,7 @@ tnoremap <Esc> <C-\><C-n>
 " run Ruby tests
 map <leader>r :call RunCurrentLineInTest()<CR><CR>
 map <leader>rr :call RunTestFile()<CR><CR>
+command! Spin !spin push spec
 
 " [vim-commentary] comment/uncomment lines
 map <silent><leader>/ :Commentary<CR>j
