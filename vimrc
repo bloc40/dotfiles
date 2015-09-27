@@ -11,6 +11,7 @@ endif
 call plug#begin('~/.vim/plugged')
 " Plug 'SirVer/ultisnips'
 Plug 'bloc40/vim-replace'
+Plug 'bloc40/vim-test-ruby'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'ervandew/supertab'
 Plug 'kien/ctrlp.vim'
