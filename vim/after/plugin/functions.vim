@@ -1,28 +1,35 @@
 " --------------------------------------
 " run Ruby tests
 " --------------------------------------
-function! _SpinOrRspec()
+function! s:spin_or_rspec()
   return system('ps ax | grep "spin serve" | grep -v grep') != '' ? 'spin push' : 'rspec'
 endfunction
 
-function! _IsNotTestFile()
-  return match(expand('%:t'), '_spec.rb$') == -1
+function! s:is_a_test_file()
+  return match(expand('%:t'), '_spec.rb$') > 0
 endfunction
 
-function! _RunTest(param)
-  if _IsNotTestFile()
-    echo '!!! not a test file :(' | return
+function! s:print_warning() abort
+  echohl WarningMsg
+  echo '!!! not a test file :(' | return
+  echohl None
+endfunction
+
+function! s:run_test(param)
+  if s:is_a_test_file()
+    exec ':wa'
+    exec ':! ' . s:spin_or_rspec() . ' ' . a:param
+  else
+    call s:print_warning() | return
   endif
-  exec ':wa'
-  exec ':! ' . _SpinOrRspec() . ' ' . a:param
 endfunction
 
 function! RunCurrentLineInTest()
-  call _RunTest('%:' . line('.'))
+  call s:run_test('%:' . line('.'))
 endfunction
 
 function! RunTestFile()
-  call _RunTest('%')
+  call s:run_test('%')
 endfunction
 
 " --------------------------------------
