@@ -184,8 +184,7 @@ command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc   " convert string into a symbol
 command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc    " convert symbol into a string
 command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc " convert to Ruby 1.9 syntax
 command! FormatJson !python -m json.tool
-command! -nargs=+ Replace call FindReplace(<f-args>)
-command! -nargs=+ Duck call DuckDuckGo(<f-args>)
+command! -nargs=* Duck call DuckDuckGo(<f-args>)
 command! Tags !ctags -R --exclude=.git --exclude=log --exclude=tmp * `bundle show --paths`/../*
 
 command! V tabe $MYVIMRC
