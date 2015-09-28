@@ -9,6 +9,14 @@ endfunction
 " --------------------------------------
 " Toggle miximizing a split window
 " --------------------------------------
+function! ZoomedIn()
+  if exists('s:maximize_session')
+    return '[Zoom]'
+  else
+    return ''
+  endif
+endfunction
+
 function! MaximizeToggle()
   if exists('s:maximize_session')
     exec 'source ' . s:maximize_session

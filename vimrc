@@ -69,7 +69,8 @@ set wildmenu          " show possible completions of command line commands, file
 " set statusline=\ %*%<%f\ %{fugitive#statusline()}%h%m%r%=%-5.(%y\ %l,%c%V%)\ %P\ " "
 set statusline=\ %*%<%f
 set statusline+=\ %{fugitive#statusline()}
-set statusline+=%2*%{&modified?'\[+]':''}%*
+set statusline+=\ %2*%{&modified?'\[+]':''}%*
+set statusline+=\ %1*%{ZoomedIn()}%*
 set statusline+=%=%-5.(%y\ %l,%c%V%)\ %P\ " "
 
 " folding settings
@@ -147,9 +148,10 @@ map <F5> [I:let nr = input("Which one: ") <Bar>exe "normal " . nr ."[\t"<CR>
 " ------------------------------------------
 " -- Commands ------------------------------
 " ------------------------------------------
-hi User2        ctermbg=red   ctermfg=white   guibg=#aa0000 guifg=#89a1a1
-hi StatusLine   ctermfg=black ctermbg=yellow
-hi StatusLineNC ctermfg=black ctermbg=darkgray
+hi User1        ctermbg=Magenta ctermfg=Black  guibg=#ff00ff guifg=#ffffff
+hi User2        ctermbg=Red     ctermfg=White  guibg=#aa0000 guifg=#89a1a1
+hi StatusLine   ctermfg=Black   ctermbg=Yellow
+hi StatusLineNC ctermfg=Black   ctermbg=DarkGray
 " change status line color in insert mode
 autocmd insertEnter * hi StatusLine term=reverse ctermfg=black ctermbg=darkblue guisp=Blue
 autocmd InsertLeave * hi StatusLine term=reverse ctermfg=black ctermbg=yellow
