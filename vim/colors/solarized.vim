@@ -603,7 +603,7 @@ exe "let s:fmt_stnd     = ' cterm=NONE".s:s." gui=NONE".s:s." term=NONE".s:s."'"
 " note that link syntax to avoid duplicate configuration doesn't work with the
 " exe compiled formats
 
-exe "hi Normal"         . s:fg_base0  .s:bg_back   .s:fmt_none
+exe "hi Normal"         . s:fg_base1  .s:bg_back   .s:fmt_none
 
 exe "hi Comment"        . s:fg_base02 .s:bg_none   .s:fmt_none
 "      *Comment         any comment
