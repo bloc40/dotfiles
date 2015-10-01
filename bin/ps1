@@ -40,7 +40,7 @@ git_branch() {
 }
 
 command_state() {
-  echo "\$(if [[ \$? == 0 ]]; then echo \"\[\e[$GREEN\]✔\"; else echo \"\[\e[$RED\]✖\"; fi)$CLEAR"
+  echo "\$(if [[ \$? == 0 ]]; then echo \"\[\e[$GREEN\]✔\"; else echo \"\[\e[$RED\]✘\"; fi)$CLEAR"
 }
 
 show_jobs() {

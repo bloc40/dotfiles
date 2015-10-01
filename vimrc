@@ -41,22 +41,18 @@ let g:solarized_termtrans=1
 colorscheme solarized
 
 set autowrite         " auto save when switching buffers
-set backspace=indent,eol,start
 set clipboard=unnamed " make all operations work with the OS clipboard.
 set dictionary="/usr/dict/words"
 set diffopt+=vertical " always use vertical diffs
 set expandtab         " indent without hard tab
 set hidden            " allow Vim to manage multiple buffers effectively
 set history=100
-set hlsearch          " highlight search
-set incsearch         " move the cursor to the matched string while searching
-set laststatus=2      " always diplay the status line. (set ls=2)
-set list listchars=tab:»·,trail:·,nbsp:·  " display extra whitespace
 set nobackup          " remove swap and backup files from working directory
 set noswapfile        " no swapfile
 set nowrap            " no text wrapping
 set nowritebackup
 set number
+set relativenumber
 set scrolloff=1       " start the scrolling 3 lines before the border
 set shiftwidth=2
 set shortmess=at      " shortens about every message to a minimum and thus avoids scrolling within the output of messages and the 'press a key' prompt that goes with these. (set shm=at)
@@ -64,7 +60,6 @@ set softtabstop=2
 set splitbelow        " put the cursor in the split below window
 set textwidth=80      " (tw=80) limit the number of characters to 80 per line
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
-set wildmenu          " show possible completions of command line commands, file names, and more
 
 " set statusline=\ %*%<%f\ %{fugitive#statusline()}%h%m%r%=%-5.(%y\ %l,%c%V%)\ %P\ " "
 set statusline=\ %*%<%f
@@ -85,13 +80,7 @@ set foldlevel=1
 " ------------------------------------------
 let mapleader = "\<Space>"
 
-" jump between windows
-map <leader>j <C-w>j
-map <leader>k <C-w>k
-map <leader>h <C-w>h
-map <leader>l <C-w>l
-
-map <leader>i mzgg=G`z
+map <leader>= mzgg=G`z
 map <leader><leader> :wa<CR>
 map <leader>d :tabe ~/Dropbox/notes/coding_notes.txt<CR>
 map <leader>z :call MaximizeToggle()<CR>
@@ -99,6 +88,12 @@ map <Leader>w mzgqap`z:w<CR>
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
 cnoremap w!! w !sudo tee % >/dev/null
 tnoremap <Esc> <C-\><C-n>
+
+" jump between windows
+map <leader>j <C-w>j
+map <leader>k <C-w>k
+map <leader>h <C-w>h
+map <leader>l <C-w>l
 
 " run Ruby tests
 map <leader>r :call RunCurrentLineInTest()<CR><CR>
@@ -148,13 +143,13 @@ map <F5> [I:let nr = input("Which one: ") <Bar>exe "normal " . nr ."[\t"<CR>
 " ------------------------------------------
 " -- Commands ------------------------------
 " ------------------------------------------
-hi User1        ctermbg=Magenta ctermfg=Black  guibg=#ff00ff guifg=#ffffff
-hi User2        ctermbg=Red     ctermfg=White  guibg=#aa0000 guifg=#89a1a1
-hi StatusLine   ctermfg=Black   ctermbg=Yellow
-hi StatusLineNC ctermfg=Black   ctermbg=DarkGray
+hi User1        ctermbg=Black ctermfg=Magenta guibg=#ff00ff guifg=#ffffff
+hi User2        ctermbg=Red   ctermfg=White   guibg=#aa0000 guifg=#89a1a1
+hi StatusLine   ctermfg=Black ctermbg=Yellow
+hi StatusLineNC ctermfg=Black ctermbg=DarkGray
 " change status line color in insert mode
-autocmd insertEnter * hi StatusLine term=reverse ctermfg=black ctermbg=darkblue guisp=Blue
-autocmd InsertLeave * hi StatusLine term=reverse ctermfg=black ctermbg=yellow
+autocmd insertEnter * hi StatusLine term=reverse ctermfg=White ctermbg=DarkBlue guisp=Blue
+autocmd InsertLeave * hi StatusLine term=reverse ctermfg=Black ctermbg=Yellow
 
 " clear white space in the end of lines
 autocmd BufWritePre * :%s/\s\+$//e
@@ -191,6 +186,7 @@ command! Tags !ctags -R --exclude=.git --exclude=log --exclude=tmp * `bundle sho
 
 command! V tabe $MYVIMRC
 command! Vs so $MYVIMRC | echo 'Vimrc sourced :)'
+
 
 " local vimrc - keep this at the end
 if filereadable(glob('$HOME/.vimrc.local'))
