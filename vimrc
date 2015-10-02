@@ -124,10 +124,6 @@ if bufwinnr(1)
   map ) 5<C-W>>
 end
 
-" scroll the viewport faster
-nnoremap <C-e> 5<C-e>
-nnoremap <C-y> 5<C-y>
-
 " In command-line mode, <C-A> goes to the front of the line, as in bash.
 cmap <C-A> <C-B>
 
@@ -151,28 +147,13 @@ hi StatusLineNC ctermfg=Black ctermbg=DarkGray
 autocmd insertEnter * hi StatusLine term=reverse ctermfg=White ctermbg=DarkBlue guisp=Blue
 autocmd InsertLeave * hi StatusLine term=reverse ctermfg=Black ctermbg=Yellow
 
-" clear white space in the end of lines
 autocmd BufWritePre * :%s/\s\+$//e
-
-" associate the .es6 file extension with JavaScript
 autocmd BufRead,BufNewFile *.es6 setfiletype javascript
-
-" additional Ruby syntax highliting
 autocmd BufRead,BufNewFile Gemfile.lock setfiletype ruby
-
-" autosave when focus is lost - GUI only :(
 autocmd FocusLost * silent! wa
-
-" make ? part of words
 autocmd FileType ruby,eruby,yaml,haml setlocal iskeyword+=?
-
-" allow stylesheets to autocomplete hyphenated words
 autocmd FileType css,scss,sass setlocal iskeyword+=-
-
-" wrap the quickfix window
 autocmd FileType qf setlocal wrap linebreak
-
-" delete .netrwhist files
 autocmd VimLeave * if filereadable('.vim/.netrwhist')|call delete('.vim/.netrwhist')|endif
 
 command! Q q                                    " bind :Q to :q
