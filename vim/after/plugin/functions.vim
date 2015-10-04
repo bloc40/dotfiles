@@ -6,9 +6,9 @@ function! DuckDuckGo(...)
   redraw!
 endfunction
 
-" --------------------------------------
-" Toggle miximizing a split window
-" --------------------------------------
+" -------------------------------------------
+" Mark statusline when a window is zoomed in
+" -------------------------------------------
 function! ZoomedIn()
   if exists('s:maximize_session')
     return '[Zoom]'
@@ -17,6 +17,9 @@ function! ZoomedIn()
   endif
 endfunction
 
+" --------------------------------------
+" Toggle miximizing a split window
+" --------------------------------------
 function! MaximizeToggle()
   if exists('s:maximize_session')
     exec 'source ' . s:maximize_session

@@ -7,5 +7,6 @@ Abolish fo      of
 Abolish grey    gray
 Abolish lastest latest
 Abolish pravite private
+Abolish recieve receive
 Abolish teh     the
 Abolish vidoe   video
