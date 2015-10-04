@@ -60,6 +60,8 @@ set softtabstop=2
 set splitbelow        " put the cursor in the split below window
 set textwidth=80      " (tw=80) limit the number of characters to 80 per line
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
+hi colorcolumn ctermbg=0
+set colorcolumn=+1
 
 " set statusline=\ %*%<%f\ %{fugitive#statusline()}%h%m%r%=%-5.(%y\ %l,%c%V%)\ %P\ " "
 set statusline=\ %*%<%f
