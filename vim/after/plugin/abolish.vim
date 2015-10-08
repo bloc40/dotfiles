@@ -8,5 +8,6 @@ Abolish grey    gray
 Abolish lastest latest
 Abolish pravite private
 Abolish recieve receive
+Abolish shoudl  should
 Abolish teh     the
 Abolish vidoe   video

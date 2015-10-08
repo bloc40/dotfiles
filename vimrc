@@ -1,7 +1,6 @@
-" ------------------------------------------
-" -- Load Plug-vim -------------------------
-" ------------------------------------------
-" install vim-plug if it does not exist
+" ---------------------------------------------------------------------------
+" Plugins
+" ---------------------------------------------------------------------------
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -27,98 +26,77 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-
 call plug#end()
 
 
-" ------------------------------------------
-" -- Settings ------------------------------
-" ------------------------------------------
-let loaded_matchit=1
-
+" ---------------------------------------------------------------------------
+" Setting
+" ---------------------------------------------------------------------------
 set background=dark
 let g:solarized_termtrans=1
 colorscheme solarized
 
-set autowrite         " auto save when switching buffers
-set clipboard=unnamed " make all operations work with the OS clipboard.
+set autowrite
+set clipboard=unnamed
 set dictionary="/usr/dict/words"
-set diffopt+=vertical " always use vertical diffs
-set expandtab         " indent without hard tab
-set hidden            " allow Vim to manage multiple buffers effectively
+set diffopt+=vertical
+set expandtab
+set hidden
 set history=100
-set nobackup          " remove swap and backup files from working directory
-set noswapfile        " no swapfile
-set nowrap            " no text wrapping
+set nobackup
+set noswapfile
+set nowrap
 set nowritebackup
 set number
 set relativenumber
-set scrolloff=1       " start the scrolling 3 lines before the border
+set scrolloff=1
 set shiftwidth=2
-set shortmess=at      " shortens about every message to a minimum and thus avoids scrolling within the output of messages and the 'press a key' prompt that goes with these. (set shm=at)
+set shortmess=at
 set softtabstop=2
-set splitbelow        " put the cursor in the split below window
-set textwidth=80      " (tw=80) limit the number of characters to 80 per line
+set splitbelow
+set textwidth=80
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
 hi colorcolumn ctermbg=0
 set colorcolumn=+1
 
-" set statusline=\ %*%<%f\ %{fugitive#statusline()}%h%m%r%=%-5.(%y\ %l,%c%V%)\ %P\ " "
-set statusline=\ %*%<%f
-set statusline+=\ %{fugitive#statusline()}
-set statusline+=\ %2*%{&modified?'\[+]':''}%*
-set statusline+=\ %1*%{ZoomedIn()}%*
-set statusline+=%=%-5.(%y\ %l,%c%V%)\ %P\ " "
-
-" folding settings
-set foldmethod=indent " fold based on indent
-set foldnestmax=10    " deepest fold is 10 levels
-set nofoldenable      " dont fold by default
+set foldmethod=indent
+set foldnestmax=2
+set nofoldenable
 set foldlevel=1
 
-
-" ------------------------------------------
-" -- Mappings ------------------------------
-" ------------------------------------------
+let loaded_matchit=1
 let mapleader = "\<Space>"
 
+" ---------------------------------------------------------------------------
+" Mappings
+" ---------------------------------------------------------------------------
 map <leader>= mzgg=G`z
 map <leader><leader> :wa<CR>
-map <leader>d :tabe ~/Dropbox/notes/coding_notes.txt<CR>
-map <leader>z :call MaximizeToggle()<CR>
+map <leader>d :tabe ~/Dropbox/notes/coding_notes.md<CR>
 map <Leader>w mzgqap`z:w<CR>
-cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
-cnoremap w!! w !sudo tee % >/dev/null
-tnoremap <Esc> <C-\><C-n>
-
-" jump between windows
+map <silent><leader>z :ZoomBuffer<CR>
 map <leader>j <C-w>j
 map <leader>k <C-w>k
 map <leader>h <C-w>h
 map <leader>l <C-w>l
-
-" run Ruby tests
-map <leader>r :call RunCurrentLineInTest()<CR><CR>
-map <leader>rr :call RunTestFile()<CR><CR>
-command! Spin !spin push spec
-
-" [vim-commentary] comment/uncomment lines
+cmap <C-A> <C-B>
+imap <C-e> <C-o>$
+imap <C-a> <C-o>^
+cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
+cnoremap w!! w !sudo tee % >/dev/null
+tnoremap <Esc> <C-\><C-n>
+map <leader>r :RunCurrentLineInTest<CR><CR>
+map <leader>rr :RunTestFile<CR><CR>
 map <silent><leader>/ :Commentary<CR>j
-
-" [CtrlP]
 map <leader>e :CtrlPBuffer<CR>
-
-" [Ag]
 map <leader>f :Ag!<space>
 nnoremap <leader>a :Ag! <C-R><C-W>
+map <F1> :NERDTreeFind<CR>
+map <F2> :NERDTreeToggle<CR>
+map <F3> :NERDTree<CR>
 
-" disable the arrow keys
-" nnoremap <Left>  :echoe "Use h"<CR>
-" nnoremap <Right> :echoe "Use l"<CR>
-" nnoremap <Up>    :echoe "Use k"<CR>
-" nnoremap <Down>  :echoe "Use j"<CR>
+map <leader>x :w !psql mouna_development<CR>
 
-" resizing windows
 if bufwinnr(1)
   map + <C-W>+
   map - <C-W>-
@@ -126,29 +104,37 @@ if bufwinnr(1)
   map ) 5<C-W>>
 end
 
-" In command-line mode, <C-A> goes to the front of the line, as in bash.
-cmap <C-A> <C-B>
-
-" Emacs-like beginning and end of line.
-imap <C-e> <C-o>$
-imap <C-a> <C-o>^
+" nnoremap <Left>  :echoe "Use h"<CR>
+" nnoremap <Right> :echoe "Use l"<CR>
+" nnoremap <Up>    :echoe "Use k"<CR>
+" nnoremap <Down>  :echoe "Use j"<CR>
 
 "!!!!! Experimentals -------------------------
 " list lines with word under the cursor
 map <F5> [I:let nr = input("Which one: ") <Bar>exe "normal " . nr ."[\t"<CR>
 
+" ---------------------------------------------------------------------------
+" StatusLine
+" ---------------------------------------------------------------------------
+hi User1 ctermbg=90 ctermfg=15
+hi User2 ctermbg=Red   ctermfg=White
 
-" ------------------------------------------
-" -- Commands ------------------------------
-" ------------------------------------------
-hi User1        ctermbg=Black ctermfg=Magenta guibg=#ff00ff guifg=#ffffff
-hi User2        ctermbg=Red   ctermfg=White   guibg=#aa0000 guifg=#89a1a1
-hi StatusLine   ctermfg=Black ctermbg=Yellow
-hi StatusLineNC ctermfg=Black ctermbg=DarkGray
-" change status line color in insert mode
-autocmd insertEnter * hi StatusLine term=reverse ctermfg=White ctermbg=DarkBlue guisp=Blue
-autocmd InsertLeave * hi StatusLine term=reverse ctermfg=Black ctermbg=Yellow
+hi StatusLine   ctermbg=214      ctermfg=Black
+hi StatusLineNC ctermbg=DarkGray ctermfg=Black
 
+autocmd insertEnter * hi StatusLine ctermbg=21  ctermfg=White
+autocmd InsertLeave * hi StatusLine ctermbg=214 ctermfg=Black
+
+set statusline=
+set statusline+=\ %*%<%f
+set statusline+=\ %{fugitive#statusline()}
+set statusline+=\ %2*%{&modified?'[+]':''}%*
+set statusline+=\ %1*%{ZoomedIn()}%*
+set statusline+=%=%-5.(%y\ %l,%c%V%)\ %P\ " "
+
+" ---------------------------------------------------------------------------
+" Commands
+" ---------------------------------------------------------------------------
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd BufRead,BufNewFile *.es6 setfiletype javascript
 autocmd BufRead,BufNewFile Gemfile.lock setfiletype ruby
@@ -158,7 +144,7 @@ autocmd FileType css,scss,sass setlocal iskeyword+=-
 autocmd FileType qf setlocal wrap linebreak
 autocmd VimLeave * if filereadable('.vim/.netrwhist')|call delete('.vim/.netrwhist')|endif
 
-command! Q q                                    " bind :Q to :q
+command! Q q
 command! Noh noh
 command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc   " convert string into a symbol
 command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc    " convert symbol into a string
@@ -166,12 +152,11 @@ command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc " convert to Ruby 1.9 syntax
 command! FormatJson !python -m json.tool
 command! -nargs=* Duck call DuckDuckGo(<f-args>)
 command! Tags !ctags -R --exclude=.git --exclude=log --exclude=tmp * `bundle show --paths`/../*
-
 command! V tabe $MYVIMRC
 command! Vs so $MYVIMRC | echo 'Vimrc sourced :)'
 
+runtime! init/**.vim
 
-" local vimrc - keep this at the end
 if filereadable(glob('$HOME/.vimrc.local'))
   source $HOME/.vimrc.local
 endif
