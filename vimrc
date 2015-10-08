@@ -1,6 +1,6 @@
-" ---------------------------------------------------------------------------
-" Plugins
-" ---------------------------------------------------------------------------
+" ----------------------------------------
+" --- Plugins ----------------------------
+" ----------------------------------------
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -31,9 +31,9 @@ Plug 'fatih/vim-go'
 call plug#end()
 
 
-" ---------------------------------------------------------------------------
-" Setting
-" ---------------------------------------------------------------------------
+" ---------------------------------------
+" --- Setting ---------------------------
+" ---------------------------------------
 set background=dark
 let g:solarized_termtrans=1
 colorscheme solarized
@@ -72,9 +72,9 @@ set foldlevel=1
 let loaded_matchit=1
 let mapleader = "\<Space>"
 
-" ---------------------------------------------------------------------------
-" Mappings
-" ---------------------------------------------------------------------------
+" ---------------------------------------
+" --- Mappings --------------------------
+" ---------------------------------------
 map <leader>= mzgg=G`z
 map <leader><leader> :wa<CR>
 map <leader>d :tabe ~/Dropbox/notes/coding_notes.md<CR>
@@ -116,16 +116,16 @@ end
 " list lines with word under the cursor
 map <F5> [I:let nr = input("Which one: ") <Bar>exe "normal " . nr ."[\t"<CR>
 
-" ---------------------------------------------------------------------------
-" StatusLine
-" ---------------------------------------------------------------------------
+" ---------------------------------------
+" --- StatusLine ------------------------
+" ---------------------------------------
 hi User1 ctermbg=90  ctermfg=15
 hi User2 ctermbg=Red ctermfg=White
 
 hi StatusLine   ctermbg=214      ctermfg=Black
 hi StatusLineNC ctermbg=DarkGray ctermfg=Black
 
-autocmd insertEnter * hi StatusLine ctermbg=21  ctermfg=White
+autocmd insertEnter * hi StatusLine ctermbg=27  ctermfg=White
 autocmd InsertLeave * hi StatusLine ctermbg=214 ctermfg=Black
 
 set statusline=
@@ -135,9 +135,9 @@ set statusline+=\ %2*%{&modified?'\ ●\ ':''}%*
 set statusline+=\ %1*%{ZoomedIn()}%*
 set statusline+=%=%-5.(%y\ %l,%c%V%)\ %P\ " "
 
-" ---------------------------------------------------------------------------
-" Commands
-" ---------------------------------------------------------------------------
+" ---------------------------------------
+" --- Commands --------------------------
+" ---------------------------------------
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd BufRead,BufNewFile *.es6 setfiletype javascript
 autocmd BufRead,BufNewFile Gemfile.lock setfiletype ruby
