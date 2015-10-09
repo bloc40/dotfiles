@@ -95,8 +95,6 @@ map <F1> :NERDTreeFind<CR>
 map <F2> :NERDTreeToggle<CR>
 map <F3> :NERDTree<CR>
 
-map <leader>x :w !psql mouna_development<CR>
-
 if bufwinnr(1)
   map + <C-W>+
   map - <C-W>-
@@ -116,8 +114,8 @@ map <F5> [I:let nr = input("Which one: ") <Bar>exe "normal " . nr ."[\t"<CR>
 " ---------------------------------------------------------------------------
 " StatusLine
 " ---------------------------------------------------------------------------
-hi User1 ctermbg=90 ctermfg=15
-hi User2 ctermbg=Red   ctermfg=White
+hi User1 ctermbg=90  ctermfg=15
+hi User2 ctermbg=Red ctermfg=White
 
 hi StatusLine   ctermbg=214      ctermfg=Black
 hi StatusLineNC ctermbg=DarkGray ctermfg=Black
@@ -128,7 +126,7 @@ autocmd InsertLeave * hi StatusLine ctermbg=214 ctermfg=Black
 set statusline=
 set statusline+=\ %*%<%f
 set statusline+=\ %{fugitive#statusline()}
-set statusline+=\ %2*%{&modified?'[+]':''}%*
+set statusline+=\ %2*%{&modified?'\ ●\ ':''}%*
 set statusline+=\ %1*%{ZoomedIn()}%*
 set statusline+=%=%-5.(%y\ %l,%c%V%)\ %P\ " "
 
@@ -142,7 +140,6 @@ autocmd FocusLost * silent! wa
 autocmd FileType ruby,eruby,yaml,haml setlocal iskeyword+=?
 autocmd FileType css,scss,sass setlocal iskeyword+=-
 autocmd FileType qf setlocal wrap linebreak
-autocmd VimLeave * if filereadable('.vim/.netrwhist')|call delete('.vim/.netrwhist')|endif
 
 command! Q q
 command! Noh noh
@@ -150,10 +147,10 @@ command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc   " convert string into a symbol
 command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc    " convert symbol into a string
 command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc " convert to Ruby 1.9 syntax
 command! FormatJson !python -m json.tool
-command! -nargs=* Duck call DuckDuckGo(<f-args>)
 command! Tags !ctags -R --exclude=.git --exclude=log --exclude=tmp * `bundle show --paths`/../*
 command! V tabe $MYVIMRC
 command! Vs so $MYVIMRC | echo 'Vimrc sourced :)'
+
 
 runtime! init/**.vim
 
