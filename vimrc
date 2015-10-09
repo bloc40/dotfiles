@@ -30,7 +30,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'fatih/vim-go'
 call plug#end()
 
-
 " ---------------------------------------
 " --- Setting ---------------------------
 " ---------------------------------------
@@ -59,10 +58,10 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 
-set textwidth=80
-set colorcolumn=+1
-hi colorcolumn ctermbg=0
+set textwidth=120
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
+hi colorcolumn ctermbg=0
+set colorcolumn=+1
 
 set foldmethod=indent
 set foldnestmax=2
