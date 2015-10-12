@@ -118,7 +118,7 @@ map <F5> [I:let nr = input("Which one: ") <Bar>exe "normal " . nr ."[\t"<CR>
 " --- StatusLine ------------------------
 " ---------------------------------------
 hi User1 ctermbg=90  ctermfg=15
-hi User2 ctermbg=Red ctermfg=White
+hi User2 ctermbg=Red ctermfg=Green
 
 hi StatusLine   ctermbg=214      ctermfg=Black
 hi StatusLineNC ctermbg=DarkGray ctermfg=Black
@@ -129,7 +129,7 @@ autocmd InsertLeave * hi StatusLine ctermbg=214 ctermfg=Black
 set statusline=
 set statusline+=\ %*%<%f
 set statusline+=\ %{fugitive#statusline()}
-set statusline+=\ %2*%{&modified?'\ ●\ ':''}%*
+set statusline+=\ %2*%{&modified?'\ ☆\ \ ':''}%*
 set statusline+=\ %1*%{ZoomedIn()}%*
 set statusline+=%=%-5.(%y\ %l,%c%V%)\ %P\ " "
 
