@@ -38,7 +38,8 @@ colorscheme solarized
 
 set autowrite
 set clipboard=unnamed
-set dictionary="/usr/dict/words"
+set complete+=k,t
+set dictionary=/usr/share/dict/words
 set diffopt+=vertical
 set hidden
 set history=100
@@ -49,6 +50,7 @@ set nowritebackup
 set number
 set relativenumber
 set scrolloff=1
+" set scrolloff=1
 set shortmess=at
 set splitbelow
 
@@ -75,7 +77,7 @@ let mapleader = "\<Space>"
 " ---------------------------------------
 map <leader>= mzgg=G`z
 map <leader><leader> :wa<CR>
-map <leader>d :tabe ~/Dropbox/notes/coding_notes.md<CR>
+map <leader>d :tabe ~/Dropbox/vim_notes/yuzu.md<CR>
 map <Leader>w mzgqap`z:w<CR>
 map <silent><leader>z :ZoomBuffer<CR>
 map <leader>j <C-w>j
@@ -99,8 +101,8 @@ map <F2> :NERDTreeToggle<CR>
 map <F3> :NERDTree<CR>
 
 if bufwinnr(1)
-  map + 2<C-W>+
-  map - 2<C-W>-
+  map + <C-W>+
+  map - <C-W>-
   map ( 5<C-W><
   map ) 5<C-W>>
 end
@@ -123,7 +125,7 @@ hi User2 ctermbg=Red ctermfg=White
 hi StatusLine   ctermbg=214      ctermfg=Black
 hi StatusLineNC ctermbg=DarkGray ctermfg=Black
 
-autocmd insertEnter * hi StatusLine ctermbg=27  ctermfg=White
+autocmd insertEnter * hi StatusLine ctermbg=21  ctermfg=White
 autocmd InsertLeave * hi StatusLine ctermbg=214 ctermfg=Black
 
 set statusline=
