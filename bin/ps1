@@ -7,56 +7,56 @@ YELLOW="\[\e[33m\]"
 MAGENTA="\[\e[35m\]"
 BLUE_BG="\[\e[44m\]"
 
-_git_repo() {
+__git_repo() {
   [[ `git rev-parse --is-inside-work-tree 2>/dev/null` == true ]]
 }
 
-_git_modified() {
+__git_modified() {
   [[ `git ls-files -m` != '' ]]
 }
 
-_git_untracked() {
+__git_untracked() {
   [[ `git ls-files -o --exclude-standard` != '' ]]
 }
 
-_git_staged() {
+__git_staged() {
   [[ `git diff --staged --name-only` != '' ]]
 }
 
-_git_dirty() {
-  _git_modified || _git_untracked || _git_staged
+__git_dirty() {
+  __git_modified || __git_untracked || __git_staged
 }
 
-git_branch_color() {
-  if _git_repo && _git_dirty; then
+__git_branch_color() {
+  if __git_repo && __git_dirty; then
     echo $RED
   else
     echo $GREEN
   fi
 }
 
-git_branch() {
+__git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'
 }
 
-command_state() {
+__command_state() {
   echo "\$(if [[ \$? == 0 ]]; then echo \"\[\e[$GREEN\]✔\"; else echo \"\[\e[$RED\]✘\"; fi)$CLEAR"
 }
 
-show_jobs() {
+__show_jobs() {
   if [[ `jobs` != '' ]]; then
     count=`jobs | wc -l | awk '{print $1}'`
     echo " [👻- $count]"
   fi
 }
 
-tmux_sessions() {
+__tmux_sessions() {
   if [[ `tmux ls 2> /dev/null` != '' ]]; then
     count=`tmux ls | wc -l | awk '{print $1}'`
     echo " [tmux $count]"
   fi
 }
-_ruby_version() {
+__ruby_version() {
   if [[ `which rvm` != '' ]]; then
     echo `~/.rvm/bin/rvm-prompt`
   elif [[ `which rbenv` != '' ]]; then
@@ -66,9 +66,9 @@ _ruby_version() {
   fi
 }
 
-print_pre_prompt() {
-  printf "\e[1;34m%$(($COLUMNS))s" $(_ruby_version)
+__print_pre_prompt() {
+  printf "\e[1;34m%$(($COLUMNS))s" $(__ruby_version)
 }
 
-PROMPT_COMMAND=print_pre_prompt
-export PS1="$(command_state) $BLUE_BG\w$CLEAR$YELLOW\$(show_jobs)$MAGENTA\$(tmux_sessions) \[\e[\$(git_branch_color)\]\$(git_branch)$CLEAR"
+PROMPT_COMMAND=__print_pre_prompt
+export PS1="$(__command_state) $BLUE_BG\w$CLEAR$YELLOW\$(__show_jobs)$MAGENTA\$(__tmux_sessions) \[\e[\$(__git_branch_color)\]\$(__git_branch)$CLEAR"

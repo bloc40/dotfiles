@@ -1,40 +1,40 @@
 #!/bin/sh
 
-_session_name() {
-  echo `basename $PWD`
+tat() {
+  __create_if_needed_and_attach
 }
 
-_not_in_tmux() {
-  [ -z "$TMUX" ]
-}
-
-_session_exists() {
-  tmux list-sessions | sed -E 's/:.*$//' | grep -q ^`_session_name`$
-}
-
-_create_detached_session() {
-  (TMUX='' tmux new-session -Ad -s `_session_name`)
-}
-
-_create_and_attach() {
-  tmux new-session -As `_session_name`
-}
-
-_switch_to_session() {
-  tmux switch-client -t `_session_name`
-}
-
-_create_if_needed_and_attach() {
-  if _not_in_tmux; then
-    _create_and_attach
+__create_if_needed_and_attach() {
+  if __not_in_tmux; then
+    __create_and_attach
   else
-    if ! _session_exists; then
-      _create_detached_session
+    if ! __session_exists; then
+      __create_detached_session
     fi
-    _switch_to_session
+    __switch_to_session
   fi
 }
 
-tat() {
-  _create_if_needed_and_attach
+__not_in_tmux() {
+  [ -z "$TMUX" ]
+}
+
+__create_and_attach() {
+  tmux new-session -As `__session_name`
+}
+
+__session_exists() {
+  tmux list-sessions | sed -E 's/:.*$//' | grep -q ^`__session_name`$
+}
+
+__create_detached_session() {
+  (TMUX='' tmux new-session -Ad -s `__session_name`)
+}
+
+__switch_to_session() {
+  tmux switch-client -t `__session_name`
+}
+
+__session_name() {
+  echo `basename $PWD`
 }
