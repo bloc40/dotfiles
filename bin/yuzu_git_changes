@@ -1,0 +1,43 @@
+#!/bin/sh
+
+color1='\033[1;31m' # bold red
+color2='\033[1;36m' # bold cyan
+color3='\033[33m'   # yellow
+color4='\033[35m'   # magenta
+clear='\033[0m'     # clear
+
+git_changes() {
+  local current_dir=$PWD
+  echo
+  for dir in ~/src/*; do
+    cd $dir
+    if [[ `git ls-files -m` != '' ]]; then
+      echo -e "$(__arrow) $(__dir_name) $(__number_files_changed)$(__message) $(__branch_name)"
+    fi
+  done
+  cd $current_dir
+}
+
+__arrow() {
+  echo $color3 '-->'
+}
+
+__dir_name() {
+  echo $color1`basename $PWD`
+}
+
+__number_files_changed() {
+  echo $color2`git ls-files -m | wc -l | awk '{print $1}'`
+}
+
+__message() {
+  echo $clear 'file(s) changed in'
+}
+
+__branch_name() {
+  echo $color4`__git_branch`$clear
+}
+
+__git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'
+}
