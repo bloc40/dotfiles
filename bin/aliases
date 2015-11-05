@@ -3,7 +3,7 @@ alias v='nvim'
 alias mkdir='mkdir -pv'
 alias c='clear'
 alias h='history'
-alias la='ls -lah'
+alias la='ls -Shal'
 alias ll='ls -lh'
 alias so='source ~/.bash_profile'
 alias tarc='tar -czvf'
@@ -31,9 +31,6 @@ alias rdb='rails db'
 alias rs='rails s'
 alias fs='foreman start'
 alias rr='be rake routes'
-
-# rspec
-alias rspec='be rspec'
 
 # bundler
 alias bo='EDITOR=vim bundle open'
