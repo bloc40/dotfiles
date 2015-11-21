@@ -1,7 +1,11 @@
 PATH=$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:$PATH
 
-# Herorku
 export PATH=$PATH:/usr/local/heroku/bin
 
-# PostgreSQL
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
+
+export GOPATH=$HOME/Code/_GO
+export PATH=$PATH:$GOPATH/bin
+
+# export GOROOT=/usr/local/bin/go
+# export PATH=$PATH:$GOROOT/bin

@@ -26,6 +26,7 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'fatih/vim-go'
 call plug#end()
 
 
@@ -40,7 +41,6 @@ set autowrite
 set clipboard=unnamed
 set dictionary="/usr/dict/words"
 set diffopt+=vertical
-set expandtab
 set hidden
 set history=100
 set nobackup
@@ -50,14 +50,18 @@ set nowritebackup
 set number
 set relativenumber
 set scrolloff=1
-set shiftwidth=2
 set shortmess=at
-set softtabstop=2
 set splitbelow
+
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+
 set textwidth=80
-set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
-hi colorcolumn ctermbg=0
 set colorcolumn=+1
+hi colorcolumn ctermbg=0
+set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
 
 set foldmethod=indent
 set foldnestmax=2
@@ -85,8 +89,8 @@ imap <C-a> <C-o>^
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
 cnoremap w!! w !sudo tee % >/dev/null
 tnoremap <Esc> <C-\><C-n>
-map <leader>r :RunCurrentLineInTest<CR><CR>
-map <leader>rr :RunTestFile<CR><CR>
+au Filetype ruby nmap <leader>r :RunCurrentLineInTest<CR><CR>
+au Filetype ruby nmap <leader>rr :RunTestFile<CR><CR>
 map <silent><leader>/ :Commentary<CR>j
 map <leader>e :CtrlPBuffer<CR>
 map <leader>f :Ag!<space>
