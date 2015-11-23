@@ -77,7 +77,9 @@ let mapleader = "\<Space>"
 " ---------------------------------------
 map <leader>= mzgg=G`z
 map <leader><leader> :wa<CR>
-map <leader>d :tabe ~/Dropbox/vim_notes/yuzu.md<CR>
+map <leader>dc :tabe ~/Dropbox/vim_notes/coding.md<CR>
+map <leader>dv :tabe ~/Dropbox/vim_notes/vim.md<CR>
+map <leader>dy :tabe ~/Dropbox/vim_notes/yuzu.md<CR>
 map <Leader>w mzgqap`z:w<CR>
 map <silent><leader>z :ZoomBuffer<CR>
 map <leader>j <C-w>j
