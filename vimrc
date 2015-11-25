@@ -50,9 +50,9 @@ set nowritebackup
 set number
 set relativenumber
 set scrolloff=1
-" set scrolloff=1
 set shortmess=at
 set splitbelow
+set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
 
 set tabstop=2
 set softtabstop=2
@@ -60,7 +60,6 @@ set shiftwidth=2
 set expandtab
 
 set textwidth=120
-set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
 hi colorcolumn ctermbg=0
 set colorcolumn=+1
 
@@ -92,12 +91,10 @@ imap <C-a> <C-o>^
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
 cnoremap w!! w !sudo tee % >/dev/null
 tnoremap <Esc> <C-\><C-n>
-au Filetype ruby nmap <leader>r :RunCurrentLineInTest<CR><CR>
-au Filetype ruby nmap <leader>rr :RunTestFile<CR><CR>
 map <silent><leader>/ :Commentary<CR>j
 map <leader>e :CtrlPBuffer<CR>
 map <leader>f :Ag!<space>
-nnoremap <leader>a :Ag! <C-R><C-W>
+nnoremap <leader>a :Ag! <C-r><C-w>
 map <F1> :NERDTreeFind<CR>
 map <F2> :NERDTreeToggle<CR>
 map <F3> :NERDTree<CR>
@@ -108,6 +105,9 @@ if bufwinnr(1)
   map ( 5<C-W><
   map ) 5<C-W>>
 end
+
+au Filetype ruby nmap <leader>r :RunCurrentLineInTest<CR><CR>
+au Filetype ruby nmap <leader>rr :RunTestFile<CR><CR>
 
 " nnoremap <Left>  :echoe "Use h"<CR>
 " nnoremap <Right> :echoe "Use l"<CR>
