@@ -10,7 +10,7 @@ endif
 call plug#begin('~/.vim/plugged')
 " Plug 'SirVer/ultisnips'
 Plug 'bloc40/vim-replace'
-Plug 'bloc40/vim-test-ruby'
+Plug 'bloc40/vim-spin'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'ervandew/supertab'
 Plug 'kien/ctrlp.vim'
@@ -107,10 +107,6 @@ if bufwinnr(1)
   map ) 5<C-W>>
 end
 
-" nnoremap <Left>  :echoe "Use h"<CR>
-" nnoremap <Right> :echoe "Use l"<CR>
-" nnoremap <Up>    :echoe "Use k"<CR>
-" nnoremap <Down>  :echoe "Use j"<CR>
 
 "!!!!! Experimentals -------------------------
 " list lines with word under the cursor
