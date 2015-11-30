@@ -48,7 +48,7 @@ set noswapfile
 set nowrap
 set nowritebackup
 set number
-set relativenumber
+" set relativenumber
 set scrolloff=1
 set shortmess=at
 set splitbelow
@@ -76,7 +76,8 @@ let mapleader = "\<Space>"
 " ---------------------------------------------------------------------------
 map <leader>= mzgg=G`z
 map <leader><leader> :wa<CR>
-map <leader>d :tabe ~/Dropbox/notes/coding_notes.md<CR>
+map <leader>dc :tabe ~/Dropbox/vim_notes/coding.md<CR>
+map <leader>dv :tabe ~/Dropbox/vim_notes/vim.md<CR>
 map <Leader>w mzgqap`z:w<CR>
 map <silent><leader>z :ZoomBuffer<CR>
 map <leader>j <C-w>j
