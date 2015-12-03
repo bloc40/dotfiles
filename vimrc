@@ -74,43 +74,41 @@ let mapleader = "\<Space>"
 " ---------------------------------------------------------------------------
 " Mappings
 " ---------------------------------------------------------------------------
-map <leader>= mzgg=G`z
-map <leader><leader> :wa<CR>
-map <leader>dc :tabe ~/Dropbox/vim_notes/coding.md<CR>
-map <leader>dv :tabe ~/Dropbox/vim_notes/vim.md<CR>
-map <Leader>w mzgqap`z:w<CR>
-map <silent><leader>z :ZoomBuffer<CR>
+map + <C-W>+
+map - <C-W>-
+map ( 5<C-W><
+map ) 5<C-W>>
 map <leader>j <C-w>j
 map <leader>k <C-w>k
 map <leader>h <C-w>h
 map <leader>l <C-w>l
-cmap <C-A> <C-B>
+map <leader>= mzgg=G`z
+map <leader><leader> :wa<CR>
+map <leader>d :tabe ~/Dropbox/vim_notes/<CR>
+map <leader>dc :tabe ~/Dropbox/vim_notes/coding.md<CR>
+map <leader>dv :tabe ~/Dropbox/vim_notes/vim.md<CR>
+map <leader>w mzgqap`z:w<CR>
+map <silent><leader>z :ZoomBuffer<CR>
+cmap <C-a> <C-b>
 imap <C-e> <C-o>$
 imap <C-a> <C-o>^
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
 cnoremap w!! w !sudo tee % >/dev/null
 tnoremap <Esc> <C-\><C-n>
-au Filetype ruby nmap <leader>r :RunCurrentLineInTest<CR><CR>
-au Filetype ruby nmap <leader>rr :RunTestFile<CR><CR>
 map <silent><leader>/ :Commentary<CR>j
 map <leader>e :CtrlPBuffer<CR>
 map <leader>f :Ag!<space>
-nnoremap <leader>a :Ag! <C-R><C-W>
+nnoremap <leader>a :Ag! <C-r><C-w>
 map <F1> :NERDTreeFind<CR>
 map <F2> :NERDTreeToggle<CR>
 map <F3> :NERDTree<CR>
-
-if bufwinnr(1)
-  map + <C-W>+
-  map - <C-W>-
-  map ( 5<C-W><
-  map ) 5<C-W>>
-end
+au Filetype ruby nmap <leader>r :RunCurrentLineInTest<CR><CR>
+au Filetype ruby nmap <leader>rr :RunTestFile<CR><CR>
 
 
 "!!!!! Experimentals -------------------------
 " list lines with word under the cursor
-map <F5> [I:let nr = input("Which one: ") <Bar>exe "normal " . nr ."[\t"<CR>
+map <F5> [I:let nr = input('Which one: ') <Bar>exe 'normal ' . nr .'[\t'<CR>
 
 " ---------------------------------------------------------------------------
 " StatusLine
