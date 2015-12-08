@@ -1,0 +1,6 @@
+#!/bin/sh
+
+jkill() {
+  local process=$@
+  ps ax | grep "$process" | grep -v grep | awk '{print $1}' | xargs kill -9
+}
