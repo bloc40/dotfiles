@@ -16,7 +16,7 @@ alias yesh='set -o history'
 alias jsonpp='python -m json.tool'
 
 # rails
-alias rake='time bundle exec rake'
+alias rake='bundle exec rake'
 alias migrate='rake db:migrate db:rollback db:migrate'
 alias rdm='rake db:migrate'
 alias rdtp='rake db:test:prepare'
@@ -34,6 +34,7 @@ alias rr='be rake routes'
 
 # bundler
 alias bo='EDITOR=vim bundle open'
+alias bi='bundle install'
 alias bu='bundle update'
 alias be='bundle exec'
 
