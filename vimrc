@@ -48,7 +48,6 @@ set noswapfile
 set nowrap
 set nowritebackup
 set number
-set relativenumber
 set scrolloff=1
 set shortmess=at
 set splitbelow
@@ -98,6 +97,7 @@ nnoremap <leader>a :Ag! <C-r><C-w>
 map <F1> :NERDTreeFind<CR>
 map <F2> :NERDTreeToggle<CR>
 map <F3> :NERDTree<CR>
+nnoremap <silent><C-l> :<C-u>nohlsearch<CR><C-l>
 
 if bufwinnr(1)
   map + <C-W>+
@@ -105,6 +105,16 @@ if bufwinnr(1)
   map ( 5<C-W><
   map ) 5<C-W>>
 end
+
+xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>/<C-R>=@/<CR><CR>
+
+function! s:VSetSearch(cmdtype)
+  let temp = @s
+  norm! gv"sy
+  let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
+  let @s = temp
+endfunction
 
 au Filetype ruby nmap <leader>r :RunCurrentLineInTest<CR><CR>
 au Filetype ruby nmap <leader>rr :RunTestFile<CR><CR>
@@ -152,7 +162,7 @@ command! Q q
 command! Noh noh
 command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc   " convert string into a symbol
 command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc    " convert symbol into a string
-command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc " convert to Ruby 1.9 syntax
+command! RubyHash %s/ :\([^ ]*\)\(\s*\)=>/ \1:/gc " convert to Ruby 1.9 syntax
 command! FormatJson !python -m json.tool
 command! Tags !ctags -R --exclude=.git --exclude=log --exclude=tmp * `bundle show --paths`/../*
 command! V tabe $MYVIMRC
