@@ -95,6 +95,7 @@ imap <C-a> <C-o>^
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
 cnoremap w!! w !sudo tee % >/dev/null
 tnoremap <Esc> <C-\><C-n>
+nnoremap <silent><C-l> :<C-u>nohlsearch<CR><C-l>
 map <silent><leader>/ :Commentary<CR>j
 map <leader>e :CtrlPBuffer<CR>
 map <leader>f :Ag!<space>
@@ -105,6 +106,14 @@ map <F3> :NERDTree<CR>
 au Filetype ruby nmap <leader>r :RunCurrentLineInTest<CR><CR>
 au Filetype ruby nmap <leader>rr :RunTestFile<CR><CR>
 
+function! s:VSetSearch(cmdtype)
+  let temp = @s
+  norm! gv"sy
+  let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
+  let @s = temp
+endfunction
+xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>/<C-R>=@/<CR><CR>
 
 "!!!!! Experimentals -------------------------
 " list lines with word under the cursor
