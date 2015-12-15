@@ -11,7 +11,6 @@ call plug#begin('~/.vim/plugged')
 " Plug 'SirVer/ultisnips'
 Plug 'bloc40/vim-replace'
 Plug 'bloc40/vim-test-ruby'
-Plug 'dhruvasagar/vim-table-mode'
 Plug 'ervandew/supertab'
 Plug 'kien/ctrlp.vim'
 Plug 'rking/ag.vim'
@@ -27,6 +26,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'fatih/vim-go'
+Plug 'godlygeek/tabular'
 call plug#end()
 
 " ---------------------------------------
