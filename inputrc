@@ -3,3 +3,4 @@ set completion-ignore-case on
 
 # set warning bell to visible
 set bell-style visible
+# "\C-n": menu-complete

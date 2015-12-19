@@ -14,6 +14,7 @@ alias dot='cd ~/Code/dotfiles && v vimrc'
 alias g='git'
 alias noh='set +o history'
 alias yesh='set -o history'
+alias jsonpp='python -m json.tool'
 
 # rails
 alias rake='time rake'
@@ -30,9 +31,11 @@ alias rc='bin/rails c'
 alias rdb='bin/rails db'
 alias rs='bin/rails s'
 alias fs='foreman start'
+alias rr='be rake routes'
 
 # bundler
 alias bo='EDITOR=vim bundle open'
+alias bi='bundle install'
 alias bu='bundle update'
 alias be='bundle exec'
 
@@ -40,4 +43,4 @@ alias be='bundle exec'
 alias ss='spin serve -t'
 
 # ctags
-alias tags='ctags -R --exclude=.git --exclude=log --exclude=tmp * `bundle show --paths`/../*'
+alias tags='ctags -R --languagues=-javascript,sql,python,sml --exclude=.git,log,tmp * `bundle show --paths`/../*'

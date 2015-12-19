@@ -12,6 +12,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'bloc40/vim-replace'
 Plug 'bloc40/vim-spin'
 Plug 'ervandew/supertab'
+Plug 'fatih/vim-go'
+Plug 'godlygeek/tabular'
 Plug 'kien/ctrlp.vim'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
@@ -25,10 +27,7 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'fatih/vim-go'
-Plug 'godlygeek/tabular'
 call plug#end()
-
 
 " ---------------------------------------------------------------------------
 " Setting
@@ -39,19 +38,20 @@ colorscheme solarized
 
 set autowrite
 set clipboard=unnamed
-set dictionary="/usr/dict/words"
+set complete+=k,t
+set dictionary=/usr/share/dict/words
 set diffopt+=vertical
 set hidden
-set history=100
+set history=200
 set nobackup
 set noswapfile
 set nowrap
 set nowritebackup
 set number
-" set relativenumber
 set scrolloff=1
 set shortmess=at
 set splitbelow
+set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
 
 set tabstop=2
 set softtabstop=2
@@ -61,12 +61,14 @@ set expandtab
 set textwidth=80
 set colorcolumn=+1
 hi colorcolumn ctermbg=0
-set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
 
 set foldmethod=indent
-set foldnestmax=2
+set foldnestmax=10
 set nofoldenable
 set foldlevel=1
+
+" set spell
+set spelllang=en_us
 
 let loaded_matchit=1
 let mapleader = "\<Space>"
@@ -82,11 +84,8 @@ map <leader>j <C-w>j
 map <leader>k <C-w>k
 map <leader>h <C-w>h
 map <leader>l <C-w>l
-map <leader>= mzgg=G`z
 map <leader><leader> :wa<CR>
-map <leader>d :tabe ~/Dropbox/vim_notes/<CR>
-map <leader>dc :tabe ~/Dropbox/vim_notes/coding.md<CR>
-map <leader>dv :tabe ~/Dropbox/vim_notes/vim.md<CR>
+map <leader>d :Vex ~/Dropbox/vim_notes/<CR>
 map <leader>w mzgqap`z:w<CR>
 map <silent><leader>z :ZoomBuffer<CR>
 cmap <C-a> <C-b>
@@ -103,9 +102,8 @@ nnoremap <leader>a :Ag! <C-r><C-w>
 map <F1> :NERDTreeFind<CR>
 map <F2> :NERDTreeToggle<CR>
 map <F3> :NERDTree<CR>
-au Filetype ruby nmap <leader>r :RunCurrentLineInTest<CR><CR>
-au Filetype ruby nmap <leader>rr :RunTestFile<CR><CR>
 
+" highlight group of words
 function! s:VSetSearch(cmdtype)
   let temp = @s
   norm! gv"sy
@@ -114,6 +112,19 @@ function! s:VSetSearch(cmdtype)
 endfunction
 xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>/<C-R>=@/<CR><CR>
+
+" map <leader>= mzgg=G`z
+
+function! s:ReIndent()
+  let winview = winsaveview()
+  execute "keepjumps normal! gg=G"
+  call winrestview(winview)
+endfunction
+nnoremap <leader>= :call <SID>ReIndent()<CR>
+
+au Filetype ruby nmap <leader>r :RunCurrentLineInTest<CR><CR>
+au Filetype ruby nmap <leader>rr :RunTestFile<CR><CR>
+
 
 "!!!!! Experimentals -------------------------
 " list lines with word under the cursor
@@ -151,11 +162,11 @@ autocmd FileType qf setlocal wrap linebreak
 
 command! Q q
 command! Noh noh
-command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc   " convert string into a symbol
-command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc    " convert symbol into a string
+" command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc   " convert string into a symbol
+" command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc    " convert symbol into a string
 command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc " convert to Ruby 1.9 syntax
 command! FormatJson !python -m json.tool
-command! Tags !ctags -R --exclude=.git --exclude=log --exclude=tmp * `bundle show --paths`/../*
+command! Tags !ctags -R --languages=-javascript,sql,python,sml --exclude=.git,log,tmp * `bundle show --paths`/../*
 command! V tabe $MYVIMRC
 command! Vs so $MYVIMRC | echo 'Vimrc sourced :)'
 
