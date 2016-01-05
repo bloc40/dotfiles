@@ -12,6 +12,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'bloc40/vim-replace'
 Plug 'bloc40/vim-test-ruby'
 Plug 'ervandew/supertab'
+Plug 'fatih/vim-go'
+Plug 'godlygeek/tabular'
 Plug 'kien/ctrlp.vim'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
@@ -25,8 +27,6 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'fatih/vim-go'
-Plug 'godlygeek/tabular'
 call plug#end()
 
 " ---------------------------------------
@@ -66,6 +66,8 @@ set foldmethod=indent
 set foldnestmax=2
 set nofoldenable
 set foldlevel=1
+" set spell
+set spelllang=en_us
 
 let loaded_matchit=1
 let mapleader = "\<Space>"
@@ -73,7 +75,7 @@ let mapleader = "\<Space>"
 " ---------------------------------------
 " --- Mappings --------------------------
 " ---------------------------------------
-map <leader>= mzgg=G`z
+
 map <leader><leader> :wa<CR>
 map <leader>dc :tabe ~/Dropbox/vim_notes/coding.md<CR>
 map <leader>dv :tabe ~/Dropbox/vim_notes/vim.md<CR>
@@ -106,8 +108,16 @@ if bufwinnr(1)
   map ) 5<C-W>>
 end
 
-xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
-xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>/<C-R>=@/<CR><CR>
+function! s:reIndent()
+  let winview = winsaveview()
+  execute "keepjumps normal! gg=G"
+  call winrestview(winview)
+endfunction
+nnoremap <leader>= :call <SID>reIndent()<CR>
+
+
+" map <leader>= mzgg=G`z
+
 
 function! s:VSetSearch(cmdtype)
   let temp = @s
@@ -115,14 +125,11 @@ function! s:VSetSearch(cmdtype)
   let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
   let @s = temp
 endfunction
+xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>/<C-R>=@/<CR><CR>
 
 au Filetype ruby nmap <leader>r :RunCurrentLineInTest<CR><CR>
 au Filetype ruby nmap <leader>rr :RunTestFile<CR><CR>
-
-" nnoremap <Left>  :echoe "Use h"<CR>
-" nnoremap <Right> :echoe "Use l"<CR>
-" nnoremap <Up>    :echoe "Use k"<CR>
-" nnoremap <Down>  :echoe "Use j"<CR>
 
 "!!!!! Experimentals -------------------------
 " list lines with word under the cursor
@@ -137,7 +144,7 @@ hi User2 ctermbg=Red ctermfg=White
 hi StatusLine   ctermbg=214      ctermfg=Black
 hi StatusLineNC ctermbg=DarkGray ctermfg=Black
 
-autocmd insertEnter * hi StatusLine ctermbg=21  ctermfg=White
+autocmd InsertEnter * hi StatusLine ctermbg=21  ctermfg=White
 autocmd InsertLeave * hi StatusLine ctermbg=214 ctermfg=Black
 
 set statusline=
@@ -160,11 +167,11 @@ autocmd FileType qf setlocal wrap linebreak
 
 command! Q q
 command! Noh noh
-command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc   " convert string into a symbol
-command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc    " convert symbol into a string
-command! RubyHash %s/ :\([^ ]*\)\(\s*\)=>/ \1:/gc " convert to Ruby 1.9 syntax
+" command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc   " convert string into a symbol
+" command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc    " convert symbol into a string
+command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc " convert to Ruby 1.9 syntax
 command! FormatJson !python -m json.tool
-command! Tags !ctags -R --exclude=.git --exclude=log --exclude=tmp * `bundle show --paths`/../*
+command! Tags !ctags -R --languages=-javascript,sql,python,sml --exclude=.git,log,tmp * `bundle show --paths`/../*
 command! V tabe $MYVIMRC
 command! Vs so $MYVIMRC | echo 'Vimrc sourced :)'
 
