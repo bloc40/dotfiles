@@ -1,11 +1,9 @@
-if exists(':Tabularize')
-  nmap <leader>a= :Tabularize /=<CR>
-  vmap <leader>a= :Tabularize /=<CR>
-  nmap <leader>a: :Tabularize /:\zs<CR>
-  vmap <leader>a: :Tabularize /:\zs<CR>
-endif
-
-inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+nmap <leader>t= :Tabularize/=<CR>
+vmap <leader>t= :Tabularize/=<CR>
+nmap <leader>t: :Tabularize/:\zs<CR>
+vmap <leader>t: :Tabularize/:\zs<CR>
+nmap <leader>t, :Tabularize/,\zs<CR>
+vmap <leader>t, :Tabularize/,\zs<CR>
 
 function! s:align()
   let p = '^\s*|\s.*\s|\s*$'
@@ -17,3 +15,5 @@ function! s:align()
     call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
   endif
 endfunction
+
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
