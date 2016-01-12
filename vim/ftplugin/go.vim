@@ -1,4 +1,11 @@
+setlocal softtabstop=2
+setlocal listchars=tab:\ \ ,trail:·,nbsp:·
+
+compiler go
+
+" ---------------------------------------
 " https://github.com/fatih/vim-go
+" ---------------------------------------
 
 au Filetype go nmap <leader>r <Plug>(go-run)
 au Filetype go nmap <leader>b <Plug>(go-build)
