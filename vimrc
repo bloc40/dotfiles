@@ -63,9 +63,10 @@ hi colorcolumn ctermbg=0
 set colorcolumn=+1
 
 set foldmethod=indent
-set foldnestmax=2
+set foldnestmax=10
 set nofoldenable
 set foldlevel=1
+
 " set spell
 set spelllang=en_us
 
