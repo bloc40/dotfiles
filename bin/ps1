@@ -40,7 +40,7 @@ __git_branch() {
 }
 
 __command_state() {
-  echo "\$(if [[ \$? == 0 ]]; then echo \"\[\e[$GREEN\]✔\"; else echo \"\[\e[$RED\]✘\"; fi)$CLEAR"
+  echo "\$(if [[ \$? == 0 ]]; then echo \"\[\e[$GREEN\]✔ \"; else echo \"\[\e[$RED\]✘ \"; fi)$CLEAR"
 }
 
 __show_jobs() {
@@ -71,4 +71,4 @@ __print_pre_prompt() {
 }
 
 PROMPT_COMMAND=__print_pre_prompt
-export PS1="$(__command_state) $BLUE_BG\w$CLEAR$YELLOW\$(__show_jobs)$MAGENTA\$(__tmux_sessions) \[\e[\$(__git_branch_color)\]\$(__git_branch)$CLEAR"
+export PS1="$(__command_state)$BLUE_BG\w$CLEAR$YELLOW\$(__show_jobs)$MAGENTA\$(__tmux_sessions) \[\e[\$(__git_branch_color)\]\$(__git_branch)$CLEAR"

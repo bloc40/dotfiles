@@ -1,6 +1,0 @@
-#!/bin/sh
-
-update_neovim() {
-  echo '!!!!  Reinstalling Neovim...'
-  command brew update && brew reinstall --HEAD neovim
-}
