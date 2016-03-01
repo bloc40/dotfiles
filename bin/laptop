@@ -1,0 +1,72 @@
+#!/bin/sh
+
+install_rvm() {
+  curl -sSL https://get.rvm.io | bash -s stable
+}
+
+install_homebrew() {
+  # ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
+}
+
+install_homebrew_package() {
+  if brew_is_installed "$1"; then
+    if brew_is_upgradable "$1"; then
+      brew upgrade "$@"
+    fi
+  else
+    brew install "$@"
+  fi
+}
+
+brew_is_installed() {
+  local name
+  name="$(brew_expand_alias "$1")"
+
+  brew list -1 | grep -Fqx "$name"
+}
+
+brew_is_upgradable() {
+  local name
+  name="$(brew_expand_alias "$1")"
+
+  ! brew outdated --quiet "$name" >/dev/null
+}
+
+install_nvm() {
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.1/install.sh | bash
+}
+
+install_node() {
+  nvm install node && nvm alias default node
+}
+
+pretty_echo() {
+  local fmt="$1"; shift
+  printf "\n>>> $fmt...\n" "$@"
+}
+
+# pretty_echo 'Installing RVM'
+# install_rvm
+
+# pretty_echo 'Installing Homebrew'
+# install_homebrew
+
+# pretty_echo 'Install Homebrew Packages'
+# brew_install_or_upgrade 'postgres'
+# brew_install_or_upgrade 'the_silver_searcher'
+# brew_install_or_upgrade 'vim'
+# brew_install_or_upgrade 'ctags'
+# brew_install_or_upgrade 'tmux'
+# brew_install_or_upgrade 'imagemagick'
+# brew_install_or_upgrade 'git'
+# brew_install_or_upgrade 'ack'
+
+# pretty_echo 'Install React Native Packages'
+# install_nvm
+# install_node
+# brew_install_or_upgrade 'watchman'
+# brew_install_or_upgrade 'flow'
+
+# pretty_echo 'Install Heroku Toolbelt'
+# brew_install_or_upgrade 'heroku-toolbelt'
