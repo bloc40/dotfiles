@@ -42,7 +42,7 @@ set complete+=k,t
 set dictionary=/usr/share/dict/words
 set diffopt+=vertical
 set hidden
-set history=100
+set history=1000
 set nobackup
 set noswapfile
 set nowrap
@@ -79,9 +79,6 @@ let mapleader = "\<Space>"
 
 map <leader><leader> :wa<CR>
 map <leader>d :Vex ~/Dropbox/vim_notes<CR>
-" map <leader>dc :tabe ~/Dropbox/vim_notes/coding.md<CR>
-" map <leader>dv :tabe ~/Dropbox/vim_notes/vim.md<CR>
-" map <leader>dy :tabe ~/Dropbox/vim_notes/yuzu.md<CR>
 map <Leader>w mzgqap`z:w<CR>
 map <silent><leader>z :ZoomBuffer<CR>
 map <leader>j <C-w>j
@@ -117,7 +114,6 @@ function! s:reIndent()
 endfunction
 nnoremap <leader>= :call <SID>reIndent()<CR>
 
-
 " map <leader>= mzgg=G`z
 
 
@@ -129,9 +125,6 @@ function! s:VSetSearch(cmdtype)
 endfunction
 xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>/<C-R>=@/<CR><CR>
-
-au Filetype ruby nmap <leader>r :RunCurrentLineInTest<CR><CR>
-au Filetype ruby nmap <leader>rr :RunTestFile<CR><CR>
 
 "!!!!! Experimentals -------------------------
 " list lines with word under the cursor
