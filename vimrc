@@ -52,6 +52,7 @@ set scrolloff=1
 set shortmess=at
 set splitbelow
 set title
+" set visualbell
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
 
 set tabstop=2
