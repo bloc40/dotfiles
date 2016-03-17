@@ -10,9 +10,9 @@ endif
 call plug#begin('~/.vim/plugged')
 " Plug 'SirVer/ultisnips'
 Plug 'bloc40/vim-replace'
-Plug 'bloc40/vim-spin'
+Plug 'bloc40/vim-spin', { 'for': 'ruby' }
 Plug 'ervandew/supertab'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'godlygeek/tabular'
 Plug 'kien/ctrlp.vim'
 Plug 'rking/ag.vim'
@@ -30,7 +30,7 @@ Plug 'tpope/vim-unimpaired'
 call plug#end()
 
 " ---------------------------------------------------------------------------
-" Setting
+" Settings
 " ---------------------------------------------------------------------------
 set background=dark
 let g:solarized_termtrans=1
@@ -122,8 +122,8 @@ function! s:ReIndent()
 endfunction
 nnoremap <leader>= :call <SID>ReIndent()<CR>
 
-au Filetype ruby nmap <leader>r :RunCurrentLineInTest<CR><CR>
-au Filetype ruby nmap <leader>rr :RunTestFile<CR><CR>
+" au Filetype ruby nmap <leader>r :RunCurrentLineInTest<CR><CR>
+" au Filetype ruby nmap <leader>rr :RunTestFile<CR><CR>
 
 
 "!!!!! Experimentals -------------------------
