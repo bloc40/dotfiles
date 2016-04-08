@@ -8,7 +8,7 @@ au Filetype go nmap <leader>c <Plug>(go-coverage)
 au Filetype go nmap <leader>gb <Plug>(go-doc-browser)
 au Filetype go nmap <leader>s <Plug>(go-implements)
 
-let g:go_fmt_autosave = 0
+let g:go_fmt_autosave = 1
 let g:go_fmt_command = 'goimports'
 
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
