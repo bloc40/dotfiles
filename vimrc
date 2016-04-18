@@ -27,14 +27,18 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+
+" ColorSchemes
+Plug 'christophermca/meta5'
 call plug#end()
 
 " ---------------------------------------
 " --- Setting ---------------------------
 " ---------------------------------------
 set background=dark
-let g:solarized_termtrans=1
-colorscheme solarized
+" let g:solarized_termtrans=1
+" colorscheme solarized
+colorscheme meta5
 
 set autowrite
 set clipboard=unnamed
