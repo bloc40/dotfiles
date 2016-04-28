@@ -28,7 +28,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
-" Colorschemes
+" colorschemes
 Plug 'christophermca/meta5'
 call plug#end()
 
@@ -36,9 +36,11 @@ call plug#end()
 " Settings
 " ---------------------------------------------------------------------------
 set background=dark
-" let g:solarized_termtrans=1
-" colorscheme solarized
-colorscheme meta5
+let g:solarized_termtrans=1
+colorscheme solarized
+
+let loaded_matchit=1
+let mapleader = "\<Space>"
 
 set autowrite
 set clipboard=unnamed
@@ -74,9 +76,6 @@ set foldlevel=1
 " set spell
 set spelllang=en_us
 
-let loaded_matchit=1
-let mapleader = "\<Space>"
-
 " ---------------------------------------------------------------------------
 " Mappings
 " ---------------------------------------------------------------------------
@@ -107,6 +106,11 @@ map <F1> :NERDTreeFind<CR>
 map <F2> :NERDTreeToggle<CR>
 map <F3> :NERDTree<CR>
 
+" autoclosing
+inoremap (<CR> (<CR>)<Esc>O
+inoremap {<CR> {<CR>}<Esc>O
+inoremap [<CR> [<CR>]<Esc>O
+
 " highlight group of words
 function! s:VSetSearch(cmdtype)
   let temp = @s
@@ -117,17 +121,13 @@ endfunction
 xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>/<C-R>=@/<CR><CR>
 
-" map <leader>= mzgg=G`z
-
+" format text without jumping
 function! s:ReIndent()
   let winview = winsaveview()
   execute "keepjumps normal! gg=G"
   call winrestview(winview)
 endfunction
 nnoremap <leader>= :call <SID>ReIndent()<CR>
-
-" au Filetype ruby nmap <leader>r :RunCurrentLineInTest<CR><CR>
-" au Filetype ruby nmap <leader>rr :RunTestFile<CR><CR>
 
 
 "!!!!! Experimentals -------------------------
