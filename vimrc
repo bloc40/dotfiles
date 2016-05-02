@@ -1,3 +1,6 @@
+set nocompatible " don't maintain compatibility with vi
+
+
 " ---------------------------------------------------------------------------
 " Plugins
 " ---------------------------------------------------------------------------
@@ -8,7 +11,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-" Plug 'SirVer/ultisnips'
+
+Plug 'SirVer/ultisnips'
 Plug 'bloc40/vim-replace'
 Plug 'bloc40/vim-spin', { 'for': 'ruby' }
 Plug 'ervandew/supertab'
@@ -21,6 +25,7 @@ Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
@@ -30,7 +35,9 @@ Plug 'tpope/vim-unimpaired'
 
 " colorschemes
 Plug 'christophermca/meta5'
+Plug 'nanotech/jellybeans.vim'
 call plug#end()
+
 
 " ---------------------------------------------------------------------------
 " Settings
@@ -42,14 +49,23 @@ colorscheme solarized
 let loaded_matchit=1
 let mapleader = "\<Space>"
 
+set autoread
 set autowrite
+set backspace=indent,eol,start
 set clipboard=unnamed
 set complete+=k,t
 set dictionary=/usr/share/dict/words
 set diffopt+=vertical
+set expandtab
 set hidden
 set history=200
+set hlsearch
+set incsearch
+set laststatus=2
+set list listchars=tab:»·,trail:·,nbsp:·  " display extra whitespace
+set mouse=a
 set nobackup
+set noeb vb t_vb=
 set noswapfile
 set nowrap
 set nowritebackup
@@ -57,6 +73,7 @@ set number
 set scrolloff=1
 set shortmess=at
 set splitbelow
+set ttymouse=xterm
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
 
 set tabstop=2
@@ -75,6 +92,7 @@ set foldlevel=1
 
 " set spell
 set spelllang=en_us
+
 
 " ---------------------------------------------------------------------------
 " Mappings
@@ -96,7 +114,6 @@ imap <C-e> <C-o>$
 imap <C-a> <C-o>^
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
 cnoremap w!! w !sudo tee % >/dev/null
-tnoremap <Esc> <C-\><C-n>
 nnoremap <silent><C-l> :<C-u>nohlsearch<CR><C-l>
 map <silent><leader>/ :Commentary<CR>j
 map <leader>e :CtrlPBuffer<CR>
@@ -134,6 +151,7 @@ nnoremap <leader>= :call <SID>ReIndent()<CR>
 " list lines with word under the cursor
 map <F5> [I:let nr = input('Which one: ') <Bar>exe 'normal ' . nr .'[\t'<CR>
 
+
 " ---------------------------------------------------------------------------
 " StatusLine
 " ---------------------------------------------------------------------------
@@ -152,6 +170,7 @@ set statusline+=\ %{fugitive#statusline()}
 set statusline+=\ %2*%{&modified?'\ ●\ ':''}%*
 set statusline+=\ %1*%{ZoomedIn()}%*
 set statusline+=%=%-5.(%y\ %l,%c%V%)\ %P\ " "
+
 
 " ---------------------------------------------------------------------------
 " Commands
