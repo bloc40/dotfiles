@@ -122,6 +122,7 @@ nnoremap <leader>a :Ag! <C-r><C-w>
 map <F1> :NERDTreeFind<CR>
 map <F2> :NERDTreeToggle<CR>
 map <F3> :NERDTree<CR>
+map 0 ^
 
 " autoclosing
 inoremap (<CR> (<CR>)<Esc>O
