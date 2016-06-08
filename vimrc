@@ -1,6 +1,3 @@
-set nocompatible " don't maintain compatibility with vi
-
-
 " ---------------------------------------------------------------------------
 " Plugins
 " ---------------------------------------------------------------------------
@@ -12,7 +9,9 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'SirVer/ultisnips'
+if !has('nvim')
+  Plug 'SirVer/ultisnips'
+endif
 Plug 'bloc40/vim-replace'
 Plug 'bloc40/vim-spin', { 'for': 'ruby' }
 Plug 'ervandew/supertab'
@@ -42,30 +41,39 @@ call plug#end()
 " ---------------------------------------------------------------------------
 " Settings
 " ---------------------------------------------------------------------------
+let loaded_matchit=1
+let mapleader = "\<Space>"
+
+if !has('nvim')
+  set nocompatible
+  filetype off
+  filetype plugin indent on
+
+  set autoread
+  set backspace=indent,eol,start
+  set encoding=utf-8
+  set expandtab
+  set hlsearch
+  set incsearch
+  set laststatus=2
+  set mouse=a
+  set noeb vb t_vb=
+  set ttymouse=xterm2
+endif
+
 set background=dark
 let g:solarized_termtrans=1
 colorscheme solarized
 
-let loaded_matchit=1
-let mapleader = "\<Space>"
-
-set autoread
 set autowrite
-set backspace=indent,eol,start
 set clipboard=unnamed
 set complete+=k,t
 set dictionary=/usr/share/dict/words
 set diffopt+=vertical
-set expandtab
 set hidden
 set history=200
-set hlsearch
-set incsearch
-set laststatus=2
 set list listchars=tab:»·,trail:·,nbsp:·  " display extra whitespace
-set mouse=a
 set nobackup
-set noeb vb t_vb=
 set noswapfile
 set nowrap
 set nowritebackup
@@ -73,7 +81,6 @@ set number
 set scrolloff=1
 set shortmess=at
 set splitbelow
-set ttymouse=xterm
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
 
 set tabstop=2
@@ -123,6 +130,9 @@ map <F1> :NERDTreeFind<CR>
 map <F2> :NERDTreeToggle<CR>
 map <F3> :NERDTree<CR>
 map 0 ^
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+endif
 
 " autoclosing
 inoremap (<CR> (<CR>)<Esc>O
