@@ -1,40 +1,41 @@
 #!/bin/sh
 
-_session_name() {
-  echo `basename $PWD`
-}
-
-_not_in_tmux() {
-  [ -z "$TMUX" ]
-}
-
-_session_exists() {
-  tmux list-sessions | sed -E 's/:.*$//' | grep -q ^`_session_name`$
-}
-
-_create_detached_session() {
-  (TMUX='' tmux new-session -Ad -s `_session_name`)
-}
-
-_create_and_attach() {
-  tmux new-session -As `_session_name`
-}
-
-_switch_to_session() {
-  tmux switch-client -t `_session_name`
-}
-
-_create_if_needed_and_attach() {
-  if _not_in_tmux; then
-    _create_and_attach
-  else
-    if ! _session_exists; then
-      _create_detached_session
-    fi
-    _switch_to_session
-  fi
-}
-
 tat() {
-  _create_if_needed_and_attach
+  name=$1
+  dir="$HOME/Code/$name"
+
+  if [ ! -d "$dir" ]; then
+    echo "Directory does NOT exist"
+    return
+  fi
+
+  tmux has-session -t $name
+
+  if [ $? != 0 ]; then
+    tmux new-session -s $name -n Vim -d
+    tmux send-keys -t $name "cd $dir" C-m
+    tmux send-keys -t $name 'vim' C-m
+    # tmux split-window -v -t $name
+    # tmux select-layout -t $name main-horizontal
+    tmux send-keys -t $name:1.2 "cd $dir" C-m
+
+    # => Foreman
+    tmux new-window -n Server -t $name
+    tmux send-keys -t $name:2 "cd $dir" C-m
+    tmux send-keys -t $name:2 "foreman start" C-m
+
+    # => Rails console
+    tmux new-window -n Console -t $name
+    tmux send-keys -t $name:3 "cd $dir" C-m
+    tmux send-keys -t $name:3 "rails console" C-m
+
+    # => Spin
+    tmux new-window -n Spin -t $name
+    tmux send-keys -t $name:4 "cd $dir" C-m
+    tmux send-keys -t $name:4 "spin serve" C-m
+
+    tmux select-window -t $name:1
+  fi
+
+  tmux attach -t $name
 }
