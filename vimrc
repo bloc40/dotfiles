@@ -72,7 +72,7 @@ set dictionary=/usr/share/dict/words
 set diffopt+=vertical
 set hidden
 set history=200
-set list listchars=tab:»·,trail:·,nbsp:·  " display extra whitespace
+" set list listchars=tab:»·,trail:·,nbsp:·  " display extra whitespace
 set nobackup
 set noswapfile
 set nowrap
