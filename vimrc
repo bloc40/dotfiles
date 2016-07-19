@@ -199,7 +199,7 @@ command! Noh noh
 " command! StrSym %s/\(['"]\)\([^ ]*\)\1/:\2/gc   " convert string into a symbol
 " command! SymStr %s/:\([^ ]*\)\(\s*\)/'\1'/gc    " convert symbol into a string
 command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc " convert to Ruby 1.9 syntax
-command! FormatJson !python -m json.tool
+command! JsonPP %!python -m json.tool
 command! Tags !ctags -R --languages=-javascript,sql,python,sml --exclude=.git,log,tmp * `bundle show --paths`/../*
 command! V tabe $MYVIMRC
 command! Vs so $MYVIMRC | echo 'Vimrc sourced :)'
