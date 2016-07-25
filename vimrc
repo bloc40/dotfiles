@@ -33,7 +33,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
 " colorschemes
-Plug 'christophermca/meta5'
 Plug 'nanotech/jellybeans.vim'
 call plug#end()
 
