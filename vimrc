@@ -120,7 +120,7 @@ imap <C-e> <C-o>$
 imap <C-a> <C-o>^
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
 cnoremap w!! w !sudo tee % >/dev/null
-nnoremap <silent><C-l> :<C-u>nohlsearch<CR><C-l>
+" nnoremap <silent><C-l> :<C-u>nohlsearch<CR><C-l>
 map <silent><leader>/ :Commentary<CR>j
 map <leader>e :CtrlPBuffer<CR>
 map <leader>f :Ag!<space>
