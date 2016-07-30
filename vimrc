@@ -134,9 +134,9 @@ if has('nvim')
 endif
 
 " autoclosing
-inoremap (<CR> (<CR>)<Esc>O
-inoremap {<CR> {<CR>}<Esc>O
-inoremap [<CR> [<CR>]<Esc>O
+" inoremap (<CR> (<CR>)<Esc>O
+" inoremap {<CR> {<CR>}<Esc>O
+" inoremap [<CR> [<CR>]<Esc>O
 
 " highlight group of words
 function! s:VSetSearch(cmdtype)
