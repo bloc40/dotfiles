@@ -1,5 +1,0 @@
-#!/bin/sh
-
-most() {
-  history | awk '{print $2}' | sort | uniq -c | sort -rn | head
-}
