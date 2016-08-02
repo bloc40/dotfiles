@@ -133,11 +133,6 @@ if has('nvim')
   tnoremap <Esc> <C-\><C-n>
 endif
 
-" autoclosing
-" inoremap (<CR> (<CR>)<Esc>O
-" inoremap {<CR> {<CR>}<Esc>O
-" inoremap [<CR> [<CR>]<Esc>O
-
 " highlight group of words
 function! s:VSetSearch(cmdtype)
   let temp = @s
@@ -192,6 +187,12 @@ autocmd FocusLost * silent! wa
 autocmd FileType ruby,eruby,yaml,haml setlocal iskeyword+=?
 autocmd FileType css,scss,sass setlocal iskeyword+=-
 autocmd FileType qf setlocal wrap linebreak
+" autoclosing
+autocmd Filetype javascript,html inoremap (<CR> (<CR>)<Esc>O
+autocmd Filetype javascript,html,sh inoremap {<CR> {<CR>}<Esc>O
+autocmd Filetype javascript,html inoremap [<CR> [<CR>]<Esc>O
+autocmd Filetype javascript,html inoremap ({<CR> ({<CR>})<Esc>O
+autocmd Filetype javascript,html inoremap [{<CR> [{<CR>}]<Esc>O
 
 command! Q q
 command! Noh noh
