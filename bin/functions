@@ -1,27 +1,37 @@
 #!/bin/sh
 
-# create folder and cd to it immediately
+# =======================================
+#  create folder and cd to it immediately
+# =======================================
 take() {
   mkdir -pv $1 && cd $1;
 }
 
+# ====================
 # find process by name
+# ====================
 jps() {
   ps ax | ag $@
 }
 
+# =======================
 # kill process(s) by name
+# =======================
 jkill() {
   local process=$@
   ps ax | grep "$process" | grep -v grep | awk '{print $1}' | xargs kill -9
 }
 
+# ==================
 # most used commands
+# ==================
 most() {
   history | awk '{print $2}' | sort | uniq -c | sort -rn | head
 }
 
+# =============================================
 # create a TMUX session with the name passed in
+# =============================================
 tat() {
   name=$1
   dir="$HOME/Code/$name"
@@ -62,9 +72,21 @@ tat() {
   tmux attach -t $name
 }
 
+# =====================================================================
 # Start an HTTP server from a directory, optionally specifying the port
+# =====================================================================
 server() {
   local port="${1:-8000}";
-  sleep 1 && open "http://localhost:${port}/" &
+  # sleep 1 && open "http://localhost:${port}/" &
   python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port";
 }
+
+# spinner() {
+#   i=1
+#   sp="/-\|"
+#   echo -n ' '
+#   while true
+#   do
+#     printf "\b${sp:i++%${#sp}:1}"
+#   done
+# }
