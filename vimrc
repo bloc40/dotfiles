@@ -112,7 +112,7 @@ map <leader>l <C-w>l
 map <leader><leader> :wa<CR>
 map <leader>d :Vex ~/Dropbox/vim_notes/<CR>
 map <leader>w mzgqap`z:w<CR>
-map <silent><leader>z :ZoomBuffer<CR>
+" map <silent><leader>z :ZoomBuffer<CR>
 cmap <C-a> <C-b>
 imap <C-e> <C-o>$
 imap <C-a> <C-o>^
@@ -173,7 +173,7 @@ set statusline=
 set statusline+=\ %*%<%f
 set statusline+=\ %{fugitive#statusline()}
 set statusline+=\ %2*%{&modified?'\ ●\ ':''}%*
-set statusline+=\ %1*%{ZoomedIn()}%*
+" set statusline+=\ %1*%{ZoomedIn()}%*
 set statusline+=%=%-5.(%y\ %l,%c%V%)\ %P\ " "
 
 " ===========================================================================
@@ -187,11 +187,11 @@ autocmd FileType ruby,eruby,yaml,haml setlocal iskeyword+=?
 autocmd FileType css,scss,sass setlocal iskeyword+=-
 autocmd FileType qf setlocal wrap linebreak
 " autoclosing
-autocmd Filetype javascript,html inoremap (<CR> (<CR>)<Esc>O
-autocmd Filetype javascript,html,sh inoremap {<CR> {<CR>}<Esc>O
-autocmd Filetype javascript,html inoremap [<CR> [<CR>]<Esc>O
-autocmd Filetype javascript,html inoremap ({<CR> ({<CR>})<Esc>O
-autocmd Filetype javascript,html inoremap [{<CR> [{<CR>}]<Esc>O
+autocmd Filetype javascript,json,html inoremap (<CR> (<CR>)<Esc>O
+autocmd Filetype javascript,json,html,sh inoremap {<CR> {<CR>}<Esc>O
+autocmd Filetype javascript,json,html inoremap [<CR> [<CR>]<Esc>O
+autocmd Filetype javascript,json,html inoremap ({<CR> ({<CR>})<Esc>O
+autocmd Filetype javascript,json,html inoremap [{<CR> [{<CR>}]<Esc>O
 
 command! Q q
 command! Noh noh
