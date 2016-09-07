@@ -67,8 +67,12 @@ _ruby_version() {
   fi
 }
 
+_node_version() {
+  echo "node-`node -v`"
+}
+
 print_pre_prompt() {
-  printf "\e[1;30m%$(($COLUMNS))s" $(_ruby_version)
+  printf "\e[1;30m%$(($COLUMNS))s" $(_ruby_version)/$(_node_version)
 }
 
 PROMPT_COMMAND=print_pre_prompt
