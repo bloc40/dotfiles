@@ -31,7 +31,7 @@ alias rc='bin/rails c'
 alias rs='bin/rails s'
 alias rdb='bin/rails db'
 alias fs='foreman start'
-alias rr='be rake routes'
+alias rr='be rails routes'
 
 # bundler
 alias bo='EDITOR=vim bundle open'
