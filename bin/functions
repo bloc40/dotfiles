@@ -54,7 +54,7 @@ tat() {
     # => Foreman
     tmux new-window -n Server -t $name
     tmux send-keys -t $name:2 "cd $dir" C-m
-    tmux send-keys -t $name:2 "foreman start" C-m
+    tmux send-keys -t $name:2 "server start" C-m
 
     # => Rails console
     tmux new-window -n Console -t $name
@@ -89,4 +89,14 @@ server() {
 #   do
 #     printf "\b${sp:i++%${#sp}:1}"
 #   done
+# }
+
+# show title of the open application/folder
+# _set_title() {
+#   echo -ne "\033]0;( `basename $PWD` )\007"
+# }
+
+# function cd() {
+#   builtin cd $@
+#   _set_title
 # }
