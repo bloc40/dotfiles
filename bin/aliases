@@ -15,6 +15,7 @@ alias g='git'
 alias noh='set +o history'
 alias yesh='set -o history'
 alias jsonpp='python -m json.tool'
+alias ns='npm start'
 
 # rails
 alias rake='time rake'
