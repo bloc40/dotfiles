@@ -44,6 +44,7 @@ let mapleader = "\<Space>"
 
 if !has('nvim')
   set nocompatible
+  " syntax enable
   filetype off
   filetype plugin indent on
 
@@ -59,6 +60,8 @@ if !has('nvim')
   set ttymouse=xterm2
 endif
 
+" set path+=**
+" set wildmenu
 set background=dark
 let g:solarized_termtrans=1
 colorscheme solarized
@@ -66,7 +69,7 @@ colorscheme solarized
 set autowrite
 set clipboard=unnamed
 set complete+=k,t
-set dictionary=/usr/share/dict/words
+" set dictionary=/usr/share/dict/words
 set diffopt+=vertical
 set hidden
 set history=200
@@ -153,6 +156,7 @@ nnoremap <leader>= :call <SID>ReIndent()<CR>
 "!!!!! Experimentals -------------------------
 " list lines with word under the cursor
 map <F5> [I:let nr = input('Which one: ') <Bar>exe 'normal ' . nr .'[\t'<CR>
+" set makeprg=bundle\ exec\ rspec\ %\ -f\ QuickfixFormatter
 
 " Instead of using man for word lookups, use the OSX dictionary
 " nnoremap K :!open dict:///<cword><cr>
