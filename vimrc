@@ -13,7 +13,7 @@ if !has('nvim')
   Plug 'SirVer/ultisnips'
 endif
 Plug 'bloc40/vim-replace'
-Plug 'bloc40/vim-spin', { 'for': 'ruby' }
+" Plug 'bloc40/vim-spin', { 'for': 'ruby' }
 Plug 'ervandew/supertab'
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'godlygeek/tabular'
@@ -24,13 +24,14 @@ Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
+" Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'skywind3000/asyncrun.vim'
 
 " colorschemes
 Plug 'nanotech/jellybeans.vim'
@@ -60,8 +61,8 @@ if !has('nvim')
   set ttymouse=xterm2
 endif
 
-" set path+=**
-" set wildmenu
+set path+=**
+set wildmenu
 set background=dark
 let g:solarized_termtrans=1
 colorscheme solarized
@@ -89,7 +90,7 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 
-set textwidth=80
+set textwidth=100
 set colorcolumn=+1
 hi colorcolumn ctermbg=0
 
@@ -114,7 +115,7 @@ map <leader>h <C-w>h
 map <leader>l <C-w>l
 map <leader><leader> :wa<CR>
 map <leader>d :Vex ~/Dropbox/vim_notes/<CR>
-map <leader>w mzgqap`z:w<CR>
+map <leader>ww mzgqap`z:w<CR>
 " map <silent><leader>z :ZoomBuffer<CR>
 cmap <C-a> <C-b>
 imap <C-e> <C-o>$
@@ -150,7 +151,8 @@ function! s:ReIndent()
   execute "keepjumps normal! gg=G"
   call winrestview(winview)
 endfunction
-nnoremap <leader>= :call <SID>ReIndent()<CR>
+
+nnoremap <leader>> :call <SID>ReIndent()<CR>
 
 
 "!!!!! Experimentals -------------------------
@@ -161,6 +163,8 @@ map <F5> [I:let nr = input('Which one: ') <Bar>exe 'normal ' . nr .'[\t'<CR>
 " Instead of using man for word lookups, use the OSX dictionary
 " nnoremap K :!open dict:///<cword><cr>
 
+
+" set cuc cul" " highlight the current column/row
 " ===========================================================================
 " StatusLine
 " ===========================================================================
