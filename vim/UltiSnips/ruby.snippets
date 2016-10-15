@@ -104,9 +104,7 @@ endsnippet
 
 snippet des
 describe '$1' do
-	it '$2' do
-		$0
-	end
+	$0
 end
 endsnippet
 
@@ -118,9 +116,7 @@ endsnippet
 
 snippet con
 context '$1' do
-	it '$2' do
-		$0
-	end
+	$0
 end
 endsnippet
 
@@ -128,6 +124,10 @@ snippet it
 it '$1' do
 	$0
 end
+endsnippet
+
+snippet it{
+it { ${0} }
 endsnippet
 
 snippet bef
@@ -154,10 +154,6 @@ feature '${1}' do
 		${0}
 	end
 end
-endsnippet
-
-snippet it{
-it { ${0} }
 endsnippet
 
 #---------------------------------------------
