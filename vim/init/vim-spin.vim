@@ -1,5 +1,5 @@
-au Filetype ruby nmap <leader>r :RunFocusedTest<CR><CR>
-au Filetype ruby nmap <leader>rr :RunTestFile<CR><CR>
+au Filetype ruby nmap <silent><leader>r :RunFocusedTest<CR>
+au Filetype ruby nmap <silent><leader>rr :RunTestFile<CR>
 
 
 function! s:run_test_file()
