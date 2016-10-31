@@ -4,13 +4,19 @@ endsnippet
 
 snippet cl
 class ${1:ClassName}
-	${0}
+	$0
+end
+endsnippet
+
+snippet C
+class ${1:ControllerName}Controller < ApplicationController
+	$0
 end
 endsnippet
 
 snippet ini
 def initialize(${1:args})
-	${0}
+	$0
 end
 endsnippet
 
@@ -28,12 +34,6 @@ endsnippet
 
 snippet defi
 def initialize${1:(${2:args})}
-	${0}
-end
-endsnippet
-
-snippet C
-class ${1:ControllerName}Controller < ApplicationController
 	$0
 end
 endsnippet
@@ -67,13 +67,13 @@ endsnippet
 
 snippet if
 if ${1:condition}
-	${0}
+	$0
 end
 endsnippet
 
 snippet ife
 if ${1:condition}
-	${0}
+	$0
 else
 
 end
@@ -81,13 +81,13 @@ endsnippet
 
 snippet unless
 unless ${1:condition}
-	${0}
+	$0
 else
 endsnippet
 
 snippet while
 while ${1:condition}
-	${0}
+	$0
 end
 endsnippet
 
@@ -127,7 +127,7 @@ end
 endsnippet
 
 snippet it{
-it { ${0} }
+it { $0 }
 endsnippet
 
 snippet bef
@@ -151,7 +151,7 @@ endsnippet
 snippet feat
 feature '${1}' do
 	scenario '${2}' do
-		${0}
+		$0
 	end
 end
 endsnippet
