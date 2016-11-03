@@ -4,9 +4,35 @@ function${1: ${2:functionName}}(${3}) {
 }
 endsnippet
 
-#############
-### React ###
-#############
+snippet if
+if (${1:statement}) {
+	$0
+}
+endsnippet
+
+snippet ife
+if (${1:statement}) {
+	$0
+} else {
+}
+endsnippet
+
+snippet sett
+setTimeout(function()
+	$0
+,${1:delay})
+endsnippet
+
+snippet seti
+setInterval(function()
+	$0
+,${1:delay})
+endsnippet
+
+
+# ===============================================
+# React snippets
+# ===============================================
 snippet cl
 class ${1:ClassName} extends Component {
 	$0

@@ -179,3 +179,10 @@ endsnippet
 snippet ir
 it { should route(:${1:get}, '${2:url}').to(action: :${3:action}${4}) }
 endsnippet
+
+snippet task
+desc '${1:description}'
+task ${2:task name}: :environment do
+	$0
+end
+endsnippet
