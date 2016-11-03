@@ -1,6 +1,19 @@
-tags
-.DS_Store
+# NeoVim
 vim/shada
-junk*
+
+# Vim
 vim/.netrwhist
+
+# Plug.vim
 vim/autoload/plug.vim.old
+
+# JavaScript
+node_modules/
+npm-debug.log
+
+# Ctags
+tags
+
+# Other stuff
+.DS_Store
+junk*
