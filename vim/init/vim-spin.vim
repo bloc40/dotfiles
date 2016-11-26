@@ -1,5 +1,5 @@
-au Filetype ruby nmap <silent><leader>r :RunFocusedTest<CR>
-au Filetype ruby nmap <silent><leader>rr :RunTestFile<CR>
+au Filetype ruby nmap <silent><leader>r :RunFocusedTest<CR><CR>
+au Filetype ruby nmap <silent><leader>rr :RunTestFile<CR><CR>
 
 
 function! s:run_test_file()
@@ -16,7 +16,7 @@ command! RunFocusedTest call s:run_focused_test()
 function! s:run_test(param)
   if s:is_a_test_file()
     exec ':wa'
-    exec ':AsyncRun rspec ' . a:param
+    exec '!spin push ' . a:param
   else
     call s:print_warning() | return
   endif
@@ -28,7 +28,7 @@ endfunction
 
 function! s:print_warning() abort
   echohl WarningMsg
-  echo '!!! not a test file :(' | return
-  echohl None
+  echo '!!! not a test file :('
+  echohl None | return
 endfunction
 

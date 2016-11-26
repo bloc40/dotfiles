@@ -13,7 +13,6 @@ if !has('nvim')
   Plug 'SirVer/ultisnips'
 endif
 Plug 'bloc40/vim-replace'
-" Plug 'bloc40/vim-spin', { 'for': 'ruby' }
 Plug 'ervandew/supertab'
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'godlygeek/tabular'
@@ -31,7 +30,6 @@ Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'skywind3000/asyncrun.vim'
 
 " colorschemes
 Plug 'nanotech/jellybeans.vim'
