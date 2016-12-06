@@ -1,6 +1,4 @@
-" ===========================================================================
-" Plugins
-" ===========================================================================
+""" Plugins
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -35,9 +33,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'nanotech/jellybeans.vim'
 call plug#end()
 
-" ===========================================================================
-" Settings
-" ===========================================================================
+
+""" Settings
 let loaded_matchit=1
 let mapleader = "\<Space>"
 
@@ -102,9 +99,8 @@ set foldlevel=1
 " set spell
 set spelllang=en_us
 
-" ===========================================================================
-" Mappings
-" ===========================================================================
+
+""" Mappings
 map + <C-W>+
 map - <C-W>-
 map ( 5<C-W><
@@ -165,9 +161,9 @@ map <F5> [I:let nr = input('Which one: ') <Bar>exe 'normal ' . nr .'[\t'<CR>
 
 
 " set cuc cul" " highlight the current column/row
-" ===========================================================================
-" StatusLine
-" ===========================================================================
+
+
+""" StatusLine
 hi User1 ctermbg=90  ctermfg=15
 hi User2 ctermbg=Red ctermfg=White
 
@@ -184,9 +180,8 @@ set statusline+=\ %2*%{&modified?'\ ●\ ':''}%*
 " set statusline+=\ %1*%{ZoomedIn()}%*
 set statusline+=%=%-5.(%y\ %l,%c%V%)\ %P\ " "
 
-" ===========================================================================
-" Commands
-" ===========================================================================
+
+""" Commands
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd BufRead,BufNewFile *.es6 setfiletype javascript
 autocmd BufRead,BufNewFile Gemfile.lock setfiletype ruby
