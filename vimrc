@@ -41,7 +41,9 @@ call plug#end()
 let loaded_matchit=1
 let mapleader = "\<Space>"
 
-if !has('nvim')
+if has('nvim')
+  set inccommand=nosplit
+else
   set nocompatible
   " syntax enable
   filetype off
