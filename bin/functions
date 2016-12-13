@@ -51,10 +51,10 @@ tat() {
     # tmux select-layout -t $name main-horizontal
     tmux send-keys -t $name:1.2 "cd $dir" C-m
 
-    # => Foreman
+    # => Rails server
     tmux new-window -n Server -t $name
     tmux send-keys -t $name:2 "cd $dir" C-m
-    tmux send-keys -t $name:2 "server start" C-m
+    tmux send-keys -t $name:2 "rails server" C-m
 
     # => Rails console
     tmux new-window -n Console -t $name
@@ -62,9 +62,9 @@ tat() {
     tmux send-keys -t $name:3 "rails console" C-m
 
     # => Spin
-    tmux new-window -n Spin -t $name
-    tmux send-keys -t $name:4 "cd $dir" C-m
-    tmux send-keys -t $name:4 "spin serve" C-m
+    # tmux new-window -n Spin -t $name
+    # tmux send-keys -t $name:4 "cd $dir" C-m
+    # tmux send-keys -t $name:4 "spin serve" C-m
 
     tmux select-window -t $name:1
   fi
