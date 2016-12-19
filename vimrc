@@ -205,6 +205,15 @@ command! Tags !ctags -R --languages=-javascript,sql,python,sml --exclude=.git,lo
 command! V tabe $MYVIMRC
 command! Vs so $MYVIMRC | echo 'Vimrc sourced :)'
 
+" Create file in a folder if it doesn't exist
+function! <SID>AutoMakeDirectory()
+  let s:directory = expand('<afile>:p:h')
+  if !isdirectory(s:directory)
+    call mkdir(s:directory, 'p')
+  endif
+endfunction
+autocmd BufWritePre,FileWritePre * :call <SID>AutoMakeDirectory()
+
 
 runtime! init/**.vim
 
