@@ -27,6 +27,7 @@ Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'yuttie/comfortable-motion.vim'
 
 " colorschemes
 Plug 'nanotech/jellybeans.vim'
