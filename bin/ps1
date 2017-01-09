@@ -72,4 +72,10 @@ print_pre_prompt() {
 }
 
 PROMPT_COMMAND=print_pre_prompt
-export PS1="$(command_state) $BLUE_BG\w$CLEAR$YELLOW\$(show_jobs)$MAGENTA\$(tmux_sessions) \[\e[\$(git_branch_color)\]\$(git_branch)$CLEAR"
+PS1="$(command_state) "
+PS1+="$BLUE_BG\w$CLEAR"
+PS1+="$YELLOW\$(show_jobs)"
+PS1+="$MAGENTA\$(tmux_sessions) "
+PS1+="\[\e[\$(git_branch_color)\]\$(git_branch)\n"
+PS1+="$MAGENTA\$$CLEAR "
+export PS1
