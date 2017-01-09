@@ -65,7 +65,9 @@ let g:solarized_termtrans=1
 colorscheme solarized
 
 set autowrite
-set clipboard=unnamed
+" if $TMUX == ''
+  set clipboard=unnamed
+" end
 set complete+=k,t
 " set dictionary=/usr/share/dict/words
 set diffopt+=vertical
@@ -147,8 +149,7 @@ function! s:ReIndent()
   execute "keepjumps normal! gg=G"
   call winrestview(winview)
 endfunction
-
-nnoremap <leader>> :call <SID>ReIndent()<CR>
+nnoremap <leader>= :call <SID>ReIndent()<CR>
 
 
 "!!!!! Experimentals -------------------------
@@ -158,7 +159,6 @@ map <F5> [I:let nr = input('Which one: ') <Bar>exe 'normal ' . nr .'[\t'<CR>
 
 " Instead of using man for word lookups, use the OSX dictionary
 " nnoremap K :!open dict:///<cword><cr>
-
 
 " set cuc cul" " highlight the current column/row
 
