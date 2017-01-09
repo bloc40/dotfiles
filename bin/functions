@@ -33,44 +33,65 @@ most() {
 # create a TMUX session with the name passed in
 # =============================================
 tat() {
-  name=$1
-  dir="$HOME/Code/$name"
+  dir=${PWD##*/}
 
-  if [ ! -d "$dir" ]; then
-    echo "Directory does NOT exist"
-    return
-  fi
+  tmux has-session -t $dir
+  # if [ $? != 0 ]; then
+    ## Vim
+    tmux new-session -s $dir -n Vim -d
+    tmux send-keys -t $dir 'nvim .' C-m
 
-  tmux has-session -t $name
+    # Console
+    tmux new-window -n Console -t $dir
+    tmux send-keys -t $dir:2 'rails c' C-m
 
-  if [ $? != 0 ]; then
-    tmux new-session -s $name -n Vim -d
-    tmux send-keys -t $name "cd $dir" C-m
-    tmux send-keys -t $name 'vim' C-m
-    # tmux split-window -v -t $name
-    # tmux select-layout -t $name main-horizontal
-    tmux send-keys -t $name:1.2 "cd $dir" C-m
+    # Server
+    tmux new-window -n Server -t $dir
+    tmux send-keys -t $dir:3 'rails s' C-m
 
-    # => Rails server
-    tmux new-window -n Server -t $name
-    tmux send-keys -t $name:2 "cd $dir" C-m
-    tmux send-keys -t $name:2 "rails server" C-m
-
-    # => Rails console
-    tmux new-window -n Console -t $name
-    tmux send-keys -t $name:3 "cd $dir" C-m
-    tmux send-keys -t $name:3 "rails console" C-m
-
-    # => Spin
-    # tmux new-window -n Spin -t $name
-    # tmux send-keys -t $name:4 "cd $dir" C-m
-    # tmux send-keys -t $name:4 "spin serve" C-m
-
-    tmux select-window -t $name:1
-  fi
-
-  tmux attach -t $name
+    tmux select-window -t $dir:1
+  # fi
+  tmux attach -t $dir
 }
+# tat() {
+#   name=$1
+#   dir="$HOME/Code/$name"
+#
+#   if [ ! -d "$dir" ]; then
+#     echo "Directory does NOT exist"
+#     return
+#   fi
+#
+#   tmux has-session -t $name
+#
+#   if [ $? != 0 ]; then
+#     tmux new-session -s $name -n Vim -d
+#     tmux send-keys -t $name "cd $dir" C-m
+#     tmux send-keys -t $name 'vim' C-m
+#     # tmux split-window -v -t $name
+#     # tmux select-layout -t $name main-horizontal
+#     tmux send-keys -t $name:1.2 "cd $dir" C-m
+#
+#     # => Rails server
+#     tmux new-window -n Server -t $name
+#     tmux send-keys -t $name:2 "cd $dir" C-m
+#     tmux send-keys -t $name:2 "rails server" C-m
+#
+#     # => Rails console
+#     tmux new-window -n Console -t $name
+#     tmux send-keys -t $name:3 "cd $dir" C-m
+#     tmux send-keys -t $name:3 "rails console" C-m
+#
+#     # => Spin
+#     # tmux new-window -n Spin -t $name
+#     # tmux send-keys -t $name:4 "cd $dir" C-m
+#     # tmux send-keys -t $name:4 "spin serve" C-m
+#
+#     tmux select-window -t $name:1
+#   fi
+#
+#   tmux attach -t $name
+# }
 
 # =====================================================================
 # Start an HTTP server from a directory, optionally specifying the port
