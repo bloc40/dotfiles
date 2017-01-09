@@ -1,3 +1,5 @@
+" Folding for the vimrc file
+" It folds by """
 function! VimrcFolds()
   let thisline = getline(v:lnum)
   if match(thisline, '^"""') >= 0

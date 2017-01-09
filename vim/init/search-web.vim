@@ -1,3 +1,9 @@
+" Search the web from the confort of the Ex command:
+" :SearchWeb <term>
+"
+" The default search engine is DuckDuckGo. To change to a different search engine:
+" :let search_engine='google'
+
 function! s:search_web(...)
   let l:default_engine = 'http://duckduckgo.com'
   let l:engines = {
