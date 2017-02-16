@@ -42,7 +42,7 @@ if has('nvim')
   set inccommand=nosplit
 else
   set nocompatible
-  " syntax enable
+  syntax enable
   filetype off
   filetype plugin indent on
 
@@ -81,13 +81,13 @@ set nowritebackup
 set number
 set scrolloff=1
 set shortmess=at
+set showcmd
+set splitright
 set splitbelow
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
 
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
 set expandtab
+set tabstop=2 softtabstop=2 shiftwidth=2
 
 set textwidth=100
 set colorcolumn=+1
@@ -195,6 +195,12 @@ autocmd Filetype javascript,json,html,sh inoremap {<CR> {<CR>}<Esc>O
 autocmd Filetype javascript,json,html inoremap [<CR> [<CR>]<Esc>O
 autocmd Filetype javascript,json,html inoremap ({<CR> ({<CR>})<Esc>O
 autocmd Filetype javascript,json,html inoremap [{<CR> [{<CR>}]<Esc>O
+
+function! ElixirTestLine()
+  exec ':!mix test %:' . line('.')
+endfunction
+autocmd Filetype elixir nmap <leader>r :call ElixirTestLine()<CR>
+autocmd Filetype elixir nmap <leader>rr :!mix test %<CR>
 
 command! Q q
 command! Noh noh
