@@ -3,9 +3,9 @@
 RED=31m
 GREEN=32m
 CLEAR="\[\e[0m\]"
-YELLOW="\[\e[33m\]"
-MAGENTA="\[\e[35m\]"
-BLUE_BG="\[\e[44m\]"
+# YELLOW="\[\e[33m\]"
+# MAGENTA="\[\e[35m\]"
+# BLUE_BG="\[\e[44m\]"
 
 _git_repo() {
   [[ `git rev-parse --is-inside-work-tree 2>/dev/null` == true ]]
@@ -46,36 +46,38 @@ command_state() {
 show_jobs() {
   if [[ `jobs` != '' ]]; then
     count=`jobs | wc -l | awk '{print $1}'`
-    echo " [👻- $count]"
+    echo "[👻- $count] "
   fi
 }
 
 tmux_sessions() {
   if [[ `tmux ls 2> /dev/null` != '' ]]; then
-    count=`tmux ls | wc -l | awk '{print $1}'`
-    echo " [tmux $count]"
+   count=`tmux ls | wc -l | awk '{print $1}'`
+   echo " [📟  $count]"
   fi
 }
 
-_ruby_version() {
-  if [[ `which rvm` != '' ]]; then
-    echo `~/.rvm/bin/rvm-prompt`
-  elif [[ `which rbenv` != '' ]]; then
-    echo `rbenv version | awk '{print $1}'`
-  else
-    echo `ruby version | awk '{print $2}'`
-  fi
-}
+# _ruby_version() {
+#   if [[ `which rvm` != '' ]]; then
+#     echo `~/.rvm/bin/rvm-prompt`
+#   elif [[ `which rbenv` != '' ]]; then
+#     echo `rbenv version | awk '{print $1}'`
+#   else
+#     echo `ruby version | awk '{print $2}'`
+#   fi
+# }
 
-print_pre_prompt() {
-  printf "\e[1;30m%$(($COLUMNS))s" $(_ruby_version)
-}
+# print_pre_prompt() {
+#   printf "\e[1;30m%$(($COLUMNS))s" $(_ruby_version)
+# }
 
-PROMPT_COMMAND=print_pre_prompt
-PS1="$(command_state) "
-PS1+="$BLUE_BG\w$CLEAR"
-PS1+="$YELLOW\$(show_jobs)"
-PS1+="$MAGENTA\$(tmux_sessions) "
-PS1+="\[\e[\$(git_branch_color)\]\$(git_branch)\n"
-PS1+="$MAGENTA\$$CLEAR "
+# PROMPT_COMMAND=print_pre_prompt
+# PS1="$(command_state) "
+# PS1+="$BLUE_BG\w$CLEAR"
+PS1="\[\e[38;5;227m\]\w$CLEAR"
+PS1+="\[\e[38;5;200m\]\$(tmux_sessions)"
+PS1+="\[\e[\$(git_branch_color)\] \$(git_branch)\n"
+PS1+="\[\e[38;5;166m\]\$(show_jobs)$CLEAR"
+# PS1+="\[\e[38;5;33m\]➜ $CLEAR "
+PS1+="\[\e[38;5;118m\]➜ $CLEAR "
 export PS1
