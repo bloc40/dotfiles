@@ -18,7 +18,7 @@ alias jsonpp='python -m json.tool'
 alias ns='npm start'
 
 # rails
-alias rake='time rake'
+alias rake='time foreman run rake'
 alias migrate='rails db:migrate db:rollback && rails db:migrate'
 alias rdm='bin/rails db:migrate'
 alias rdtp='bin/rails db:test:prepare'
@@ -28,10 +28,11 @@ alias rdms='bin/rails db:migrate db:seed'
 alias rds='bin/rails db:seed'
 alias rpp='rake parallel:prepare'
 alias rpa='rake parallel:all'
-alias rc='bin/rails c'
-alias rs='bin/rails s'
+alias rc='foreman run bin/rails c'
+alias rs='foreman run bin/rails s'
 alias rdb='bin/rails db'
 alias fs='foreman start'
+alias fr='foreman run'
 alias rr='be rails routes'
 
 # bundler

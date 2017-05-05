@@ -1,20 +1,10 @@
 #!/bin/bash
-#
-# moonphase
-# =======
-#
-# By John Krueger
-#
-# This script sends a request to retrieve the current moon phase, and returns an
-# appropriate emoji. Nice for the tmux status bar.
-
-# set -e
 
 moon_icon() {
   case $1 in
-    "New Moon") echo 🌙
-      ;;
     "Dark Moon") echo 🌚
+      ;;
+    "New Moon") echo 🌙
       ;;
     "Waxing Crescent") echo 🌒
       ;;

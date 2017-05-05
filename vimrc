@@ -33,7 +33,6 @@ Plug 'yuttie/comfortable-motion.vim'
 Plug 'nanotech/jellybeans.vim'
 call plug#end()
 
-
 """ Settings
 let loaded_matchit=1
 let mapleader = "\<Space>"
