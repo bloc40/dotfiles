@@ -40,20 +40,20 @@ git_branch() {
 }
 
 command_state() {
-  echo "\$(if [[ \$? == 0 ]]; then echo \"\[\e[$GREEN\]✔\"; else echo \"\[\e[$RED\]✘\"; fi)$CLEAR"
+  echo -n "\$(if [[ \$? == 0 ]]; then echo \"\[\e[$GREEN\]✔ \"; else echo \"\[\e[$RED\]✘ \"; fi)$CLEAR"
 }
 
 show_jobs() {
   if [[ `jobs` != '' ]]; then
     count=`jobs | wc -l | awk '{print $1}'`
-    echo "[👻- $count] "
+    echo "jobs:$count"
   fi
 }
 
 tmux_sessions() {
   if [[ `tmux ls 2> /dev/null` != '' ]]; then
-   count=`tmux ls | wc -l | awk '{print $1}'`
-   echo " [📟  $count]"
+    count=`tmux ls | wc -l | awk '{print $1}'`
+    echo " tmux:$count"
   fi
 }
 
@@ -72,9 +72,9 @@ tmux_sessions() {
 # }
 
 # PROMPT_COMMAND=print_pre_prompt
-# PS1="$(command_state) "
+PS1="$(command_state)"
 # PS1+="$BLUE_BG\w$CLEAR"
-PS1="\[\e[38;5;227m\]\w$CLEAR"
+PS1+="\[\e[38;5;227m\]\w$CLEAR"
 PS1+="\[\e[38;5;200m\]\$(tmux_sessions)"
 PS1+="\[\e[\$(git_branch_color)\] \$(git_branch)\n"
 PS1+="\[\e[38;5;166m\]\$(show_jobs)$CLEAR"
