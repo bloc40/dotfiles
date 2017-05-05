@@ -151,7 +151,6 @@ function! s:ReIndent()
 endfunction
 nnoremap <leader>= :call <SID>ReIndent()<CR>
 
-
 "!!!!! Experimentals -------------------------
 " list lines with word under the cursor
 map <F5> [I:let nr = input('Which one: ') <Bar>exe 'normal ' . nr .'[\t'<CR>
@@ -167,11 +166,11 @@ map <F5> [I:let nr = input('Which one: ') <Bar>exe 'normal ' . nr .'[\t'<CR>
 hi User1 ctermbg=90  ctermfg=15
 hi User2 ctermbg=Red ctermfg=White
 
-hi StatusLine   ctermbg=214      ctermfg=Black
+hi StatusLine   ctermbg=251      ctermfg=Black
 hi StatusLineNC ctermbg=DarkGray ctermfg=Black
 
 autocmd insertEnter * hi StatusLine ctermbg=21  ctermfg=White
-autocmd InsertLeave * hi StatusLine ctermbg=214 ctermfg=Black
+autocmd InsertLeave * hi StatusLine ctermbg=251 ctermfg=Black
 
 set statusline=
 set statusline+=\ %*%<%f
