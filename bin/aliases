@@ -45,3 +45,5 @@ alias ss='spin serve -t'
 
 # ctags
 alias tags='ctags -R --languagues=-javascript,sql,python,sml --exclude=.git,log,tmp * `bundle show --paths`/../*'
+
+alias tmux='tmux -f ~/.tmux/tmux.conf'

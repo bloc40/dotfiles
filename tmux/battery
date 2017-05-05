@@ -1,0 +1,27 @@
+#!/bin/sh
+
+HEART_FULL=❤
+HEART_EMPTY=♡
+
+if command -v pmset &> /dev/null; then
+  percentage=$(pmset -g batt | egrep -o '([0-9]+)\%' | egrep -o '[0-9]+')
+  charging=$(pmset -g batt | egrep -o 'AC Power')
+  discharging=$(pmset -g batt | egrep -o 'Battery Power')
+
+
+
+  # if [ $1 == 'Discharging' ]; then
+  #   echo $discharging
+  # fi
+
+  # if [ $1 == 'Charging' && $percentage == 100 ]; then
+  #   echo 'foo'
+  # else
+    if [[ $1 == 'Charging' && $charging != '' ]]; then
+      echo $percentage%$HEART_EMPTY
+    fi
+    if [[ $1 == 'Discharging' && $discharging != '' ]]; then
+      echo $percentage%$HEART_EMPTY
+    fi
+  # fi
+fi
