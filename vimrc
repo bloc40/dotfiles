@@ -178,6 +178,7 @@ set statusline+=\ %2*%{&modified?'\ ●\ ':''}%*
 " set statusline+=\ %1*%{ZoomedIn()}%*
 set statusline+=%=%-5.(%y\ %l,%c%V%)\ %P\ " "
 
+hi Search cterm=NONE ctermfg=black ctermbg=70
 
 """ Commands
 autocmd BufWritePre * :%s/\s\+$//e
