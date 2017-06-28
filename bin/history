@@ -1,0 +1,5 @@
+export HISTSIZE=10000
+export HISTFILESIZE=1000000
+export HISTTIMEFORMAT='%b %d %I:%R '
+export HISTCONTROL='ignoreboth'        # ignoredups:ignorespace
+# export HISTIGNORE='history:h:pwd:exit:cd:cd ..:cd ../:cd -:source:so:ls:la'
