@@ -81,7 +81,7 @@ set nowritebackup
 set number
 set scrolloff=1
 set shortmess=at
-set showcmd
+" set showcmd
 set splitright
 set splitbelow
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
@@ -168,14 +168,24 @@ map <F5> [I:let nr = input('Which one: ') <Bar>exe 'normal ' . nr .'[\t'<CR>
 
 
 """ StatusLine
-hi User1 ctermbg=90  ctermfg=15
+hi User1 ctermbg=178 ctermfg=Black
 hi User2 ctermbg=Red ctermfg=White
+hi User3 ctermbg=8   ctermfg=7
+hi User4 ctermbg=172 ctermfg=Black
+hi User5 ctermbg=166 ctermfg=Black
 
-hi StatusLine   ctermbg=251      ctermfg=Black
-hi StatusLineNC ctermbg=DarkGray ctermfg=Black
+hi StatusLine   ctermbg=251 ctermfg=Black
+hi StatusLineNC ctermbg=8 ctermfg=Black
 
-autocmd insertEnter * hi StatusLine ctermbg=21  ctermfg=White
+autocmd insertEnter * hi StatusLine ctermbg=21 ctermfg=White
 autocmd InsertLeave * hi StatusLine ctermbg=251 ctermfg=Black
+
+" set statusline=
+" set statusline+=%4*\ %<%f
+" set statusline+=%1*\ %{fugitive#statusline()}
+" set statusline+=\ %2*%{&modified?'\ ●\ ':''}%*
+" set statusline+=%=%-5.(%1*%y\ %4*\ %l,%c%V%)\ %*
+" set statusline+=%5*\ %P\ %*
 
 set statusline=
 set statusline+=\ %*%<%f
