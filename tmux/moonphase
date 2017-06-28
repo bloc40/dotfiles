@@ -10,6 +10,8 @@ moon_icon() {
       ;;
     "First Quarter") echo 🌓
       ;;
+    "1st Quarter") echo 🌓
+      ;;
     "Waxing Gibbous") echo 🌔
       ;;
     "Full Moon") echo 🌕
