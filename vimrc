@@ -28,6 +28,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'yuttie/comfortable-motion.vim'
+Plug 'hwartig/vim-seeing-is-believing', { 'for': 'ruby' }
 
 " colorschemes
 Plug 'nanotech/jellybeans.vim'
@@ -149,6 +150,11 @@ function! s:ReIndent()
   call winrestview(winview)
 endfunction
 nnoremap <leader>= :call <SID>ReIndent()<CR>
+
+" Annotate every line
+nmap <leader>b :%!seeing_is_believing --timeout 12 --line-length 500 --number-of-captures 300 --alignment-strategy chunk<CR><space><space>
+" Remove annotations
+nmap <leader>c :%.!seeing_is_believing --clean<CR><space><space>
 
 "!!!!! Experimentals -------------------------
 " list lines with word under the cursor
