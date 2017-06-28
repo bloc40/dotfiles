@@ -68,7 +68,6 @@ set autowrite
 " if $TMUX == ''
   set clipboard=unnamed
 " end
-set complete+=k,t
 " set dictionary=/usr/share/dict/words
 set diffopt+=vertical
 set hidden
@@ -85,6 +84,7 @@ set shortmess=at
 set splitright
 set splitbelow
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
+set gdefault
 
 set expandtab
 set tabstop=2 softtabstop=2 shiftwidth=2
@@ -99,6 +99,7 @@ set nofoldenable
 set foldlevel=1
 
 " set spell
+set complete+=k,t
 set spelllang=en_us
 
 
@@ -132,6 +133,9 @@ map 0 ^
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
 endif
+
+" Make dot work over visual line selections
+xnoremap . :norm.<CR>
 
 " highlight group of words
 function! s:VSetSearch(cmdtype)
@@ -198,7 +202,7 @@ hi Search cterm=NONE ctermfg=black ctermbg=70
 
 """ Commands
 autocmd BufWritePre * :%s/\s\+$//e
-autocmd BufRead,BufNewFile *.es6 setfiletype javascript
+autocmd BufRead,BufNewFile *.es7 setfiletype javascript
 autocmd BufRead,BufNewFile Gemfile.lock setfiletype ruby
 autocmd FocusLost * silent! wa
 autocmd FileType ruby,eruby,yaml,haml setlocal iskeyword+=?
@@ -216,6 +220,8 @@ function! ElixirTestLine()
 endfunction
 autocmd Filetype elixir nmap <leader>r :call ElixirTestLine()<CR>
 autocmd Filetype elixir nmap <leader>rr :!mix test %<CR>
+
+autocmd VimResized * wincmd = " Automatically equalize splits when Vim is resized
 
 command! Q q
 command! Noh noh
