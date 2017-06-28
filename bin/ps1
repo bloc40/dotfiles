@@ -29,18 +29,20 @@ _git_dirty() {
 
 git_branch_color() {
   if _git_repo && _git_dirty; then
-    echo $RED
+    # echo $RED
+    echo 9m
   else
-    echo $GREEN
+    # echo $GREEN
+    echo 2m
   fi
 }
 
 git_branch() {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'
+  git rev-parse --abbrev-ref HEAD 2> /dev/null | sed 's/\(.*\)/ \1 /'
 }
 
 command_state() {
-  echo -n "\$(if [[ \$? == 0 ]]; then echo \"\[\e[$GREEN\]✔ \"; else echo \"\[\e[$RED\]✘ \"; fi)$CLEAR"
+  echo -n "\$(if [[ \$? == 0 ]]; then echo \"\[\e[$GREEN\]☺ \"; else echo \"\[\e[$RED\]✘ \"; fi)$CLEAR"
 }
 
 show_jobs() {
@@ -53,31 +55,41 @@ show_jobs() {
 tmux_sessions() {
   if [[ `tmux ls 2> /dev/null` != '' ]]; then
     count=`tmux ls | wc -l | awk '{print $1}'`
-    echo " tmux:$count"
+    echo " tmux:$count "
   fi
 }
 
-# _ruby_version() {
-#   if [[ `which rvm` != '' ]]; then
-#     echo `~/.rvm/bin/rvm-prompt`
-#   elif [[ `which rbenv` != '' ]]; then
-#     echo `rbenv version | awk '{print $1}'`
-#   else
-#     echo `ruby version | awk '{print $2}'`
-#   fi
-# }
+_ruby_version() {
+  if [[ `which rvm` != '' ]]; then
+    echo `~/.rvm/bin/rvm-prompt`
+  elif [[ `which rbenv` != '' ]]; then
+    echo `rbenv version | awk '{print $1}'`
+  else
+    echo `ruby version | awk '{print $2}'`
+  fi
+}
 
-# print_pre_prompt() {
-#   printf "\e[1;30m%$(($COLUMNS))s" $(_ruby_version)
-# }
+print_pre_prompt() {
+  printf "\e[1;30m%$(($COLUMNS))s" $(_ruby_version)
+}
 
 # PROMPT_COMMAND=print_pre_prompt
 PS1="$(command_state)"
 # PS1+="$BLUE_BG\w$CLEAR"
-PS1+="\[\e[38;5;227m\]\w$CLEAR"
-PS1+="\[\e[38;5;200m\]\$(tmux_sessions)"
-PS1+="\[\e[\$(git_branch_color)\] \$(git_branch)\n"
+PS1+="\[\e[38;5;0m\]\[\e[46m\] \w $CLEAR"
+PS1+="\[\e[38;5;0m\]\[\e[48;5;171m\]\$(tmux_sessions)$CLEAR"
+PS1+="\[\e[38;5;0m\]\[\e[48;5;\$(git_branch_color)\]\$(git_branch)$CLEAR\n"
+# PS1+="\[\e[38;5;118m\]\$$CLEAR "
 PS1+="\[\e[38;5;166m\]\$(show_jobs)$CLEAR"
-# PS1+="\[\e[38;5;33m\]➜ $CLEAR "
 PS1+="\[\e[38;5;118m\]➜ $CLEAR "
+
+# # PROMPT_COMMAND=print_pre_prompt
+# PS1="$(command_state)"
+# # PS1+="$BLUE_BG\w$CLEAR"
+# PS1+="\[\e[38;5;227m\]\w $CLEAR"
+# PS1+="\[\e[38;5;200m\]\$(tmux_sessions)"
+# PS1+="\[\e[\$(git_branch_color)\]\$(git_branch)\n"
+# PS1+="\[\e[38;5;166m\]\$([ \j -gt 0 ] && echo jobs:\j)$CLEAR"
+# # PS1+="\[\e[38;5;118m\]➜ $CLEAR "
+
 export PS1
