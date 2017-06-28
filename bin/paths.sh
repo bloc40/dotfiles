@@ -1,4 +1,4 @@
-PATH=$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:$PATH
+PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:$PATH
 
 export PATH=$PATH:/usr/local/heroku/bin
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.6/bin
