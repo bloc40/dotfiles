@@ -26,12 +26,12 @@ jkill() {
 # most used commands
 # ==================
 most() {
-  history | awk '{print $2}' | sort | uniq -c | sort -rn | head
+  history | awk '{print $5}' | sort | uniq -c | sort -rn | head
 }
 
-# =============================================
-# create a TMUX session with the name passed in
-# =============================================
+# =========================================
+# create a TMUX session for a Rails project
+# =========================================
 tat() {
   dir=${PWD##*/}
 
@@ -43,14 +43,31 @@ tat() {
 
     # Console
     tmux new-window -n Console -t $dir
-    tmux send-keys -t $dir:2 'rails c' C-m
+    tmux send-keys -t $dir:2 'foreman run rails c' C-m
 
     # Server
     tmux new-window -n Server -t $dir
-    tmux send-keys -t $dir:3 'rails s' C-m
+    tmux send-keys -t $dir:3 'foreman start' C-m
 
-    tmux select-window -t $dir:1
+    # Logs
+    tmux new-window -n Logs -t $dir
+    tmux send-keys -t $dir:4 'tail -f log/development.log' C-m
+
+    # tmux select-window -t $dir:1
   # fi
+
+  cd ../map-editor
+  editor=${PWD##*/}
+  tmux has-session -t $editor
+
+  tmux new-session -s $editor -n Vim -d
+  tmux send-keys -t $editor 'nvim .' C-m
+
+  tmux new-window -n Server -t $editor
+  tmux send-keys -t $editor:2 'heroku local web' C-m
+
+  tmux select-window -t $dir:1
+
   tmux attach -t $dir
 }
 # tat() {
@@ -122,6 +139,6 @@ server() {
 #   _set_title
 # }
 
-tmux_colors() {
+colors() {
   for i in {0..255}; do printf "\x1b[38;5;${i}mcolor${i}\x1b[0m\n"; done
 }
