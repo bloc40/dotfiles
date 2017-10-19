@@ -64,7 +64,8 @@ tat() {
   tmux send-keys -t $editor 'nvim .' C-m
 
   tmux new-window -n Server -t $editor
-  tmux send-keys -t $editor:2 'heroku local web' C-m
+  tmux send-keys -t $editor:2 'npm start' C-m
+
 
   tmux select-window -t $dir:1
 
@@ -142,3 +143,20 @@ server() {
 colors() {
   for i in {0..255}; do printf "\x1b[38;5;${i}mcolor${i}\x1b[0m\n"; done
 }
+
+# embedded_stanford() {
+#   cd ~/Code/aloft/map-editor
+#   if [[ `git rev-parse --abbrev-ref HEAD` != 'embedded-stanford' ]]; then
+#     printf "\e[0;31m You need to switch to the embedded-stanford branch\n";
+#   else
+#     cd ../
+#     cp -R map-editor map-editor.copy/
+#     cd map-editor.copy
+
+#     rm -rf .DS_Store .editorconfig .env .git/ .gitignore ISSUE_TEMPLATE.md PULL_REQUEST_TEMPLATE.md app.json node_modules/ package.json README.md
+#     rm -rf public/scripts/
+
+#     mv public/index.html .
+#     mv public/visual.html .
+#   fi
+# }
