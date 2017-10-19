@@ -29,11 +29,9 @@ _git_dirty() {
 
 git_branch_color() {
   if _git_repo && _git_dirty; then
-    # echo $RED
-    echo 9m
+    echo $RED
   else
-    # echo $GREEN
-    echo 2m
+    echo $GREEN
   fi
 }
 
@@ -55,13 +53,13 @@ show_jobs() {
 tmux_sessions() {
   if [[ `tmux ls 2> /dev/null` != '' ]]; then
     count=`tmux ls | wc -l | awk '{print $1}'`
-    echo " tmux:$count "
+    echo " tmux:$count"
   fi
 }
 
 _ruby_version() {
   if [[ `which rvm` != '' ]]; then
-    echo `~/.rvm/bin/rvm-prompt`
+    echo `~/.rvm/bin/rvm-prompt` #| tr 'ruby-' 'Ruby '`
   elif [[ `which rbenv` != '' ]]; then
     echo `rbenv version | awk '{print $1}'`
   else
@@ -69,21 +67,24 @@ _ruby_version() {
   fi
 }
 
+# PS1='$(printf "%*s\r%s" $(( COLUMNS-1 )) "[$(git branch 2>/dev/null | grep '^*' | sed s/..//)] $(date +%H:%M:%S)" "heipei@wavefront:$PWD$ ")'
 print_pre_prompt() {
+  # printf "\e[1;30m%$(($COLUMNS))s" "$(pmset -g batt | egrep -o '([0-9]+)\%') < $(_ruby_version) < Node $(node -v 2> /dev/null)"
   printf "\e[1;30m%$(($COLUMNS))s" $(_ruby_version)
 }
 
-# PROMPT_COMMAND=print_pre_prompt
-PS1="$(command_state)"
+PROMPT_COMMAND=print_pre_prompt
+PS1=""
 # PS1+="$BLUE_BG\w$CLEAR"
-PS1+="\[\e[38;5;0m\]\[\e[46m\] \w $CLEAR"
-PS1+="\[\e[38;5;0m\]\[\e[48;5;171m\]\$(tmux_sessions)$CLEAR"
-PS1+="\[\e[38;5;0m\]\[\e[48;5;\$(git_branch_color)\]\$(git_branch)$CLEAR\n"
-# PS1+="\[\e[38;5;118m\]\$$CLEAR "
+PS1+="$(command_state)"
+# PS1+="\[\e[36m\]\w$CLEAR"
+PS1+="\[\e[38;5;33m\]\w$CLEAR"
+PS1+="\[\e[35m\]\$(tmux_sessions)$CLEAR"
+PS1+="\[\e[\$(git_branch_color)\]\$(git_branch)$CLEAR\n"
 PS1+="\[\e[38;5;166m\]\$(show_jobs)$CLEAR"
 PS1+="\[\e[38;5;118m\]➜ $CLEAR "
 
-# # PROMPT_COMMAND=print_pre_prompt
+# PROMPT_COMMAND=print_pre_prompt
 # PS1="$(command_state)"
 # # PS1+="$BLUE_BG\w$CLEAR"
 # PS1+="\[\e[38;5;227m\]\w $CLEAR"
