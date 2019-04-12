@@ -1,3 +1,4 @@
 --skip-coffee
 --skip-test
 --skip-turbolinks
+--database postgresql

@@ -1,14 +1,14 @@
-" https://github.com/fatih/vim-go
-
 au Filetype go nmap <leader>r <Plug>(go-run)
 au Filetype go nmap <leader>b <Plug>(go-build)
 au Filetype go nmap <leader>t <Plug>(go-test)
 au Filetype go nmap <leader>c <Plug>(go-coverage)
+" au FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
 
 au Filetype go nmap <leader>gb <Plug>(go-doc-browser)
 au Filetype go nmap <leader>s <Plug>(go-implements)
 
 let g:go_fmt_autosave = 1
+let g:go_auto_type_info = 1
 let g:go_fmt_command = 'goimports'
 
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']

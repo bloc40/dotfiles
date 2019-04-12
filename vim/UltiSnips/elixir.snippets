@@ -10,8 +10,60 @@ def ${1:functionName}${2:(${3:arguments})} do
 end
 endsnippet
 
+snippet defdo
+def ${1:functionName}${2:(${3:arguments})}, do: $0
+endsnippet
+
 snippet defp
 defp ${1:privateFunctionName}${2:(${3:arguments})} do
 	${0}
+end
+endsnippet
+
+snippet defs
+defstruct $0
+endsnippet
+
+snippet defw
+def ${1:functionName}${2:(${3:arguments})} when ${4:clause} do
+	${0}
+end
+endsnippet
+
+snippet if
+if ${1:condition} do
+	$0
+end
+endsnippet
+
+snippet ife
+if ${1:condition} do
+	$0
+else
+
+end
+endsnippet
+
+snippet if,
+if ${1:condition}, do: ${2:statement}, else: ${3:statement}
+endsnippet
+
+snippet cond
+cond do
+	$1 -> $2
+	true ->
+end
+endsnippet
+
+snippet case
+case ${1:condition} do
+	$2 -> $3
+	_ ->
+end
+endsnippet
+
+snippet test
+test "${1:title}" do
+	$0
 end
 endsnippet

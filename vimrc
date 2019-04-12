@@ -6,13 +6,11 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-if !has('nvim')
-  Plug 'SirVer/ultisnips'
-endif
+Plug 'SirVer/ultisnips'
 Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] }
 Plug 'bloc40/vim-replace'
 Plug 'ervandew/supertab'
-" Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 Plug 'godlygeek/tabular'
 Plug 'kien/ctrlp.vim'
 Plug 'rking/ag.vim'
@@ -41,10 +39,8 @@ let mapleader = "\<Space>"
 if has('nvim')
   set inccommand=nosplit
 else
-  set nocompatible
   syntax enable
   filetype off
-  filetype plugin indent on
 
   set autoread
   set backspace=indent,eol,start
@@ -56,10 +52,10 @@ else
   set mouse=a
   set noeb vb t_vb=
   set ttymouse=xterm2
+  set wildmenu
 endif
 
-set path+=**
-set wildmenu
+" set path+=**
 set background=dark
 let g:solarized_termtrans=1
 colorscheme solarized
@@ -84,7 +80,7 @@ set shortmess=at
 set splitright
 set splitbelow
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
-set gdefault
+" set gdefault
 
 set expandtab
 set tabstop=2 softtabstop=2 shiftwidth=2
@@ -117,7 +113,7 @@ map <leader>d :Vex ~/Dropbox/vim_notes/<CR>
 map <leader>ww mzgqap`z:w<CR>
 " map <silent><leader>z :ZoomBuffer<CR>
 cmap <C-a> <C-b>
-imap <C-e> <C-o>$
+" imap <C-e> <C-o>$
 imap <C-a> <C-o>^
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
 cnoremap w!! w !sudo tee % >/dev/null
@@ -210,8 +206,8 @@ autocmd FileType css,scss,sass setlocal iskeyword+=-
 autocmd FileType qf setlocal wrap linebreak
 " autoclosing
 autocmd Filetype javascript,json,html inoremap (<CR> (<CR>)<Esc>O
-autocmd Filetype javascript,json,html,sh inoremap {<CR> {<CR>}<Esc>O
-autocmd Filetype javascript,json,html inoremap [<CR> [<CR>]<Esc>O
+autocmd Filetype javascript,json,html,sh,go,elixir,css,scss inoremap {<CR> {<CR>}<Esc>O
+autocmd Filetype javascript,json,html,elixir inoremap [<CR> [<CR>]<Esc>O
 autocmd Filetype javascript,json,html inoremap ({<CR> ({<CR>})<Esc>O
 autocmd Filetype javascript,json,html inoremap [{<CR> [{<CR>}]<Esc>O
 

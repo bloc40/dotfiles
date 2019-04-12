@@ -1,5 +1,8 @@
+# nvim
+export VISUAL=nvim  # use Neovim as "preferred editor"
+alias v='nvim'
+
 # unix
-alias v='vim'
 alias mkdir='mkdir -pv'
 alias c='clear'
 alias h='history'
@@ -41,10 +44,11 @@ alias fs='foreman start'
 alias fr='foreman run'
 alias rr='be rails routes'
 alias tags='ctags -R --languagues=-javascript,sql,python,sml --exclude=.git,log,tmp * `bundle show --paths`/../*'
+alias edit='EDITOR="vim" rails credentials:edit'
 
 # bundler
 alias bo='EDITOR=vim bundle open'
-alias bi='bundle install'
+alias bi='bundle inof'
 alias bu='bundle update'
 alias be='bundle exec'
 

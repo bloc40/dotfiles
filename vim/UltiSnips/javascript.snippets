@@ -1,5 +1,5 @@
 snippet fun
-function${1: ${2:functionName}}(${3}) {
+function ${1: ${2:functionName}}(${3}) {
 	$0
 }
 endsnippet
@@ -18,26 +18,68 @@ if (${1:statement}) {
 endsnippet
 
 snippet sett
-setTimeout(function()
+setTimeout(() => {
 	$0
-,${1:delay})
+}, ${1:delay});
 endsnippet
 
 snippet seti
-setInterval(function()
+setInterval(() => {
 	$0
-,${1:delay})
+}, ${1:delay});
 endsnippet
 
+snippet dqs
+document.querySelector('$0');
+endsnippet
+
+snippet log
+console.log($0)
+endsnippet
+
+snippet warn
+console.warn($0);
+endsnippet
+
+snippet ael
+addEventListener('$0');
+endsnippet
+
+snippet ed
+export default $0;
+endsnippet
+
+snippet t
+<${1:div}>$0</$1>
+endsnippet
+
+snippet div
+<div className='$1'>$0</div>
+endsnippet
+
+snippet switch
+switch($1) {
+	case $2:
+		$3
+		break;
+	default:
+		$4
+}
+endsnippet
+
+snippet img
+<img src='$1'>
+endsnippet
 
 # ===============================================
 # React snippets
 # ===============================================
+
 snippet cl
 class ${1:ClassName} extends Component {
-	$0
 	render() {
 		return (
+			$0
 		);
 	}
 }
@@ -45,10 +87,11 @@ endsnippet
 
 snippet con
 constructor(${1:props}) {
-	super();
+	super(props);
 
 	$0
 }
+
 endsnippet
 
 snippet cwm
@@ -75,12 +118,93 @@ componentWillReceiveProps(${1:props}) {
 }
 endsnippet
 
-snippet t
-<${1:div}>$0</$1>
+snippet ren
+render() {
+	return (
+		$0
+	);
+}
 endsnippet
 
-snippet div
-<div class='$1'>
+snippet imp
+import ${1:React}${2:, { Component }} from ${3:'react'}
+$0
+endsnippet
+
+snippet imf
+import $1 from '$2'
+endsnippet
+
+snippet im{
+import { $1 } from '$2'
+endsnippet
+
+snippet impp
+import PropTypes from 'prop-types'
+endsnippet
+
+snippet ss
+this.setState({
 	$0
-</div>
+})
+endsnippet
+
+snippet ssp
+this.setState((prevState) => ({
+	$1: $2
+}))
+endsnippet
+
+snippet f=>
+${1:functionName} = ($2) => {
+	$0
+}
+endsnippet
+
+snippet r=>
+import React from 'react'
+import PropTypes from 'prop-types'
+
+const $1 = ($2) => {
+	return (
+		$0
+	)
+}
+
+$1.propTypes = {
+}
+
+export default $1;
+endsnippet
+
+snippet rcc
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+class $1 extends Component {
+	render() {
+		return (
+			$0
+		)
+	}
+}
+
+$1.propTypes = {
+}
+
+export default $1
+endsnippet
+
+# ===============================================
+# ReactNative snippets
+# ===============================================
+
+snippet style
+const styles = StyleSheet.create({
+	$0
+})
+endsnippet
+
+snippet st
+style={styles.$0}
 endsnippet
