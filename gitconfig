@@ -1,8 +1,6 @@
 [user]
-	name = Jamal
-  email      = elmilahi@pm.me
-  signingkey = 780A2A17E9AA9413
-  ; signingkey = 7AF4C9DB3676AC3E30E6EA2C780A2A17E9AA9413
+	name       = Jamal
+  email      = github.s5323@passmail.net
 
 [color]
   ui = auto

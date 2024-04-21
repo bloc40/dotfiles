@@ -1,7 +1,6 @@
 " call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 call plug#begin()
 Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] }
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
@@ -159,10 +158,10 @@ hi User3 ctermbg=8   ctermfg=7
 hi User4 ctermbg=172 ctermfg=Black
 hi User5 ctermbg=166 ctermfg=Black
 
-hi StatusLine   ctermbg=251 ctermfg=Black
-hi StatusLineNC ctermbg=8 ctermfg=Black
+hi StatusLine   ctermbg=220 ctermfg=Black
+hi StatusLineNC ctermbg=8   ctermfg=Black
 
-autocmd insertEnter * hi StatusLine ctermbg=21 ctermfg=White
+autocmd insertEnter * hi StatusLine ctermbg=21 ctermfg=Yellow
 autocmd InsertLeave * hi StatusLine ctermbg=251 ctermfg=Black
 
 " set statusline=

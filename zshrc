@@ -108,5 +108,4 @@ for file in ~/Code/dotfiles/bin/*; do
   [[ -r $file ]] && source $file;
 done
 
-# export BUNDLE_GITHUB__COM="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:x-oauth-basic"
 SHELL_SESSION_HISTORY=0
