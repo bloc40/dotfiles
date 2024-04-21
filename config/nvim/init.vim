@@ -1,20 +1,11 @@
-""" Plugins
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall
-endif
-
-call plug#begin('~/.vim/plugged')
-Plug 'SirVer/ultisnips'
+call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
+" Plug 'SirVer/ultisnips'
 Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] }
-Plug 'bloc40/vim-replace'
 Plug 'ervandew/supertab'
-Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 Plug 'godlygeek/tabular'
 Plug 'kien/ctrlp.vim'
 Plug 'rking/ag.vim'
-Plug 'scrooloose/nerdtree' ", { 'on': 'NERDTreeToggle' }
+Plug 'preservim/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-abolish'
@@ -27,36 +18,25 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'hwartig/vim-seeing-is-believing', { 'for': 'ruby' }
-
-" colorschemes
-Plug 'nanotech/jellybeans.vim'
 call plug#end()
+
+" ----------------------------------------
+" Added for Neovim found in https://builtin.com/software-engineering-perspectives/neovim-configuration
+set nocompatible " disable compatibility to old-time vi
+set showmatch    " show matching
+" set cursorline   " highlight current cursorline
+
+" ----------------------------------------
 
 """ Settings
 let loaded_matchit=1
 let mapleader = "\<Space>"
 
-if has('nvim')
-  set inccommand=nosplit
-else
-  syntax enable
-  filetype off
+set inccommand=nosplit
 
-  set autoread
-  set backspace=indent,eol,start
-  set encoding=utf-8
-  set expandtab
-  set hlsearch
-  set incsearch
-  set laststatus=2
-  set mouse=a
-  set noeb vb t_vb=
-  set ttymouse=xterm2
-  set wildmenu
-endif
-
-" set path+=**
-set background=dark
+syntax enable
+set path+=**
+set background=light
 let g:solarized_termtrans=1
 colorscheme solarized
 
@@ -122,9 +102,12 @@ map <silent><leader>/ :Commentary<CR>j
 map <leader>e :CtrlPBuffer<CR>
 map <leader>f :Ag!<space>
 nnoremap <leader>a :Ag! <C-r><C-w>
-map <F1> :NERDTreeFind<CR>
-map <F2> :NERDTreeToggle<CR>
-map <F3> :NERDTree<CR>
+
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <F1> :NERDTreeFind<CR>
+nnoremap <F2> :NERDTreeToggle<CR>
+nnoremap <F3> :NERDTree<CR>
+
 map 0 ^
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>

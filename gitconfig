@@ -1,9 +1,11 @@
 [user]
-  name  = Jamal El Milahi
-  email = jamal@elmilahi.com
+	name = Jamal
+  email      = elmilahi@pm.me
+  signingkey = 780A2A17E9AA9413
+  ; signingkey = 7AF4C9DB3676AC3E30E6EA2C780A2A17E9AA9413
 
 [color]
-  ui     = auto
+  ui = auto
 
 [color "status"]
   added     = green
@@ -12,6 +14,7 @@
 
 [commit]
   template = /etc/git-commit-template
+  ; gpgsign  = true
 
 [core]
   pager            = less
@@ -77,3 +80,12 @@
 
 [init]
   templatedir = ~/.git_template
+  defaultBranch = main
+
+[credential]
+  ; helper = osxkeychain
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

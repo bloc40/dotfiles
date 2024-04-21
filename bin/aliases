@@ -1,19 +1,19 @@
-# nvim
-export VISUAL=nvim  # use Neovim as "preferred editor"
-alias v='nvim'
-
+# ====================
 # unix
+# ====================
+alias v='nvim'
 alias mkdir='mkdir -pv'
 alias c='clear'
 alias h='history'
 alias la='ls -lah'
 alias las='ls -la | grep "\->"'
 alias ll='ls -lh'
-alias so='source ~/.bashrc'
+alias source='source ~/.zshrc'
 alias tarc='tar -czvf'
 alias tarx='tar -xzvf'
 alias now='date +"%T"'
 alias dot='cd ~/Code/dotfiles && v vimrc'
+alias cog='cd ~/Code/cognoa'
 alias g='git'
 alias noh='set +o history'
 alias yesh='set -o history'
@@ -25,38 +25,56 @@ alias du='du -h'
 alias sc='screencapture -i'
 alias mute="osascript -e 'set volume output muted true'"
 alias unmute="osascript -e 'set volume output muted false'"
+alias ip="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | awk '{print \$2}'"
+alias isp='curl ip.me'
+alias users="dscl . list /Users | grep -v '^_'"
+alias scan="sudo arp-scan -l"
+alias pass="openssl rand -base64 20"
 
+# ====================
 # rails
+# ====================
 # alias rake='time foreman run rake'
-alias migrate='rails db:migrate db:rollback && rails db:migrate'
+alias migrate='bin/rails db:migrate db:rollback && rails db:migrate'
 alias rdm='bin/rails db:migrate'
 alias rdtp='bin/rails db:test:prepare'
 alias rdr='bin/rails db:rollback'
 alias rdm0='bin/rails db:migrate VERSION=0'
 alias rdms='bin/rails db:migrate db:seed'
 alias rds='bin/rails db:seed'
-alias rpp='rake parallel:prepare'
-alias rpa='rake parallel:all'
-# alias rc='foreman run bin/rails c'
-# alias rs='foreman run bin/rails s'
+alias rpp='bin/rails parallel:prepare'
+alias rpa='bin/rails parallel:all'
+alias rps='bin/rails parallel:spec'
+alias rc='bin/rails c'
+alias rs='bin/rails s'
+alias rs0='be rails s -b 0.0.0.0'
 alias rdb='bin/rails db'
 alias fs='foreman start'
 alias fr='foreman run'
-alias rr='be rails routes'
-alias tags='ctags -R --languagues=-javascript,sql,python,sml --exclude=.git,log,tmp * `bundle show --paths`/../*'
+alias rr='bin/rails routes'
+# alias tags='ctags -R --languagues=-javascript,sql,python,sml --exclude=.git,log,tmp * `bundle show --paths`/../*'
+alias rspec='be rspec'
 alias edit='EDITOR="vim" rails credentials:edit'
 
+# ====================
 # bundler
+# ====================
 alias bo='EDITOR=vim bundle open'
 alias bi='bundle inof'
 alias bu='bundle update'
 alias be='bundle exec'
 
+# ====================
 # spin
+# ====================
 alias ss='spin serve -t'
 
+# ====================
 # tmux
+# ====================
 alias tmux='tmux -f ~/.tmux/tmux.conf'
 
+# ====================
 # python
+# ====================
 alias p3='python3'
