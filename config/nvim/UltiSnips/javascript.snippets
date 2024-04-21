@@ -33,7 +33,7 @@ snippet dqs
 document.querySelector('$0');
 endsnippet
 
-snippet log
+snippet con
 console.log($0)
 endsnippet
 
@@ -71,6 +71,12 @@ snippet img
 <img src='$1'>
 endsnippet
 
+snippet f=>
+${1:functionName} = ($2) => {
+	$0
+}
+endsnippet
+
 # ===============================================
 # React snippets
 # ===============================================
@@ -85,7 +91,7 @@ class ${1:ClassName} extends Component {
 }
 endsnippet
 
-snippet con
+snippet cons
 constructor(${1:props}) {
 	super(props);
 

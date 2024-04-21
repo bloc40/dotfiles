@@ -16,7 +16,7 @@ _symlink_file() {
   ln -s $PWD/$1 $HOME/.$1
 }
 
-EXCLUDED_FILES=( .git README.md install remove_symlinks bin gvimrc iex.exs inputrc .DS_Store )
+EXCLUDED_FILES=( .git README.md install remove_symlinks bin iex.exs inputrc .DS_Store )
 
 for file in $(ls -A $pwd ); do
   target=`echo ${EXCLUDED_FILES[*]} | grep $file`

@@ -1,0 +1,39 @@
+extends html
+
+priority -50
+
+snippet <
+<% $0 %>
+endsnippet
+
+snippet =
+<%= $0 %>
+endsnippet
+
+snippet <do
+<% $1 do ${2:|${3}|} %>
+	<%= $0 %>
+<% end %>
+endsnippet
+
+snippet if
+<% if $1 %>
+	$0
+<% end %>
+endsnippet
+
+snippet ife
+<% if $1 %>
+	$2
+<% else %>
+	$0
+<% end %>
+endsnippet
+
+snippet end
+<% end %>
+endsnippet
+
+snippet lt
+<%= link_to "${1:name}", ${2:path} %>
+endsnippet
