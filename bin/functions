@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 # =======================================
 #  create folder and cd to it immediately
@@ -26,7 +26,7 @@ jkill() {
 # most used commands
 # ==================
 most() {
-  history | awk '{print $5}' | sort | uniq -c | sort -rn | head
+  history | awk '{print $2}' | sort | uniq -c | sort -rn | head
 }
 
 # =========================================
@@ -118,6 +118,28 @@ server() {
   local port="${1:-8000}";
   # sleep 1 && open "http://localhost:${port}/" &
   python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port";
+}
+
+# =================================================
+# Sync a database from Heroku to your local machine
+# =================================================
+sync_db() {
+  db_name=`cat config/database.yml | grep _development | awk '{print $2}' | sed 's/:.*//'`
+
+  read -p "You are about to sync your database from Heroku to your local db $db_name. Are you sure? (y/n): " answer
+
+  if [ "$answer" = "y" ]; then
+    # heroku pg:pull DATABASE_URL $db_name --app $HEROKU_APP_NAME
+    echo -e "\n>>> Capturing the database from Heroku to your local database $db_name!\n"
+    heroku pg:backups capture
+    echo -e "\n>>> Downloading the database from Heroku to your local database $db_name!\n"
+    heroku pg:backups:download
+    echo -e "\n>>> Restoring the database from Heroku to your local database $db_name!\n"
+    pg_restore --verbose --clean --no-acl --no-owner -h localhost -d $db_name latest.dump
+    echo -e "\n>>> Removing the database dump from Heroku!\n"
+    rm latest.dump
+    echo -e "\n>>> Done!!!"
+  fi
 }
 
 # spinner() {

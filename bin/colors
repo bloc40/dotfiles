@@ -1,4 +1,0 @@
-#!/bin/sh
-
-export CLICOLOR=1
-export LSOCOLORS=gxBxhxDxfxhxhxhxhxcxcx

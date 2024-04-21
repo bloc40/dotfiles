@@ -2,14 +2,37 @@ snippet #!
 #!/usr/bin/ruby
 endsnippet
 
-snippet cl
-class ${1:ClassName}
+#---------------------------------------------
+#------------ Rails --------------------------
+#---------------------------------------------
+
+snippet C
+class ${1:ControllerName}Controller < ApplicationController
 	$0
 end
 endsnippet
 
-snippet C
-class ${1:ControllerName}Controller < ApplicationController
+snippet bt
+belongs_to :${1:class}
+endsnippet
+
+snippet hm
+has_many :${1:classes}
+endsnippet
+
+snippet task
+desc '${1:description}'
+task ${2:name}: :environment do
+	$0
+end
+endsnippet
+
+#---------------------------------------------
+#------------ Ruby ---------------------------
+#---------------------------------------------
+
+snippet cl
+class ${1:ClassName}
 	$0
 end
 endsnippet
@@ -30,14 +53,6 @@ snippet defi
 def initialize${1:(${2:args})}
 	$0
 end
-endsnippet
-
-snippet bt
-belongs_to :${1:class}
-endsnippet
-
-snippet hm
-has_many :${1:classes}
 endsnippet
 
 snippet aw
@@ -86,8 +101,13 @@ end
 endsnippet
 
 snippet p
-puts '${1:1}'*80
+puts "${1:1}"*80
 endsnippet
+
+snippet am
+alias_method :${1:new} :${2:existing}
+endsnippet
+
 #---------------------------------------------
 #------------ RSpec --------------------------
 #---------------------------------------------
@@ -97,7 +117,7 @@ expect($1).to ${2:eq} $0
 endsnippet
 
 snippet des
-describe '$1' do
+describe "$1" do
 	$0
 end
 endsnippet
@@ -109,13 +129,13 @@ end
 endsnippet
 
 snippet con
-context '$1' do
+context "$1" do
 	$0
 end
 endsnippet
 
 snippet it
-it '$1' do
+it "$1" do
 	$0
 end
 endsnippet
@@ -134,17 +154,13 @@ snippet save
 save_and_open_page
 endsnippet
 
-snippet bb
-byebug
-endsnippet
-
-snippet debugger
-byebug
+snippet deb
+debugger
 endsnippet
 
 snippet feat
-feature '${1}' do
-	scenario '${2}' do
+feature "${1}" do
+	scenario "${2}" do
 		$0
 	end
 end
@@ -155,28 +171,25 @@ endsnippet
 #---------------------------------------------
 
 snippet ivp
-it { should validate_presence_of :${1:attribute} }
+it { is_expected.to validate_presence_of :${1:attribute} }
 endsnippet
 
 snippet ivu
-it { should validate_uniqueness_of :${1:attribute} }
+it { is_expected.to validate_uniqueness_of :${1:attribute} }
 endsnippet
 
 snippet ibt
-it { should belong_to :${1:attribute} }
+it { is_expected.to belong_to :${1:attribute} }
 endsnippet
 
 snippet ihm
-it { should have_many :${1:attribute} }
+it { is_expected.to have_many :${1:attribute} }
+endsnippet
+
+snippet ivi
+it { is_expected.to validation_inclusion_of(:${1:attribute}).to_array(${2}) }
 endsnippet
 
 snippet ir
-it { should route(:${1:get}, '${2:url}').to(action: :${3:action}${4}) }
-endsnippet
-
-snippet task
-desc '${1:description}'
-task ${2:name}: :environment do
-	$0
-end
+it { is_expected.to route(:${1:get}, '${2:url}').to(action: :${3:action}${4}) }
 endsnippet
