@@ -29,6 +29,16 @@ most() {
   history | awk '{print $2}' | sort | uniq -c | sort -rn | head
 }
 
+colors() {
+  for i in {0..255}; do printf "\x1b[38;5;${i}mcolor${i}\x1b[0m\n"; done
+}
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# ############################################################################
+# Unnused functions below
+# ############################################################################
+# <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 # =========================================
 # create a TMUX session for a Rails project
 # =========================================
@@ -117,7 +127,7 @@ tat() {
 server() {
   local port="${1:-8000}";
   # sleep 1 && open "http://localhost:${port}/" &
-  python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port";
+  python3 -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port";
 }
 
 # =================================================
@@ -161,10 +171,6 @@ sync_db() {
 #   builtin cd $@
 #   _set_title
 # }
-
-colors() {
-  for i in {0..255}; do printf "\x1b[38;5;${i}mcolor${i}\x1b[0m\n"; done
-}
 
 # embedded_stanford() {
 #   cd ~/Code/aloft/map-editor
