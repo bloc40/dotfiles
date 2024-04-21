@@ -26,7 +26,6 @@ call plug#end()
 set nocompatible " disable compatibility to old-time vi
 set showmatch    " show matching
 " set cursorline   " highlight current cursorline
-
 " ----------------------------------------
 
 """ Settings
