@@ -109,3 +109,6 @@ for file in ~/Code/dotfiles/bin/*; do
 done
 
 SHELL_SESSION_HISTORY=0
+
+# heroku autocomplete setup
+HEROKU_AC_ZSH_SETUP_PATH=/Users/jamal/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;

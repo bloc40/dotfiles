@@ -1,5 +1,6 @@
 " call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 call plug#begin()
+
 Plug 'SirVer/ultisnips'
 Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] }
 Plug 'ervandew/supertab'
@@ -19,6 +20,9 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'hwartig/vim-seeing-is-believing', { 'for': 'ruby' }
+Plug 'neoclide/coc.nvim'
+Plug 'github/copilot.vim'
+
 call plug#end()
 
 " ----------------------------------------
@@ -77,6 +81,8 @@ set foldlevel=1
 " set spell
 set complete+=k,t
 set spelllang=en_us
+
+set encoding=UTF-8
 
 
 """ Mappings
@@ -224,6 +230,6 @@ autocmd BufWritePre,FileWritePre * :call <SID>AutoMakeDirectory()
 
 runtime! init/**.vim
 
-if filereadable(glob('$HOME/.vimrc.local'))
-  source $HOME/.vimrc.local
-endif
+" if filereadable(glob('$HOME/.vimrc.local'))
+"   source $HOME/.vimrc.local
+" endif

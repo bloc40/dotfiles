@@ -1,0 +1,66 @@
+{
+  "coc-json|global": {
+    "json-schema-cache": {
+      "https://json.schemastore.org/package.json": {
+        "etag": "\"80505ec45147db1:0\"",
+        "fileName": "473f72b44c2905902dfbcc770aab7f7a.schema.json",
+        "updateTime": 1734232615542
+      },
+      "https://json.schemastore.org/prettierrc.json": {
+        "etag": "\"079e10ba4ada1:0\"",
+        "fileName": "ea5ab10330a3ab77dfd6d00a735b0925.schema.json",
+        "updateTime": 1734232615909
+      },
+      "https://json.schemastore.org/semantic-release.json": {
+        "etag": "\"09e8ecc624ada1:0\"",
+        "fileName": "fbc95702ba6eddb3e2de4f52e31ca82a.schema.json",
+        "updateTime": 1734232615907
+      },
+      "https://json.schemastore.org/jscpd.json": {
+        "etag": "\"06c7f331a12db1:0\"",
+        "fileName": "22bfc1ab1ff56aae62322f6ce45dab5a.schema.json",
+        "updateTime": 1734232615910
+      },
+      "https://json.schemastore.org/eslintrc.json": {
+        "etag": "\"805385dd39b8da1:0\"",
+        "fileName": "c5064f140d4cfdbf4d6fbe68f68abbb1.schema.json",
+        "updateTime": 1734232615911
+      },
+      "https://json.schemastore.org/stylelintrc.json": {
+        "etag": "\"8027545973adb1:0\"",
+        "fileName": "000bfbdd14d2fb8ec5b0d59bec32ef98.schema.json",
+        "updateTime": 1734232615930
+      },
+      "https://json.schemastore.org/ava.json": {
+        "etag": "\"0d33f13698ada1:0\"",
+        "fileName": "635f57185b22bce9d3a56c68f5da4ad7.schema.json",
+        "updateTime": 1734232615907
+      },
+      "https://json.schemastore.org/partial-eslint-plugins.json": {
+        "etag": "\"01dc33f55f4da1:0\"",
+        "fileName": "fc7bb6e733b774ce47be6006f0b75b87.schema.json",
+        "updateTime": 1734232616342
+      },
+      "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json": {
+        "etag": "W/\"a221de7fd59735c32d86f14bf89356b5234a1217f4ac06a59fd14accce4840b9\"",
+        "fileName": "d83550c9bedd13afaa4c233448de2a1a.schema.json",
+        "updateTime": 1736396086016
+      },
+      "https://raw.githubusercontent.com/microsoft/vscode/main/extensions/configuration-editing/schemas/devContainer.codespaces.schema.json": {
+        "etag": "W/\"383097de4215b651985e831b06ba9fa5c90072c50ce99085052fc6910280db69\"",
+        "fileName": "3305fa5fab1eff3e241151ad8559930c.schema.json",
+        "updateTime": 1736396086136
+      },
+      "https://raw.githubusercontent.com/microsoft/vscode/main/extensions/configuration-editing/schemas/devContainer.vscode.schema.json": {
+        "etag": "W/\"febc62049e72310b798d78afa768b8cf394ca3302200beadc89d8a177b380239\"",
+        "fileName": "2c3d9ecf7d47f856850a7580eb416954.schema.json",
+        "updateTime": 1736396086144
+      },
+      "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.base.schema.json": {
+        "etag": "W/\"30161c4f408d47ab57f996d3c7dc4e2218b81f30a97aaf430f3e4130bd1ce315\"",
+        "fileName": "16c31e07c0f3c7a43b0698a02f3495d1.schema.json",
+        "updateTime": 1736396086142
+      }
+    }
+  }
+}
