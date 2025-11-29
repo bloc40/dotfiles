@@ -125,9 +125,30 @@ tat() {
 # Start an HTTP server from a directory, optionally specifying the port
 # =====================================================================
 server() {
-  local port="${1:-8000}";
-  # sleep 1 && open "http://localhost:${port}/" &
-  python3 -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port";
+  if [[ "$1" == "-p" || "$1" == "--port" ]]; then
+    PORT="$2"
+
+    if [[ "$PORT" =~ ^[0-9]{4}$ ]]; then
+      python3 -m http.server $PORT;
+    else
+      python3 -m http.server 8000;
+    fi
+  elif [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    echo "Usage: server -p <4-digit port> | --port <4-digit port>"
+  else
+    python3 -m http.server 8000;
+  fi
+
+  # if [[ "$PORT" =~ ^[0-9]{4}$ ]]; then
+  #   python3 -m http.server $PORT;
+  # else
+    # python3 -m http.server 8000;
+  # fi
+
+  ## Old way (works only with Python 2):
+  # local port="${1:-8000}";
+  # # sleep 1 && open "http://localhost:${port}/" &
+  # python3 -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port";
 }
 
 # =================================================
