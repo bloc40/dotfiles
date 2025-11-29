@@ -71,7 +71,7 @@ alias ss='spin serve -t'
 # ====================
 # tmux
 # ====================
-alias tmux='tmux -f ~/.tmux/tmux.conf'
+# alias tmux='tmux -f ~/.tmux/tmux.conf'
 
 # ====================
 # python

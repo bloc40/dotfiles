@@ -33,93 +33,39 @@ colors() {
   for i in {0..255}; do printf "\x1b[38;5;${i}mcolor${i}\x1b[0m\n"; done
 }
 
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# ############################################################################
-# Unnused functions below
-# ############################################################################
-# <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
 # =========================================
 # create a TMUX session for a Rails project
 # =========================================
 tat() {
   dir=${PWD##*/}
 
-  tmux has-session -t $dir
-  # if [ $? != 0 ]; then
-    ## Vim
-    tmux new-session -s $dir -n Vim -d
-    tmux send-keys -t $dir 'nvim .' C-m
+  # attach if session already exists
+  if tmux has-session -t $dir 2>/dev/null; then
+    tmux attach -t $dir
+    return
+  fi
 
-    # Console
-    tmux new-window -n Console -t $dir
-    tmux send-keys -t $dir:2 'foreman run rails c' C-m
+  # create new session with Vim window
+  tmux new-session -s "$dir" -n Vim -d
+  tmux send-keys -t $dir:Vim 'nvim .' C-m
 
-    # Server
-    tmux new-window -n Server -t $dir
-    tmux send-keys -t $dir:3 'foreman start' C-m
+  # Console window
+  tmux new-window -t $dir -n Console
+  tmux send-keys -t $dir:Console 'bin/rails c' C-m
 
-    # Logs
-    tmux new-window -n Logs -t $dir
-    tmux send-keys -t $dir:4 'tail -f log/development.log' C-m
+  # Server window
+  tmux new-window -t $dir -n Server
+  tmux send-keys -t $dir:Server 'bin/rails s' C-m
 
-    # tmux select-window -t $dir:1
-  # fi
+  # Logs window
+  tmux new-window -t $dir -n Logs
+  tmux send-keys -t $dir:Logs 'tail -f log/development.log' C-m
 
-  cd ../map-editor
-  editor=${PWD##*/}
-  tmux has-session -t $editor
-
-  tmux new-session -s $editor -n Vim -d
-  tmux send-keys -t $editor 'nvim .' C-m
-
-  tmux new-window -n Server -t $editor
-  tmux send-keys -t $editor:2 'npm start' C-m
-
-
-  tmux select-window -t $dir:1
-
+  # start in Vim window
+  tmux select-window -t $dir:Vim
   tmux attach -t $dir
 }
-# tat() {
-#   name=$1
-#   dir="$HOME/Code/$name"
-#
-#   if [ ! -d "$dir" ]; then
-#     echo "Directory does NOT exist"
-#     return
-#   fi
-#
-#   tmux has-session -t $name
-#
-#   if [ $? != 0 ]; then
-#     tmux new-session -s $name -n Vim -d
-#     tmux send-keys -t $name "cd $dir" C-m
-#     tmux send-keys -t $name 'vim' C-m
-#     # tmux split-window -v -t $name
-#     # tmux select-layout -t $name main-horizontal
-#     tmux send-keys -t $name:1.2 "cd $dir" C-m
-#
-#     # => Rails server
-#     tmux new-window -n Server -t $name
-#     tmux send-keys -t $name:2 "cd $dir" C-m
-#     tmux send-keys -t $name:2 "rails server" C-m
-#
-#     # => Rails console
-#     tmux new-window -n Console -t $name
-#     tmux send-keys -t $name:3 "cd $dir" C-m
-#     tmux send-keys -t $name:3 "rails console" C-m
-#
-#     # => Spin
-#     # tmux new-window -n Spin -t $name
-#     # tmux send-keys -t $name:4 "cd $dir" C-m
-#     # tmux send-keys -t $name:4 "spin serve" C-m
-#
-#     tmux select-window -t $name:1
-#   fi
-#
-#   tmux attach -t $name
-# }
+
 
 # =====================================================================
 # Start an HTTP server from a directory, optionally specifying the port
@@ -137,93 +83,5 @@ server() {
     echo "Usage: server -p <4-digit port> | --port <4-digit port>"
   else
     python3 -m http.server 8000;
-  fi
-
-  # if [[ "$PORT" =~ ^[0-9]{4}$ ]]; then
-  #   python3 -m http.server $PORT;
-  # else
-    # python3 -m http.server 8000;
-  # fi
-
-  ## Old way (works only with Python 2):
-  # local port="${1:-8000}";
-  # # sleep 1 && open "http://localhost:${port}/" &
-  # python3 -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port";
-}
-
-# =================================================
-# Sync a database from Heroku to your local machine
-# =================================================
-sync_db() {
-  db_name=`cat config/database.yml | grep _development | awk '{print $2}' | sed 's/:.*//'`
-
-  read -p "You are about to sync your database from Heroku to your local db $db_name. Are you sure? (y/n): " answer
-
-  if [ "$answer" = "y" ]; then
-    # heroku pg:pull DATABASE_URL $db_name --app $HEROKU_APP_NAME
-    echo -e "\n>>> Capturing the database from Heroku to your local database $db_name!\n"
-    heroku pg:backups capture
-    echo -e "\n>>> Downloading the database from Heroku to your local database $db_name!\n"
-    heroku pg:backups:download
-    echo -e "\n>>> Restoring the database from Heroku to your local database $db_name!\n"
-    pg_restore --verbose --clean --no-acl --no-owner -h localhost -d $db_name latest.dump
-    echo -e "\n>>> Removing the database dump from Heroku!\n"
-    rm latest.dump
-    echo -e "\n>>> Done!!!"
-  fi
-}
-
-# spinner() {
-#   i=1
-#   sp="/-\|"
-#   echo -n ' '
-#   while true
-#   do
-#     printf "\b${sp:i++%${#sp}:1}"
-#   done
-# }
-
-# show title of the open application/folder
-# _set_title() {
-#   echo -ne "\033]0;( `basename $PWD` )\007"
-# }
-
-# function cd() {
-#   builtin cd $@
-#   _set_title
-# }
-
-# embedded_stanford() {
-#   cd ~/Code/aloft/map-editor
-#   if [[ `git rev-parse --abbrev-ref HEAD` != 'embedded-stanford' ]]; then
-#     printf "\e[0;31m You need to switch to the embedded-stanford branch\n";
-#   else
-#     cd ../
-#     cp -R map-editor map-editor.copy/
-#     cd map-editor.copy
-
-#     rm -rf .DS_Store .editorconfig .env .git/ .gitignore ISSUE_TEMPLATE.md PULL_REQUEST_TEMPLATE.md app.json node_modules/ package.json README.md
-#     rm -rf public/scripts/
-
-#     mv public/index.html .
-#     mv public/visual.html .
-#   fi
-# }
-
-clean_old_gems() {
-  echo "NB! This process could be too destructive sometimes and you may need to run 'bundle' command from your project directory."
-  echo "Do you want to cleanup all gemsets?"
-  read -p "(anything other than 'yes' will cancel) > " ANSWER
-
-  if [[ $ANSWER != "yes" ]]; then
-    echo "Phew...\nMay be another day."
-  else
-    for gemset in `ls $rvm_path/gems | grep @`
-    do
-      echo "Switching to gemset $gemset"
-      # echo $gemset
-      # rvm $gemset do gem cleanup
-    done
-    echo "\nAll gemsets are clean and shiny!"
   fi
 }
