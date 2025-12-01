@@ -85,3 +85,22 @@ server() {
     python3 -m http.server 8000;
   fi
 }
+
+# =====================================================================
+# Disable saving to history file
+# =====================================================================
+privacy_on() {
+  export HISTFILE=/dev/null
+  export HISTSIZE=0
+  export SAVEHIST=0
+  unsetopt INC_APPEND_HISTORY
+  unsetopt SHARE_HISTORY
+}
+
+privacy_off() {
+  export HISTFILE=~/.zsh_history
+  export HISTSIZE=5000
+  export SAVEHIST=5000
+  setopt INC_APPEND_HISTORY
+  setopt SHARE_HISTORY
+}

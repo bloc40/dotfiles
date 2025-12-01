@@ -24,7 +24,7 @@ Plug 'hwartig/vim-seeing-is-believing', { 'for': 'ruby' }
 Plug 'github/copilot.vim'
 Plug 'folke/tokyonight.nvim'
 " Plug 'neoclide/coc.nvim'
-" Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 
 call plug#end()
 

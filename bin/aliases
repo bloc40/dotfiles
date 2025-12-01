@@ -14,8 +14,8 @@ alias tarx='tar -xzvf'
 alias now='date +"%T"'
 alias dot='cd ~/Code/dotfiles && v config/nvim/init.vim'
 alias g='git'
-alias noh='set +o history'
-alias yesh='set -o history'
+alias noh='privacy_on' # 'set +o history'
+alias yesh='privacy_off' # 'set -o history'
 alias jsonpp='python -m json.tool'
 alias ns='npm start'
 # alias less='less -MN'
@@ -52,7 +52,7 @@ alias fs='foreman start'
 alias fr='foreman run'
 alias rr='bin/rails routes'
 # alias tags='ctags -R --languagues=-javascript,sql,python,sml --exclude=.git,log,tmp * `bundle show --paths`/../*'
-alias rspec='be rspec'
+# alias rspec='be rspec'
 alias edit='EDITOR="vim" rails credentials:edit'
 
 # ====================
@@ -66,7 +66,7 @@ alias be='bundle exec'
 # ====================
 # spin
 # ====================
-alias ss='spin serve -t'
+# alias ss='spin serve -t'
 
 # ====================
 # tmux
