@@ -1,0 +1,28 @@
+# topgrade: one command to update everything. Run `topgrade` (or `topgrade -n`
+# for a dry run). Reference: `topgrade --config-reference`.
+
+[misc]
+# system    = macOS softwareupdate; do that deliberately from System Settings,
+#             it can require a restart
+# gem       = topgrade adds --user-install, which puts gems in ~/.gem instead
+#             of the rbenv gem dir; replaced by the "Gems" command below
+# containers = pulls every Docker image; slow and rarely wanted
+# yarn      = no yarn globals in use (project deps come from yarn.lock)
+# skills    = third-party `npx skills` updater
+disable = ["system", "gem", "containers", "yarn", "skills"]
+
+# run `brew cleanup` etc. after upgrading
+cleanup = true
+
+# show how long each step took in the summary
+display_time = true
+
+[brew]
+# remove dependencies nothing needs anymore
+autoremove = true
+
+[commands]
+# replaces the built-in gem step (see above)
+"Gems" = "gem update && gem cleanup"
+# the venv nvim's python3 provider uses (see init/python3.vim)
+"Neovim python provider" = "~/nvim-python-env/bin/pip install -q --upgrade pip pynvim"
