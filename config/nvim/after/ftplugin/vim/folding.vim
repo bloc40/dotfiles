@@ -1,21 +1,20 @@
-" Folding for the vimrc file
-" It folds by """
+" Fold init.vim by its section headers:
+"   "==========================================
+"   " Section title
+"   "==========================================
+" A fold starts at the top border of each header.
 function! VimrcFolds()
-  let thisline = getline(v:lnum)
-  if match(thisline, '^"""') >= 0
+  if getline(v:lnum) =~# '^"=\{3,}' && getline(v:lnum + 1) =~# '^" \S'
     return '>1'
-  else
-    return '='
   endif
+  return '='
+endfunction
+
+function! VimrcFoldText()
+  let title = substitute(getline(v:foldstart + 1), '^"\s*', '', '')
+  return title . ' (' . (v:foldend - v:foldstart + 1) . ' lines)'
 endfunction
 
 setlocal foldmethod=expr
 setlocal foldexpr=VimrcFolds()
-
-
-function! VimrcFoldText()
-  let foldsize = (v:foldend - v:foldstart)
-  return getline(v:foldstart) . ' (' . foldsize . ' lines)'
-endfunction
-
 setlocal foldtext=VimrcFoldText()

@@ -87,5 +87,15 @@ else
   run curl -fsSLo "$PLUG" --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
+# UltiSnips needs the python3 provider; init/python3.vim points at this venv
+VENV=$HOME/nvim-python-env
+if [[ -x $VENV/bin/python ]] && "$VENV/bin/python" -c 'import pynvim' 2>/dev/null; then
+  say "$DIM" ok "python provider ($(tilde "$VENV"))"
+else
+  act "$GREEN" python "venv + pynvim -> $(tilde "$VENV")"
+  run python3 -m venv "$VENV"
+  run "$VENV/bin/pip" install -q pynvim
+fi
+
 act "$GREEN" nvim "PlugInstall"
 run nvim --headless +'PlugInstall --sync' +qa
