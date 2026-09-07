@@ -16,6 +16,8 @@ tags
 
 # Copilot
 config/github-copilot/apps.json
+config/github-copilot/auth.db*
+config/github-copilot/versions.json
 
 # Other stuff
 .DS_Store
