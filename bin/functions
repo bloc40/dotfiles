@@ -104,3 +104,122 @@ privacy_off() {
   setopt INC_APPEND_HISTORY
   setopt SHARE_HISTORY
 }
+
+# =====================================================================
+# rm with confirmation, supporting recursive deletion
+# =====================================================================
+
+rmc() {
+  local flags=()
+  local targets=()
+  local is_recursive=false
+
+  for arg in "$@"; do
+    case "$arg" in
+      -*)
+        flags+=("$arg")
+        [[ "$arg" == *r* || "$arg" == *R* ]] && is_recursive=true
+        ;;
+      *)
+        targets+=("$arg")
+        ;;
+    esac
+  done
+
+  for target in "${targets[@]}"; do
+    if $is_recursive && [ -d "$target" ]; then
+      printf "Recursively remove folder '%s'? [y/N] " "$target"
+    elif [ -e "$target" ]; then
+      printf "Remove '%s'? [y/N] " "$target"
+    else
+      echo "rm: $target: No such file or directory"
+      continue
+    fi
+
+    read -r reply
+    case "$reply" in
+      [yY][eE][sS]|[yY])
+        command rm "${flags[@]}" "$target"
+        ;;
+      *)
+        echo "Skipped '$target'"
+        ;;
+    esac
+  done
+}
+
+# =====================================================================
+# Check if an IP address is valid by pinging it
+# =====================================================================
+
+# check_ip() {
+  # ping -c 3 -W 1 "$1" &>/dev/null && echo "valid IP" || echo "invalid IP"
+# }
+
+# check_ip() {
+#   local ip="$1"
+#   local spinner=('⠋' '⠙' '⠹' '⠸' '⠼' '⠴' '⠦' '⠧' '⠇' '⠏')
+#   local i=0
+#   local result
+
+#   {
+#     setopt LOCAL_OPTIONS NO_MONITOR
+#     ping -c 3 -W 1 "$ip" &>/dev/null &
+#     local pid=$!
+
+#     while kill -0 "$pid" 2>/dev/null; do
+#       # printf "\rChecking $ip... ${spinner[$i]}"
+#       printf "\r${spinner[$i]} Checking..."
+#       i=$(( (i + 1) % 10 ))
+#       sleep 0.1
+#     done
+
+#     wait "$pid"
+#     result=$?
+#   }
+
+#   printf "\r\033[K"  # clear spinner line
+
+#   if [[ $result -eq 0 ]]; then
+#     echo "✅ valid IP"
+#   else
+#     echo "❌ invalid IP"
+#   fi
+# }
+
+# =====================================================================
+# Scan the local network for live hosts
+# =====================================================================
+
+# lanscan() {
+#   sudo nmap -sn 192.168.1.0/24
+# }
+
+lanscan() {
+  {
+    echo "IP|HOSTNAME|MAC|VENDOR"
+    sudo nmap -sn "${1:-192.168.1.0/24}" | awk '
+      function flush() {
+        if (ip != "") printf "%s|%s|%s|%s\n", ip, host, mac, vendor
+        ip = host = mac = vendor = ""
+      }
+      /^Nmap scan report for/ {
+        flush()
+        if (match($0, /\(([0-9.]+)\)$/)) {
+          ip = substr($0, RSTART + 1, RLENGTH - 2); host = $5
+        } else {
+          ip = $NF; host = "-"
+        }
+        mac = "-"; vendor = "-"
+        next
+      }
+      /^MAC Address:/ {
+        mac = $3; vendor = "-"
+        if (match($0, /\(.*\)$/)) vendor = substr($0, RSTART + 1, RLENGTH - 2)
+        next
+      }
+      /^Nmap done/ { flush(); next }
+      END { flush() }
+    '
+  } | column -t -s '|'
+}

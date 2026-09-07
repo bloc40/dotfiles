@@ -41,16 +41,16 @@ alias rdr='bin/rails db:rollback'
 alias rdm0='bin/rails db:migrate VERSION=0'
 alias rdms='bin/rails db:migrate db:seed'
 alias rds='bin/rails db:seed'
-alias rpp='bin/rails parallel:prepare'
-alias rpa='bin/rails parallel:all'
-alias rps='bin/rails parallel:spec'
 alias rc='bin/rails c'
 alias rs='bin/rails s'
 alias rs0='be rails s -b 0.0.0.0'
 alias rdb='bin/rails db'
-alias fs='foreman start'
-alias fr='foreman run'
 alias rr='bin/rails routes'
+# alias rpp='bin/rails parallel:prepare'
+# alias rpa='bin/rails parallel:all'
+# alias rps='bin/rails parallel:spec'
+# alias fs='foreman start'
+# alias fr='foreman run'
 # alias tags='ctags -R --languagues=-javascript,sql,python,sml --exclude=.git,log,tmp * `bundle show --paths`/../*'
 # alias rspec='be rspec'
 alias edit='EDITOR="vim" rails credentials:edit'
@@ -59,7 +59,7 @@ alias edit='EDITOR="vim" rails credentials:edit'
 # bundler
 # ====================
 alias bo='EDITOR=vim bundle open'
-alias bi='bundle inof'
+# alias bi='bundle inof'
 alias bu='bundle update'
 alias be='bundle exec'
 
@@ -71,7 +71,7 @@ alias be='bundle exec'
 # ====================
 # tmux
 # ====================
-# alias tmux='tmux -f ~/.tmux/tmux.conf'
+alias tmux='tmux -f ~/.tmux/tmux.conf'
 
 # ====================
 # python

@@ -1,0 +1,413 @@
+# shellcheck shell=bash
+# =====================================================================
+# Network helpers — portable between macOS (BSD tools) and
+# Raspberry Pi OS / Debian (iproute2). Sourced, not executed.
+# Run `nethelp` for the list.
+# =====================================================================
+
+# ====================
+# internal: which OS
+# ====================
+_net_os() {
+  case "$(uname -s)" in
+    Darwin) echo mac ;;
+    Linux)  echo linux ;;
+    *)      echo other ;;
+  esac
+}
+
+# =========================================
+# internal: warn when a tool is missing
+# =========================================
+_net_need() {
+  command -v "$1" >/dev/null 2>&1 && return 0
+  if [ "$(_net_os)" = mac ]; then
+    printf 'net: %s not found — try: brew install %s\n' "$1" "$1" >&2
+  else
+    printf 'net: %s not found — try: sudo apt install %s\n' "$1" "${2:-$1}" >&2
+  fi
+  return 1
+}
+
+# =========================================
+# internal: primary interface (en0 / eth0)
+# =========================================
+_net_iface() {
+  if [ "$(_net_os)" = mac ]; then
+    route -n get default 2>/dev/null | awk '/interface:/{print $2}'
+  else
+    ip route show default 2>/dev/null | awk '/default/{print $5; exit}'
+  fi
+}
+
+# =========================================
+# internal: this machine's /24 as a CIDR
+# =========================================
+_net_subnet() {
+  local ip
+  ip=$(netip)
+  [ -n "$ip" ] || return 1
+  echo "${ip%.*}.0/24"
+}
+
+# =====================================================================
+# DISCOVERY
+# =====================================================================
+
+# ==========================================
+# scan the LAN, one line per host
+# usage: netscan [subnet]   default: own /24
+# ==========================================
+netscan() {
+  _net_need nmap || return 1
+  local subnet="${1:-$(_net_subnet)}"
+  printf 'scanning %s ...\n' "$subnet" >&2
+  sudo nmap -sn "$subnet" | awk '
+    /^Nmap scan report/ { if (n) print buf; buf = $0; n = 1; next }
+    /^Nmap done/        { if (n) print buf; n = 0; next }
+    n && NF             { buf = buf " <> " $0 }
+    END                 { if (n) print buf }
+  '
+}
+
+# ==========================================
+# scan the LAN as an aligned table
+# usage: nettable [subnet]
+# ==========================================
+nettable() {
+  _net_need nmap || return 1
+  local subnet="${1:-$(_net_subnet)}"
+  printf 'scanning %s ...\n' "$subnet" >&2
+  {
+    echo "IP|HOSTNAME|MAC|VENDOR"
+    sudo nmap -sn "$subnet" | awk '
+      function flush() {
+        if (ip != "") printf "%s|%s|%s|%s\n", ip, host, mac, vendor
+        ip = host = mac = vendor = ""
+      }
+      /^Nmap scan report for/ {
+        flush()
+        if (match($0, /\(([0-9.]+)\)$/)) {
+          ip = substr($0, RSTART + 1, RLENGTH - 2); host = $5
+        } else {
+          ip = $NF; host = "-"
+        }
+        mac = "-"; vendor = "-"
+        next
+      }
+      /^MAC Address:/ {
+        mac = $3; vendor = "-"
+        if (match($0, /\(.*\)$/)) vendor = substr($0, RSTART + 1, RLENGTH - 2)
+        next
+      }
+      /^Nmap done/ { flush(); next }
+      END { flush() }
+    '
+  } | column -t -s '|'
+}
+
+# ==========================================
+# hosts this machine has recently talked to
+# ==========================================
+netarp() {
+  if [ "$(_net_os)" = mac ]; then
+    arp -a
+  else
+    ip neigh
+  fi
+}
+
+# ==========================================
+# what is a host running
+# usage: netprobe <host> [ports]
+# ==========================================
+netprobe() {
+  _net_need nmap || return 1
+  [ -n "$1" ] || { echo "usage: netprobe <host> [ports]" >&2; return 1; }
+  nmap -Pn -p "${2:-22,80,443,8123,51826}" "$1"
+}
+
+# =====================================================================
+# INTERFACES & ROUTING
+# =====================================================================
+
+# ==========================================
+# this machine's IP
+# usage: netip [interface]
+# ==========================================
+netip() {
+  local iface="${1:-$(_net_iface)}"
+  [ -n "$iface" ] || return 1
+  if [ "$(_net_os)" = mac ]; then
+    ipconfig getifaddr "$iface"
+  else
+    ip -4 -o addr show "$iface" 2>/dev/null | awk '{split($4,a,"/"); print a[1]}'
+  fi
+}
+
+# ==========================================
+# all interfaces and their addresses
+# ==========================================
+netifaces() {
+  if [ "$(_net_os)" = mac ]; then
+    ifconfig | awk '/^[a-z]/{iface=$1} /inet /{print iface, $2}'
+  else
+    ip -4 -o addr show | awk '{print $2, $4}'
+  fi
+}
+
+# ==========================================
+# default gateway and its interface
+# ==========================================
+netgw() {
+  if [ "$(_net_os)" = mac ]; then
+    route -n get default 2>/dev/null | awk '/gateway:|interface:/{print $1, $2}'
+  else
+    ip route show default
+  fi
+}
+
+# ==========================================
+# which route a destination takes
+# usage: netroute [destination]
+# ==========================================
+netroute() {
+  local dest="${1:-1.1.1.1}"
+  if [ "$(_net_os)" = mac ]; then
+    route -n get "$dest"
+  else
+    ip route get "$dest"
+  fi
+}
+
+# ==========================================
+# full DHCP lease detail
+# usage: netlease [interface]
+# ==========================================
+netlease() {
+  local iface="${1:-$(_net_iface)}"
+  if [ "$(_net_os)" = mac ]; then
+    ipconfig getpacket "$iface"
+  elif command -v nmcli >/dev/null 2>&1; then
+    nmcli device show "$iface"
+  else
+    dhcpcd -U "$iface" 2>/dev/null || cat /var/lib/dhcp/dhclient."$iface".leases 2>/dev/null
+  fi
+}
+
+# =====================================================================
+# REACHABILITY
+# =====================================================================
+
+# ==========================================
+# is a host reachable
+# usage: netping <host> [count]
+# ==========================================
+netping() {
+  [ -n "$1" ] || { echo "usage: netping <host> [count]" >&2; return 1; }
+  ping -c "${2:-5}" "$1"
+}
+
+# ==========================================
+# is a port open
+# usage: netopen <host> <port>
+# ==========================================
+netopen() {
+  [ -n "$2" ] || { echo "usage: netopen <host> <port>" >&2; return 1; }
+  nc -z -v -w 3 "$1" "$2"
+}
+
+# ==========================================
+# where packets stop
+# usage: netpath [destination]
+# ==========================================
+netpath() {
+  _net_need traceroute || return 1
+  traceroute "${1:-1.1.1.1}"
+}
+
+# =====================================================================
+# DNS
+# =====================================================================
+
+# ==========================================
+# resolve a name
+# usage: netdns <name> [resolver]
+# ==========================================
+netdns() {
+  _net_need dig dnsutils || return 1
+  [ -n "$1" ] || { echo "usage: netdns <name> [resolver]" >&2; return 1; }
+  if [ -n "$2" ]; then
+    dig "@$2" +short "$1"
+  else
+    dig +short "$1"
+  fi
+}
+
+# ==========================================
+# what resolvers are actually in use
+# ==========================================
+netresolv() {
+  if [ "$(_net_os)" = mac ]; then
+    scutil --dns | awk '/nameserver\[/{print $3}' | sort -u
+  elif command -v resolvectl >/dev/null 2>&1; then
+    resolvectl status
+  else
+    cat /etc/resolv.conf
+  fi
+}
+
+# ==========================================
+# flush the DNS cache
+# ==========================================
+netflush() {
+  if [ "$(_net_os)" = mac ]; then
+    sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder && echo "dns cache flushed"
+  else
+    sudo resolvectl flush-caches && echo "dns cache flushed"
+  fi
+}
+
+# =====================================================================
+# PORTS & CONNECTIONS
+# =====================================================================
+
+# ==========================================
+# everything listening on this machine
+# ==========================================
+netports() {
+  if [ "$(_net_os)" = mac ]; then
+    sudo lsof -i -P -n | grep LISTEN
+  else
+    sudo ss -tulpn
+  fi
+}
+
+# ==========================================
+# what owns a specific port
+# usage: netport <port>
+# ==========================================
+netport() {
+  [ -n "$1" ] || { echo "usage: netport <port>" >&2; return 1; }
+  if [ "$(_net_os)" = mac ]; then
+    sudo lsof -i ":$1"
+  else
+    sudo ss -tulpn | grep ":$1"
+  fi
+}
+
+# ==========================================
+# live per-process / per-connection bandwidth
+# ==========================================
+netbw() {
+  if [ "$(_net_os)" = mac ]; then
+    nettop -m tcp
+  else
+    _net_need iftop || return 1
+    sudo iftop -i "$(_net_iface)"
+  fi
+}
+
+# =====================================================================
+# mDNS / BONJOUR
+# =====================================================================
+
+# ==========================================
+# browse advertised services
+# usage: netmdns [type]   default: _hap._tcp
+# ==========================================
+netmdns() {
+  local type="${1:-_hap._tcp}"
+  if [ "$(_net_os)" = mac ]; then
+    dns-sd -B "$type"
+  else
+    _net_need avahi-browse avahi-utils || return 1
+    avahi-browse -rt "$type"
+  fi
+}
+
+# ==========================================
+# every service type on the network
+# ==========================================
+netservices() {
+  if [ "$(_net_os)" = mac ]; then
+    dns-sd -B _services._dns-sd._udp
+  else
+    _net_need avahi-browse avahi-utils || return 1
+    avahi-browse -at
+  fi
+}
+
+# =====================================================================
+# WI-FI & CAPTURE
+# =====================================================================
+
+# ==========================================
+# wi-fi signal, channel, rate
+# ==========================================
+netwifi() {
+  if [ "$(_net_os)" = mac ]; then
+    sudo wdutil info
+  else
+    iw dev "${1:-wlan0}" link
+  fi
+}
+
+# ==========================================
+# capture packets to/from a host
+# usage: netcap <host> [outfile]
+# ==========================================
+netcap() {
+  [ -n "$1" ] || { echo "usage: netcap <host> [outfile]" >&2; return 1; }
+  local iface
+  iface=$(_net_iface)
+  if [ -n "$2" ]; then
+    sudo tcpdump -i "$iface" -n host "$1" -w "$2"
+  else
+    sudo tcpdump -i "$iface" -n host "$1"
+  fi
+}
+
+# =====================================================================
+# HELP
+# =====================================================================
+
+nethelp() {
+  cat <<'HELP'
+discovery
+  netscan [subnet]        sweep the LAN, one line per host
+  nettable [subnet]       sweep the LAN as an aligned table
+  netarp                  hosts recently talked to (arp / ip neigh)
+  netprobe <host> [ports] what a host is running
+
+interfaces & routing
+  netip [iface]           this machine's IP
+  netifaces               all interfaces and addresses
+  netgw                   default gateway and interface
+  netroute [dest]         which route a destination takes
+  netlease [iface]        full DHCP lease detail
+
+reachability
+  netping <host> [count]  is a host reachable
+  netopen <host> <port>   is a port open
+  netpath [dest]          where packets stop
+
+dns
+  netdns <name> [server]  resolve a name
+  netresolv               resolvers actually in use
+  netflush                flush the DNS cache
+
+ports
+  netports                everything listening here
+  netport <port>          what owns a specific port
+  netbw                   live bandwidth
+
+mdns
+  netmdns [type]          browse services (default _hap._tcp)
+  netservices             every service type on the network
+
+wifi & capture
+  netwifi [iface]         signal, channel, rate
+  netcap <host> [file]    capture packets to/from a host
+HELP
+}

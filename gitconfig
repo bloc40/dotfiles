@@ -51,7 +51,8 @@
               fi \
             }; f"
   lp   = log -p
-  poh  = push origin HEAD
+  ; poh  = push origin HEAD
+  poh  = push --force-with-lease origin HEAD ; it refuses if the remote moved since the last fetch
   pr   = pull --rebase
   ra   = rebase --abort
   rc   = rebase --continue

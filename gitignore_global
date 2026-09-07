@@ -22,3 +22,5 @@ config/github-copilot/versions.json
 # Other stuff
 .DS_Store
 junk*
+
+**/.claude/settings.local.json
