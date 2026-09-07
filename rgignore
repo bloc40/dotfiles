@@ -2,4 +2,4 @@ log
 tags
 tmp
 *.pyc
-coverage/*
+coverage/

@@ -13,7 +13,7 @@
 setopt err_exit no_unset pipe_fail
 
 DOTFILES=${0:A:h}
-EXCLUDED=( .git .DS_Store README.md install remove_symlinks shell iex.exs )
+EXCLUDED=( .git .DS_Store README.md install remove_symlinks shell )
 
 DRY_RUN=false
 SKIP_NVIM=false

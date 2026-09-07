@@ -1,12 +1,3 @@
-# NeoVim
-vim/shada
-
-# Vim
-vim/.netrwhist
-
-# Plug.vim
-vim/autoload/plug.vim.old
-
 # JavaScript
 node_modules/
 npm-debug.log
