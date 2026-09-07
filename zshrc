@@ -102,9 +102,9 @@ source $ZSH/oh-my-zsh.sh
 
 # @jamal
 # ------------------------------------
-# Source files in dotfiles/bin folder
+# Source files in dotfiles/shell folder
 # ------------------------------------
-for file in ~/Code/dotfiles/bin/*; do
+for file in ~/Code/dotfiles/shell/*; do
   [[ -r $file ]] && source $file;
 done
 

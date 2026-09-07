@@ -1,0 +1,121 @@
+# ==================
+# most used commands
+# ==================
+most() {
+  history | awk '{print $2}' | sort | uniq -c | sort -rn | head
+}
+
+colors() {
+  for i in {0..255}; do printf "\x1b[38;5;${i}mcolor${i}\x1b[0m\n"; done
+}
+
+# =========================================
+# create a TMUX session for a Rails project
+# =========================================
+tat() {
+  local dir=${PWD##*/}
+  dir=${dir//[.:]/_}   # tmux session names cannot contain '.' or ':'
+
+  # attach if session already exists
+  if tmux has-session -t "$dir" 2>/dev/null; then
+    tmux attach -t "$dir"
+    return
+  fi
+
+  # create new session with Vim window
+  tmux new-session -s "$dir" -n Vim -d
+  tmux send-keys -t "$dir:Vim" 'nvim .' C-m
+
+  # Console window
+  tmux new-window -t "$dir" -n Console
+  tmux send-keys -t "$dir:Console" 'bin/rails c' C-m
+
+  # Server window
+  tmux new-window -t "$dir" -n Server
+  tmux send-keys -t "$dir:Server" 'bin/rails s' C-m
+
+  # Logs window
+  tmux new-window -t "$dir" -n Logs
+  tmux send-keys -t "$dir:Logs" 'tail -f log/development.log' C-m
+
+  # start in Vim window
+  tmux select-window -t "$dir:Vim"
+  tmux attach -t "$dir"
+}
+
+# =====================================================================
+# Start an HTTP server from the current directory
+# usage: server [port]   default: 8000
+# =====================================================================
+server() {
+  python3 -m http.server "${1:-8000}"
+}
+
+# =====================================================================
+# Stop saving to the history file until privacy_off restores the
+# values that were in effect (oh-my-zsh sets the defaults).
+# =====================================================================
+privacy_on() {
+  _privacy_saved=("$HISTFILE" "$HISTSIZE" "$SAVEHIST")
+  HISTFILE=/dev/null
+  HISTSIZE=0
+  SAVEHIST=0
+  unsetopt INC_APPEND_HISTORY
+  unsetopt SHARE_HISTORY
+}
+
+privacy_off() {
+  [[ -n "$_privacy_saved" ]] || return 0
+  HISTFILE=$_privacy_saved[1]
+  HISTSIZE=$_privacy_saved[2]
+  SAVEHIST=$_privacy_saved[3]
+  unset _privacy_saved
+  setopt INC_APPEND_HISTORY
+  setopt SHARE_HISTORY
+}
+
+# =====================================================================
+# rm with confirmation, supporting recursive deletion
+# =====================================================================
+rmc() {
+  local flags=()
+  local targets=()
+  local is_recursive=false
+
+  for arg in "$@"; do
+    case "$arg" in
+      -*)
+        flags+=("$arg")
+        [[ "$arg" == *r* || "$arg" == *R* ]] && is_recursive=true
+        ;;
+      *)
+        targets+=("$arg")
+        ;;
+    esac
+  done
+
+  for target in "${targets[@]}"; do
+    if $is_recursive && [ -d "$target" ]; then
+      printf "Recursively remove folder '%s'? [y/N] " "$target"
+    elif [ -e "$target" ]; then
+      printf "Remove '%s'? [y/N] " "$target"
+    else
+      echo "rm: $target: No such file or directory"
+      continue
+    fi
+
+    read -r reply
+    case "$reply" in
+      [yY][eE][sS]|[yY])
+        command rm "${flags[@]}" "$target"
+        ;;
+      *)
+        echo "Skipped '$target'"
+        ;;
+    esac
+  done
+}
+
+# pgrep -fl puma  # find a process by name
+# pkill -f puma   # kill a process by name
+

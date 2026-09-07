@@ -14,11 +14,10 @@ eval "$(rbenv init -)"
 # --- Heroku setup ------------------------------
 # export PATH=$PATH:/usr/local/heroku/bin
 
-# --- Postgress App ------------------------------
-# export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.6/bin
-# export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+# --- Postgresql ------------------------------
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
-# --- NeoVim Setup ------------------------------
+# --- Neovim Setup ------------------------------
 export PATH=$PATH:$HOME/Library/Python/3.6/bin # neovim-remote
 
 # --- For using time in the command line just like Bash ------
