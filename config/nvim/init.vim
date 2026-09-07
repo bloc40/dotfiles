@@ -116,7 +116,7 @@ nnoremap <leader>= :call <SID>ReIndent()<CR>
 "==========================================
 " StatusLine
 "==========================================
-hi User2 guifg=red
+hi User1 guifg=red
 
 hi StatusLine guibg=#ffd787   guifg=#000000   " focused = gold bg
 hi StatusLineNC guibg=#333333 guifg=#808080   " unfocused = dim
@@ -130,7 +130,7 @@ augroup END
 set statusline=
 set statusline+=\ %*%<%f
 set statusline+=\ %{fugitive#statusline()}
-set statusline+=\ %2*%{&modified?'\ ●\ ':''}%*
+set statusline+=\ %1*%{&modified?'\ ●\ ':''}%*
 set statusline+=%=%-5.(%y\ %l,%c%V%)\ %P\
 
 hi Search gui=NONE guifg=#000000 guibg=#5faf00
