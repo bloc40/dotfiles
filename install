@@ -1,54 +1,90 @@
 #!/bin/zsh
+# Symlink this repo's dotfiles into $HOME.
+#
+#   ./install            link everything, back up files that are in the way
+#   ./install -n         dry run: show what would happen
+#   ./install --skip-nvim  don't bootstrap vim-plug / plugins
+#
+# Every top-level entry becomes ~/.<name>, except the ones in EXCLUDED.
+# config/ is special: if ~/.config is already a real directory (other apps
+# create it), its children are linked individually so nothing else in
+# there is disturbed. Otherwise ~/.config points at config/ as a whole.
 
-RED="\033[31m"
-GREEN="\033[32m"
-YELLOW="\033[33m"
-RESET="\033[0m"
+setopt err_exit no_unset pipe_fail
 
-_backup_existing_file() {
-  echo "$RED $1 exists but not a symlink $RESET"
-  echo "$YELLOW Moving .$1 to .$1.bak $RESET"
-  mv $HOME/.$1 "$HOME/.$1.bak"
+DOTFILES=${0:A:h}
+EXCLUDED=( .git .DS_Store README.md install remove_symlinks shell iex.exs )
+
+DRY_RUN=false
+SKIP_NVIM=false
+for arg in "$@"; do
+  case $arg in
+    -n|--dry-run)   DRY_RUN=true ;;
+    --skip-nvim)    SKIP_NVIM=true ;;
+    -h|--help)      sed -n '2,11p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+    *) echo "unknown option: $arg" >&2; exit 1 ;;
+  esac
+done
+
+RED=$'\033[31m' GREEN=$'\033[32m' YELLOW=$'\033[33m' DIM=$'\033[2m' RESET=$'\033[0m'
+
+say()  { printf '%s%-10s%s %s\n' "$1" "$2" "$RESET" "$3"; }
+run()  { $DRY_RUN || "$@"; }
+tilde() { [[ $1 == $HOME/* ]] && print -r -- "~/${1#$HOME/}" || print -r -- "$1"; }
+
+# Back up a real file/dir that is in the way. Never overwrites an older backup.
+backup() {
+  local file=$1 dest=$1.bak
+  [[ -e $dest ]] && dest=$1.bak.$(date +%Y%m%d%H%M%S)
+  say "$YELLOW" backup "$(tilde "$file") -> $(tilde "$dest")"
+  run mv "$file" "$dest"
 }
 
-_symlink_file() {
-  echo "$GREEN Symlinking $1 ...$RESET"
-  ln -s $PWD/$1 $HOME/.$1
-}
-
-EXCLUDED_FILES=( .git README.md install remove_symlinks shell iex.exs inputrc .DS_Store )
-
-for file in $(ls -A $pwd ); do
-  target=`echo ${EXCLUDED_FILES[*]} | grep $file`
-  echo ${EXCLUDED_FILES[*]}
-
-  if [[ ${target} == "" ]]; then
-    if [[ -e ~/.$file ]]; then
-      if [ ! -L ~/.$file ]; then
-        _backup_existing_file $file
-        _symlink_file $file
-      else
-        echo "$RED $file file exists $RESET"
-      fi
-    else
-      _symlink_file $file
+# link <source in repo> <destination in $HOME>
+link() {
+  local src=$1 dst=$2 shown=$(tilde "$2")
+  if [[ -L $dst ]]; then
+    if [[ ${dst:A} == ${src:A} ]]; then
+      say "$DIM" ok "$shown"
+      return
     fi
+    say "$RED" skip "$shown is a symlink to $(readlink "$dst")"
+    return
+  fi
+  [[ -e $dst ]] && backup "$dst"
+  say "$GREEN" link "$shown -> $(tilde "$src")"
+  run ln -s "$src" "$dst"
+}
+
+# --- dotfiles -------------------------------------------------------------
+for entry in "$DOTFILES"/*(DN); do
+  name=${entry:t}
+  (( ${EXCLUDED[(Ie)$name]} )) && continue
+
+  if [[ $name == config && -d $HOME/.config && ! -L $HOME/.config ]]; then
+    for child in "$entry"/*(DN); do
+      (( ${EXCLUDED[(Ie)${child:t}]} )) && continue
+      link "$child" "$HOME/.config/${child:t}"
+    done
+  else
+    link "$entry" "$HOME/.$name"
   fi
 done
 
-# #######################################################
-# Set up Neovim
-# https://github.com/ZyX-I/neovim/blob/42047acb4f07c689936b051864c6b4448b1b6aa1/runtime/doc/nvim_from_vim.txt#L12-L18
-# Open nvim then :help vim-differences
-# #######################################################
-# mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
-# ln -s ~/.vim $XDG_CONFIG_HOME/nvim
-# ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
+# --- neovim ---------------------------------------------------------------
+$SKIP_NVIM && exit 0
+if ! command -v nvim >/dev/null 2>&1; then
+  say "$YELLOW" nvim "not installed; skipping plugin setup"
+  exit 0
+fi
 
-# echo 'Install vim plugins'
-# vim -E -s <<-EOF
-#   :source ~/.vimrc
-#   :PlugInstall
-#   :PlugClean
-#   :qa
-# EOF
+PLUG=${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim
+if [[ -f $PLUG ]]; then
+  say "$DIM" ok "vim-plug"
+else
+  say "$GREEN" fetch "vim-plug -> $(tilde "$PLUG")"
+  run curl -fsSLo "$PLUG" --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+say "$GREEN" nvim "PlugInstall"
+run nvim --headless +'PlugInstall --sync' +qa

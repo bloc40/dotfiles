@@ -17,12 +17,8 @@ $ cd dotfiles
 $ git pull --rebase
 ```
 
-Make sure to have Neovim installed
+`./install -n` shows what would change without touching anything. Files
+already in the way are moved to `<name>.bak`.
 
-## Set up vim-plug
-Set up [vim-plug](sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
-```
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-```
+If Neovim is installed, `./install` also fetches [vim-plug](https://github.com/junegunn/vim-plug)
+and installs the plugins. Pass `--skip-nvim` to leave that out.

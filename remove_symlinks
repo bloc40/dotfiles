@@ -1,7 +1,16 @@
-#!/bin/sh
+#!/bin/zsh
+# Remove every symlink in ~ (and ~/.config, when that is a real directory)
+# that points into this repo. Backups made by ./install are left alone.
 
-for file in $(ls -A $pwd); do
-  if [ -L ~/$file ]; then
-    rm ~/$file
-  fi
+setopt err_exit no_unset
+
+DOTFILES=${0:A:h}
+
+candidates=( "$HOME"/.*(@N) )
+[[ -d $HOME/.config && ! -L $HOME/.config ]] && candidates+=( "$HOME"/.config/*(@N) )
+
+for link in "${candidates[@]}"; do
+  [[ ${link:A} == $DOTFILES/* ]] || continue
+  printf 'unlink     ~/%s\n' "${link#$HOME/}"
+  rm "$link"
 done
