@@ -18,6 +18,7 @@ Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'karb94/neoscroll.nvim'
 Plug 'github/copilot.vim'
 Plug 'folke/tokyonight.nvim'
 Plug 'SirVer/ultisnips'
@@ -41,7 +42,6 @@ set nobackup noswapfile nowritebackup
 set nowrap
 set number
 set scrolloff=1
-set smoothscroll
 set shortmess=at
 set splitright splitbelow
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
