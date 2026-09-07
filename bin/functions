@@ -11,7 +11,7 @@ take() {
 # find process by name
 # ====================
 jps() {
-  ps ax | ag $@
+  ps ax | rg $@
 }
 
 # =======================

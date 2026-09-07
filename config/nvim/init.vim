@@ -6,10 +6,9 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] }
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
-Plug 'kien/ctrlp.vim'
-Plug 'rking/ag.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'preservim/nerdtree'
-Plug 'scrooloose/syntastic'
+Plug 'neovim/nvim-lspconfig'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
@@ -19,11 +18,8 @@ Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'yuttie/comfortable-motion.vim'
-Plug 'hwartig/vim-seeing-is-believing', { 'for': 'ruby' }
 Plug 'github/copilot.vim'
 Plug 'folke/tokyonight.nvim'
-" Plug 'neoclide/coc.nvim'
 Plug 'SirVer/ultisnips'
 
 call plug#end()
@@ -34,11 +30,8 @@ call plug#end()
 let mapleader = " "
 
 set showmatch
-set inccommand=nosplit
-set hidden
-set history=200
+" set history=200
 
-set background=light
 colorscheme tokyonight-night
 
 set autowrite
@@ -48,6 +41,7 @@ set nobackup noswapfile nowritebackup
 set nowrap
 set number
 set scrolloff=1
+set smoothscroll
 set shortmess=at
 set splitright splitbelow
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
@@ -59,7 +53,6 @@ set tabstop=2 softtabstop=2 shiftwidth=2
 " Text formatting
 set textwidth=100
 set colorcolumn=+1
-hi ColorColumn ctermbg=0
 
 " Folding
 set foldmethod=indent
@@ -90,8 +83,8 @@ nnoremap <silent><leader>/ :Commentary<CR>j
 " Multiple lines comment
 xnoremap <silent><leader>/ :Commentary<CR>j
 nnoremap <leader>e :CtrlPBuffer<CR>
-nnoremap <leader>f :Ag!<space>
-nnoremap <leader>a :Ag! <C-r><C-w>
+nnoremap <leader>f :silent grep!<space>
+nnoremap <leader>a :silent grep! <C-r><C-w>
 
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <F1> :NERDTreeFind<CR>
@@ -120,29 +113,18 @@ function! s:ReIndent()
 endfunction
 nnoremap <leader>= :call <SID>ReIndent()<CR>
 
-" Seeing is believing
-nmap <leader>b :%!seeing_is_believing --timeout 12 --line-length 500 --number-of-captures 300 --alignment-strategy chunk<CR>
-nmap <leader>c :%.!seeing_is_believing --clean<CR>
-
 "==========================================
 " StatusLine
 "==========================================
-hi User1 ctermbg=178 ctermfg=Black
-" hi User2 ctermbg=Red  ctermfg=White
-hi User2 guifg=red    ctermfg=red
-hi User3 ctermbg=8    ctermfg=7
-hi User4 ctermbg=172  ctermfg=Black
-hi User5 ctermbg=166  ctermfg=Black
+hi User2 guifg=red
 
-" hi StatusLine   ctermbg=220 ctermfg=Black
-" hi StatusLineNC ctermbg=8   ctermfg=Black
 hi StatusLine guibg=#ffd787   guifg=#000000   " focused = gold bg
 hi StatusLineNC guibg=#333333 guifg=#808080   " unfocused = dim
 
 augroup StatusLineColors
   autocmd!
-  autocmd InsertEnter * highlight StatusLine ctermbg=21  ctermfg=Yellow
-  autocmd InsertLeave * highlight StatusLine ctermbg=251 ctermfg=Black
+  autocmd InsertEnter * highlight StatusLine guibg=#0000ff guifg=#ffff00
+  autocmd InsertLeave * highlight StatusLine guibg=#ffd787 guifg=#000000
 augroup END
 
 set statusline=
@@ -151,25 +133,25 @@ set statusline+=\ %{fugitive#statusline()}
 set statusline+=\ %2*%{&modified?'\ ●\ ':''}%*
 set statusline+=%=%-5.(%y\ %l,%c%V%)\ %P\
 
-hi Search cterm=NONE ctermfg=black ctermbg=70
+hi Search gui=NONE guifg=#000000 guibg=#5faf00
 
 "==========================================
 " Autocommands
 "==========================================
 augroup MyAutoCmds
   autocmd!
-  autocmd BufWritePre * %s/\s\+$//e
+  autocmd BufWritePre * call <SID>StripTrailingWhitespace()
   autocmd BufRead,BufNewFile *.es7 setfiletype javascript
   autocmd BufRead,BufNewFile Gemfile.lock setfiletype ruby
   autocmd FocusLost * silent! wa
   autocmd FileType ruby,eruby,yaml,haml setlocal iskeyword+=?
   autocmd FileType css,scss,sass setlocal iskeyword+=-
   autocmd FileType qf setlocal wrap linebreak
-  autocmd FileType javascript,json,html inoremap (<CR> (<CR>)<Esc>O
-  autocmd FileType javascript,json,html,sh,go,elixir,css,scss inoremap {<CR> {<CR>}<Esc>O
-  autocmd FileType javascript,json,html,elixir inoremap [<CR> [<CR>]<Esc>O
-  autocmd FileType javascript,json,html inoremap ({<CR> ({<CR>})<Esc>O
-  autocmd FileType javascript,json,html inoremap [{<CR> [{<CR>}]<Esc>O
+  autocmd FileType javascript,json,html inoremap <buffer> (<CR> (<CR>)<Esc>O
+  autocmd FileType javascript,json,html,sh,go,elixir,css,scss inoremap <buffer> {<CR> {<CR>}<Esc>O
+  autocmd FileType javascript,json,html,elixir inoremap <buffer> [<CR> [<CR>]<Esc>O
+  autocmd FileType javascript,json,html inoremap <buffer> ({<CR> ({<CR>})<Esc>O
+  autocmd FileType javascript,json,html inoremap <buffer> [{<CR> [{<CR>}]<Esc>O
   autocmd FileType elixir nmap <buffer> <leader>r :call ElixirTestLine()<CR>
   autocmd FileType elixir nmap <buffer> <leader>rr :!mix test %<CR>
   autocmd VimResized * wincmd =
@@ -178,6 +160,15 @@ augroup END
 
 function! ElixirTestLine()
   exec ':!mix test %:' . line('.')
+endfunction
+
+function! <SID>StripTrailingWhitespace()
+  if !&modifiable || &binary
+    return
+  endif
+  let view = winsaveview()
+  keeppatterns %s/\s\+$//e
+  call winrestview(view)
 endfunction
 
 function! <SID>AutoMakeDirectory()
@@ -192,7 +183,7 @@ endfunction
 "==========================================
 command! Q q
 command! Noh noh
-command! RubyHash %s/:$begin:math:text$[^ ]*$end:math:text$$begin:math:text$\\s*$end:math:text$=>/\1:/gc
+command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc
 command! JsonPP %!python3 -m json.tool
 " command! Tags !ctags -R --languages=-javascript,sql,python,sml --exclude=.git,log,tmp * `bundle show --paths`/../*
 command! Tags silent execute '!ctags -R' .
