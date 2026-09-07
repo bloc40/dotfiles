@@ -38,11 +38,6 @@ alias rs0='be rails s -b 0.0.0.0'
 alias edit='EDITOR="nvim" rails credentials:edit'
 
 # ====================
-# tmux
-# ====================
-alias tmux='tmux -f ~/.tmux/tmux.conf'
-
-# ====================
 # python
 # ====================
 alias p3='python3'

@@ -1,0 +1,19 @@
+#!/bin/zsh
+# Battery percentage for the tmux status line (macOS).
+# usage: battery [Charging|Discharging]
+#   With an argument, print only while the battery is in that state.
+command -v pmset >/dev/null 2>&1 || exit 0
+
+info=$(pmset -g batt)
+pct=$(printf '%s' "$info" | grep -oE '[0-9]+%' | head -1)
+[[ -n "$pct" ]] || exit 0   # no battery (desktop)
+
+if printf '%s' "$info" | grep -q 'Battery Power'; then
+  state=Discharging
+elif printf '%s' "$info" | grep -qE '; charged'; then
+  state=Charged
+else
+  state=Charging
+fi
+
+[[ -z "$1" || "$1" == "$state" ]] && echo "$pct"

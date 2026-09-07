@@ -1,0 +1,19 @@
+#!/bin/zsh
+# Moon phase emoji for the tmux status line, computed locally.
+# usage: moonphase [unix-timestamp]   (timestamp is for testing)
+#
+# Age of the moon = seconds since a reference new moon, modulo one
+# synodic month. Reference: 2000-01-06 18:14 UTC. Accurate to a few
+# hours, which is plenty for an icon.
+now=${1:-$(date +%s)}
+ref=947182440
+synodic=2551443   # 29.530588 days in seconds
+
+age=$(( (now - ref) % synodic ))
+(( age < 0 )) && age=$(( age + synodic ))
+
+# 8 phases; the +1)/2 rounds so each icon is centred on its exact moment
+idx=$(( ((age * 16 / synodic) + 1) / 2 % 8 ))
+
+icons=(🌑 🌒 🌓 🌔 🌕 🌖 🌗 🌘)
+printf '%s ' "${icons[idx + 1]}"
