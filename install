@@ -28,7 +28,8 @@ done
 
 RED=$'\033[31m' GREEN=$'\033[32m' YELLOW=$'\033[33m' DIM=$'\033[2m' RESET=$'\033[0m'
 
-say()  { printf '%s%-10s%s %s\n' "$1" "$2" "$RESET" "$3"; }
+say()  { printf '%s%-12s%s %s\n' "$1" "$2" "$RESET" "$3"; }
+act()  { $DRY_RUN && set -- "$1" "would $2" "$3"; say "$@"; }   # for things run() would do
 run()  { $DRY_RUN || "$@"; }
 tilde() { [[ $1 == $HOME/* ]] && print -r -- "~/${1#$HOME/}" || print -r -- "$1"; }
 
@@ -36,7 +37,7 @@ tilde() { [[ $1 == $HOME/* ]] && print -r -- "~/${1#$HOME/}" || print -r -- "$1"
 backup() {
   local file=$1 dest=$1.bak
   [[ -e $dest ]] && dest=$1.bak.$(date +%Y%m%d%H%M%S)
-  say "$YELLOW" backup "$(tilde "$file") -> $(tilde "$dest")"
+  act "$YELLOW" backup "$(tilde "$file") -> $(tilde "$dest")"
   run mv "$file" "$dest"
 }
 
@@ -52,7 +53,7 @@ link() {
     return
   fi
   [[ -e $dst ]] && backup "$dst"
-  say "$GREEN" link "$shown -> $(tilde "$src")"
+  act "$GREEN" link "$shown -> $(tilde "$src")"
   run ln -s "$src" "$dst"
 }
 
@@ -82,9 +83,9 @@ PLUG=${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim
 if [[ -f $PLUG ]]; then
   say "$DIM" ok "vim-plug"
 else
-  say "$GREEN" fetch "vim-plug -> $(tilde "$PLUG")"
+  act "$GREEN" fetch "vim-plug -> $(tilde "$PLUG")"
   run curl -fsSLo "$PLUG" --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
-say "$GREEN" nvim "PlugInstall"
+act "$GREEN" nvim "PlugInstall"
 run nvim --headless +'PlugInstall --sync' +qa
