@@ -185,7 +185,6 @@ endfunction
 " ------------------------------------------
 command! Q q
 command! Noh noh
-command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc
 command! JsonPP %!python3 -m json.tool
 " command! Tags !ctags -R --languages=-javascript,sql,python,sml --exclude=.git,log,tmp * `bundle show --paths`/../*
 command! Tags silent execute '!ctags -R' .

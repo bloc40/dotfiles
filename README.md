@@ -34,7 +34,6 @@ Defined in `config/nvim/init.vim`. The leader key is `<Space>`.
 |---|---|
 | `:Q` | Same as `:q` (for when the shift key sticks) |
 | `:Noh` | Same as `:noh`, clears search highlighting |
-| `:RubyHash` | Convert `:key => value` hashes to `key: value` across the file, confirming each |
 | `:JsonPP` | Pretty-print the buffer as JSON with `python3 -m json.tool` |
 | `:Tags` | Rebuild the `tags` file with ctags for the project and its bundled gems |
 | `:V` | Open `init.vim` in a new tab |
