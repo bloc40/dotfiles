@@ -9,3 +9,13 @@ augroup GrepQuickFix
   autocmd!
   autocmd QuickFixCmdPost grep,grepadd cwindow | redraw!
 augroup END
+
+" --------------
+" how to use:
+" --------------
+" rg <pattern>
+" rg -l <pattern>
+" rg -i <pattern>
+" rg -g '*.rb' <pattern>
+" rg --hidden <pattern>
+" rg --files
