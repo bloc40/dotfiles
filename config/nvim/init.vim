@@ -32,17 +32,23 @@ let mapleader = " "
 
 set showmatch
 
-colorscheme tokyonight-night
+" Load the colorscheme only when it isn't already active, so re-sourcing
+" (:Vs) doesn't run :hi clear and flash the buffer's colors off.
+if !exists('g:colors_name') || g:colors_name !=# 'tokyonight-night'
+  colorscheme tokyonight-night
+endif
 
 set autowrite
 set clipboard=unnamedplus
 set diffopt+=vertical
 set noswapfile nowritebackup
+set undofile                      " undo history survives closing the file
 set nowrap
 set number
 set scrolloff=1
 set shortmess+=a
 set splitright splitbelow
+set signcolumn=yes                " gutter always open, so text doesn't shift with diagnostics
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
 
 " Indentation
@@ -92,6 +98,9 @@ nnoremap <F3> :NERDTree<CR>
 
 nnoremap 0 ^
 xnoremap . :norm.<CR>
+" move the selected lines down / up, re-indenting
+xnoremap J :m '>+1<CR>gv=gv
+xnoremap K :m '<-2<CR>gv=gv
 tnoremap <Esc> <C-\><C-n>
 
 " %% on the command line expands to the current file's directory, e.g. :e %%
@@ -114,6 +123,10 @@ function! s:ReIndent()
   call winrestview(winview)
 endfunction
 nnoremap <leader>= :call <SID>ReIndent()<CR>
+
+" Substitute the whole word under the cursor across the file; type the
+" replacement, then <CR>. e.g. cursor on 'total' -> :%s/\<total\>//g
+nnoremap <leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 " ------------------------------------------
 " StatusLine
@@ -149,19 +162,45 @@ augroup MyAutoCmds
   autocmd FileType scss setlocal iskeyword+=-
   autocmd FileType qf setlocal wrap linebreak
   autocmd FileType javascript,json,html inoremap <buffer> (<CR> (<CR>)<Esc>O
-  autocmd FileType javascript,json,html,sh,go,elixir,css,scss inoremap <buffer> {<CR> {<CR>}<Esc>O
-  autocmd FileType javascript,json,html,elixir inoremap <buffer> [<CR> [<CR>]<Esc>O
+  autocmd FileType javascript,json,html,sh,go inoremap <buffer> {<CR> {<CR>}<Esc>O
+  autocmd FileType javascript,json,html inoremap <buffer> [<CR> [<CR>]<Esc>O
   autocmd FileType javascript,json,html inoremap <buffer> ({<CR> ({<CR>})<Esc>O
   autocmd FileType javascript,json,html inoremap <buffer> [{<CR> [{<CR>}]<Esc>O
-  autocmd FileType elixir nmap <buffer> <leader>r :call ElixirTestLine()<CR>
-  autocmd FileType elixir nmap <buffer> <leader>rr :!mix test %<CR>
+  autocmd FileType ruby nnoremap <buffer> <leader>r :call <SID>RubyTest(0)<CR>
+  autocmd FileType ruby nnoremap <buffer> <leader>rr :call <SID>RubyTest(1)<CR>
+  autocmd TextYankPost * silent! lua vim.hl.on_yank()
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") && &filetype !~# 'commit' | execute 'normal! g`"' | endif
   autocmd VimResized * wincmd =
   autocmd BufWritePre,FileWritePre * call <SID>AutoMakeDirectory()
 augroup END
 
-function! ElixirTestLine()
-  exec ':!mix test %:' . line('.')
+" Run the current test file (or the test at the cursor line) with RSpec when
+" the project has a spec/ directory, otherwise with Rails' minitest runner.
+" Output goes to a terminal split below; <Esc> (or q inside the split) closes it.
+function! <SID>RubyTest(line)
+  let runner = isdirectory('spec') ? 'bundle exec rspec' : 'bin/rails test'
+  let cmd = runner . ' ' . expand('%') . (a:line ? ':' . line('.') : '')
+  " run in a terminal split (a real TTY, so the output is colored); reuse the
+  " split from the previous run, whose finished terminal buffer is wiped
+  if !(exists('s:test_win') && win_gotoid(s:test_win))
+    botright 15split
+    let s:test_win = win_getid()
+  endif
+  execute 'terminal ' . cmd
+  setlocal bufhidden=wipe
+  nnoremap <buffer> q <Cmd>quit!<CR>
+  normal! G
+  wincmd p
 endfunction
+
+" <Esc> in normal mode closes the test split from anywhere
+function! <SID>RubyTestClose()
+  if exists('s:test_win') && win_id2win(s:test_win) > 0 && winnr('$') > 1
+    call win_execute(s:test_win, 'quit!')
+  endif
+endfunction
+" <Esc> closes the test split and clears search highlighting
+nnoremap <Esc> <Cmd>call <SID>RubyTestClose()<CR><Cmd>nohlsearch<CR>
 
 function! <SID>StripTrailingWhitespace()
   " markdown uses trailing spaces for line breaks; diffs need theirs intact
@@ -184,7 +223,6 @@ endfunction
 " Commands
 " ------------------------------------------
 command! Q q
-command! Noh noh
 command! JsonPP %!python3 -m json.tool
 command! Tags silent execute '!ctags -R' .
       \ ' --languages=-javascript,sql,python,sml' .

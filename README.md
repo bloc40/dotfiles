@@ -59,11 +59,16 @@ it and `:sp %%name` opens a sibling file.
 | `<Space>d` | normal | Open `~/Dropbox/vim_notes/` in a vertical split |
 | `<Space>ww` | normal | Reformat the paragraph and save, keeping the cursor |
 | `<Space>=` | normal | Re-indent the whole file, keeping the cursor |
+| `<Space>s` | normal | Start a file-wide substitution of the word under the cursor; type the replacement and press Enter |
 | `0` | normal | Go to the first non-blank character |
 | `.` | visual | Repeat the last change on every selected line |
 | `*` `#` | visual | Search forward / backward for the selected text |
 | `<Esc>` | terminal | Leave terminal mode |
-| `<Space>r` `<Space>rr` | normal, Elixir files | Run the test under the cursor / the whole test file |
+| `<Space>F` | normal | Fix what RuboCop complains about: rewrites the buffer with its safe autocorrections, then you save. Uses whatever language server is attached, so it works for other languages once their server is installed |
+| `<Space>x` | normal | Put every RuboCop / LSP finding in the file into the quickfix window |
+| `J` `K` | visual | Move the selected lines down / up, re-indenting |
+| `<Space>r` `<Space>rr` | normal, Ruby files | Run the current test file / the test at the cursor (RSpec if `spec/` exists, else `bin/rails test`) in a colored terminal split below |
+| `<Esc>` | normal | Close the test split from anywhere (`q` inside the split does the same) |
 
 More mappings live in `config/nvim/init/`: `<Space>t=` `<Space>t:` `<Space>t,` align on
 `=`, `:` or `,` (Tabular), and `<Space>z` toggles zooming the current window.

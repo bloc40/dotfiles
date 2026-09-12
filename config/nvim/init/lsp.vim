@@ -1,10 +1,14 @@
-"==========================================
+" =============================================
 " Native LSP + diagnostics (replaces syntastic)
-"==========================================
+" =============================================
 " Server configs come from nvim-lspconfig. A server is enabled only when its
 " binary is on PATH, so installing one is enough to switch it on.
 " Default mappings (Neovim 0.11+): K hover, grn rename, gra code action,
 " grr references, gri implementation, [d ]d next/prev diagnostic, <C-w>d float.
+" <leader>F formats the buffer with the attached server (RuboCop: safe autocorrect)
+nnoremap <leader>F <Cmd>lua vim.lsp.buf.format({ async = true })<CR>
+" <leader>x lists every diagnostic in the file in the quickfix window
+nnoremap <leader>x <Cmd>lua vim.diagnostic.setqflist()<CR>
 lua << LUA
 local servers = {
   rubocop  = 'rubocop',
