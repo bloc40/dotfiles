@@ -3,25 +3,25 @@
 " ------------------------------------------
 call plug#begin(stdpath('data') . '/plugged')
 
-Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] }
-Plug 'ervandew/supertab'
-Plug 'godlygeek/tabular'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'preservim/nerdtree'
-Plug 'neovim/nvim-lspconfig'
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rails', { 'for': 'ruby' }
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'karb94/neoscroll.nvim'
-Plug 'github/copilot.vim'
-Plug 'folke/tokyonight.nvim'
-Plug 'SirVer/ultisnips'
+Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] } " plugin to highlight CSS colors
+Plug 'ervandew/supertab'                  " plugin to use tab for completion
+Plug 'godlygeek/tabular'                  " plugin to align text
+Plug 'ctrlpvim/ctrlp.vim'                 " plugin to fuzzy file finder
+Plug 'preservim/nerdtree'                 " plugin to explore the filesystem
+Plug 'neovim/nvim-lspconfig'              " plugin to configure LSP
+Plug 'sheerun/vim-polyglot'               " plugin to support multiple languages
+Plug 'tpope/vim-abolish'                  " plugin to easily search and replace words
+Plug 'tpope/vim-commentary'               " plugin to comment out code
+Plug 'tpope/vim-endwise'                  " plugin to automatically add 'end' in Ruby, etc.
+Plug 'tpope/vim-fugitive'                 " plugin to integrate Git
+Plug 'tpope/vim-rails', { 'for': 'ruby' } " plugin to support Ruby on Rails
+Plug 'tpope/vim-repeat'                   " plugin to repeat commands
+Plug 'tpope/vim-surround'                 " plugin to easily manipulate surrounding characters
+Plug 'tpope/vim-unimpaired'               " plugin to provide handy mappings
+Plug 'karb94/neoscroll.nvim'              " plugin to provide smooth scrolling
+Plug 'github/copilot.vim'                 " plugin to integrate GitHub Copilot
+Plug 'folke/tokyonight.nvim'              " plugin to provide Tokyo Night color scheme
+Plug 'SirVer/ultisnips'                   " plugin to provide snippet support
 
 call plug#end()
 
@@ -93,6 +93,9 @@ nnoremap <F3> :NERDTree<CR>
 nnoremap 0 ^
 xnoremap . :norm.<CR>
 tnoremap <Esc> <C-\><C-n>
+
+" %% on the command line expands to the current file's directory, e.g. :e %%
+cnoremap <expr> %% getcmdtype() == ':' ? fnameescape(expand('%:h') ==# '' ? '.' : expand('%:h')).'/' : '%%'
 
 " Visual search mappings
 function! s:VSetSearch(cmdtype)
