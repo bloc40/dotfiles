@@ -25,6 +25,7 @@ alias pubip='curl -s ip.me'
 alias isp='curl -s ipinfo.io/org'
 alias users="dscl . list /Users | grep -v '^_'"
 alias pass="openssl rand -base64 20"
+alias source="source ~/.zprofile && source ~/.zshrc"
 
 # ====================
 # rails
