@@ -3,25 +3,25 @@
 " ------------------------------------------
 call plug#begin(stdpath('data') . '/plugged')
 
-Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] } " plugin to highlight CSS colors
-Plug 'ervandew/supertab'                  " plugin to use tab for completion
-Plug 'godlygeek/tabular'                  " plugin to align text
-Plug 'ctrlpvim/ctrlp.vim'                 " plugin to fuzzy file finder
-Plug 'preservim/nerdtree'                 " plugin to explore the filesystem
-Plug 'neovim/nvim-lspconfig'              " plugin to configure LSP
-Plug 'sheerun/vim-polyglot'               " plugin to support multiple languages
-Plug 'tpope/vim-abolish'                  " plugin to easily search and replace words
-Plug 'tpope/vim-commentary'               " plugin to comment out code
-Plug 'tpope/vim-endwise'                  " plugin to automatically add 'end' in Ruby, etc.
-Plug 'tpope/vim-fugitive'                 " plugin to integrate Git
-Plug 'tpope/vim-rails', { 'for': 'ruby' } " plugin to support Ruby on Rails
-Plug 'tpope/vim-repeat'                   " plugin to repeat commands
-Plug 'tpope/vim-surround'                 " plugin to easily manipulate surrounding characters
-Plug 'tpope/vim-unimpaired'               " plugin to provide handy mappings
-Plug 'karb94/neoscroll.nvim'              " plugin to provide smooth scrolling
-Plug 'github/copilot.vim'                 " plugin to integrate GitHub Copilot
-Plug 'folke/tokyonight.nvim'              " plugin to provide Tokyo Night color scheme
-Plug 'SirVer/ultisnips'                   " plugin to provide snippet support
+Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] } " highlight CSS colors
+Plug 'ctrlpvim/ctrlp.vim'    " fuzzy file finder
+Plug 'ervandew/supertab'     " use tab for completion
+Plug 'folke/tokyonight.nvim' " provide Tokyo Night color scheme
+Plug 'github/copilot.vim'    " integrate GitHub Copilot
+Plug 'godlygeek/tabular'     " align text
+Plug 'karb94/neoscroll.nvim' " provide smooth scrolling
+Plug 'neovim/nvim-lspconfig' " configure LSP
+Plug 'preservim/nerdtree'    " explore the filesystem
+Plug 'SirVer/ultisnips'      " provide snippet support
+Plug 'sheerun/vim-polyglot'  " support multiple languages
+Plug 'tpope/vim-abolish'     " easily search and replace words
+Plug 'tpope/vim-commentary'  " comment out code
+Plug 'tpope/vim-endwise'     " automatically add 'end' in Ruby, etc.
+Plug 'tpope/vim-fugitive'    " integrate Git
+Plug 'tpope/vim-rails'       " support Ruby on Rails
+Plug 'tpope/vim-repeat'      " repeat commands
+Plug 'tpope/vim-surround'    " easily manipulate surrounding characters
+Plug 'tpope/vim-unimpaired'  " provide handy mappings
 
 call plug#end()
 
@@ -37,11 +37,11 @@ colorscheme tokyonight-night
 set autowrite
 set clipboard=unnamedplus
 set diffopt+=vertical
-set nobackup noswapfile nowritebackup
+set noswapfile nowritebackup
 set nowrap
 set number
 set scrolloff=1
-set shortmess=at
+set shortmess+=a
 set splitright splitbelow
 set wildignore+=*/tmp/*,*/public/uploads/*,*.swp,*.bak,*.pyc,*.class,.git
 
@@ -60,7 +60,7 @@ set nofoldenable
 set foldlevel=1
 
 " Spell and completion
-set complete+=k,t
+set complete+=t
 set spelllang=en_us
 
 " ------------------------------------------
@@ -105,7 +105,7 @@ function! s:VSetSearch(cmdtype)
   let @s = temp
 endfunction
 xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
-xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
 
 " Re-indent without moving cursor
 function! s:ReIndent()
@@ -143,11 +143,10 @@ hi Search gui=NONE guifg=#000000 guibg=#5faf00
 augroup MyAutoCmds
   autocmd!
   autocmd BufWritePre * call <SID>StripTrailingWhitespace()
-  autocmd BufRead,BufNewFile *.es7 setfiletype javascript
   autocmd BufRead,BufNewFile Gemfile.lock setfiletype ruby
   autocmd FocusLost * silent! wa
   autocmd FileType ruby,eruby,yaml,haml setlocal iskeyword+=?
-  autocmd FileType css,scss,sass setlocal iskeyword+=-
+  autocmd FileType scss setlocal iskeyword+=-
   autocmd FileType qf setlocal wrap linebreak
   autocmd FileType javascript,json,html inoremap <buffer> (<CR> (<CR>)<Esc>O
   autocmd FileType javascript,json,html,sh,go,elixir,css,scss inoremap <buffer> {<CR> {<CR>}<Esc>O
@@ -165,7 +164,8 @@ function! ElixirTestLine()
 endfunction
 
 function! <SID>StripTrailingWhitespace()
-  if !&modifiable || &binary
+  " markdown uses trailing spaces for line breaks; diffs need theirs intact
+  if !&modifiable || &binary || index(['markdown', 'diff', 'git'], &filetype) >= 0
     return
   endif
   let view = winsaveview()
@@ -186,7 +186,6 @@ endfunction
 command! Q q
 command! Noh noh
 command! JsonPP %!python3 -m json.tool
-" command! Tags !ctags -R --languages=-javascript,sql,python,sml --exclude=.git,log,tmp * `bundle show --paths`/../*
 command! Tags silent execute '!ctags -R' .
       \ ' --languages=-javascript,sql,python,sml' .
       \ ' --exclude=.git --exclude=log --exclude=tmp' .
