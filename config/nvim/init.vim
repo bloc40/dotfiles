@@ -1,6 +1,6 @@
-"==========================================
+" ------------------------------------------
 " Plugins (using vim-plug)
-"==========================================
+" ------------------------------------------
 call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'ap/vim-css-color', { 'for': ['css', 'sass', 'scss'] }
@@ -25,13 +25,12 @@ Plug 'SirVer/ultisnips'
 
 call plug#end()
 
-"==========================================
+" ------------------------------------------
 " General Settings
-"==========================================
+" ------------------------------------------
 let mapleader = " "
 
 set showmatch
-" set history=200
 
 colorscheme tokyonight-night
 
@@ -64,9 +63,9 @@ set foldlevel=1
 set complete+=k,t
 set spelllang=en_us
 
-"==========================================
+" ------------------------------------------
 " Key Mappings
-"==========================================
+" ------------------------------------------
 nnoremap + <C-W>+
 nnoremap - <C-W>-
 nnoremap ( 5<C-W><
@@ -113,9 +112,9 @@ function! s:ReIndent()
 endfunction
 nnoremap <leader>= :call <SID>ReIndent()<CR>
 
-"==========================================
+" ------------------------------------------
 " StatusLine
-"==========================================
+" ------------------------------------------
 hi User1 guifg=red
 
 hi StatusLine guibg=#ffd787   guifg=#000000   " focused = gold bg
@@ -135,9 +134,9 @@ set statusline+=%=%-5.(%y\ %l,%c%V%)\ %P\
 
 hi Search gui=NONE guifg=#000000 guibg=#5faf00
 
-"==========================================
+" ------------------------------------------
 " Autocommands
-"==========================================
+" ------------------------------------------
 augroup MyAutoCmds
   autocmd!
   autocmd BufWritePre * call <SID>StripTrailingWhitespace()
@@ -178,9 +177,9 @@ function! <SID>AutoMakeDirectory()
   endif
 endfunction
 
-"==========================================
+" ------------------------------------------
 " Commands
-"==========================================
+" ------------------------------------------
 command! Q q
 command! Noh noh
 command! RubyHash %s/:\([^ ]*\)\(\s*\)=>/\1:/gc
@@ -196,7 +195,7 @@ command! Tags silent execute '!ctags -R' .
 command! V tabe $MYVIMRC
 command! Vs execute 'source ' . fnameescape($MYVIMRC) | redraw! | echom 'Vimrc sourced :)'
 
-"==========================================
+" ------------------------------------------
 " Source additional configs
-"==========================================
+" ------------------------------------------
 runtime! init/**.vim

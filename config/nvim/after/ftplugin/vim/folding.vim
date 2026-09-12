@@ -1,10 +1,13 @@
-" Fold init.vim by its section headers:
-"   "==========================================
-"   " Section title
-"   "==========================================
-" A fold starts at the top border of each header.
+" Fold init.vim by its section headers, a three-line block:
+"   " ---...      (border: a comment holding only dashes, 3 or more)
+"   " Title
+"   " ---...
+" A fold starts at the top border. Spacing after the quote doesn't matter.
 function! VimrcFolds()
-  if getline(v:lnum) =~# '^"=\{3,}' && getline(v:lnum + 1) =~# '^" \S'
+  let border = '^"\s*-\{3,}\s*$'
+  if getline(v:lnum) =~# border
+        \ && getline(v:lnum + 1) =~# '^"\s*\S' && getline(v:lnum + 1) !~# border
+        \ && getline(v:lnum + 2) =~# border
     return '>1'
   endif
   return '='
